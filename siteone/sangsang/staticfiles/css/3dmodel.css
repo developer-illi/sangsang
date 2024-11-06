@@ -1,0 +1,55 @@
+.slider-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.slide {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-content {
+    flex: 1;
+}
+
+.text-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.image-content img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.indicator {
+    position: absolute;
+    bottom: -20px; /* 이미지 하단에 위치 */
+    left: 10px; /* 왼쪽 하단에 위치 */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.indicator p {
+    color: #000; /* 텍스트 색상 */
+    text-transform: uppercase; /* 대문자로 */
+}

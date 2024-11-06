@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dronsol.css' %}">
+    <script src="{% static 'js/dronsol.js' %}"></script>
+    <title>sangsang BUILD</title>
+</head>
+<body>
+    <div class="header">
+        {% include 'templates/header.html' %}
+        {% block content %}
+    </div>
+    <div class="content">
+        <div class="cont_sign">
+            <h2>맞춤형 드론 솔루션</h2>
+        </div>
+        <div class="dronsol_content">
+            <div class="dronsol_box1">
+                <div class="box1_text">
+                    <h2>자율비행 R&D</h2>
+                    <p>V-SLAM기술 기반으로 GPS 음영지역에서</p>
+                    <p>경로 비행과 장애물 회피가 가능하게</p>
+                    <p>최적화된 AI엔진이 탑재</p>
+                </div>
+                <div class="box1_img">
+                    <img src="{% static 'img/dronsol1.jpg' %}">
+                </div>
+            </div>
+            <div class="dronsol_box2">
+                <div class="box2_text">
+                    <h2>드론 솔루션</h2>
+                    <p>자율비행 드론 시스템 구축</p>
+                    <p>드론 운영 교육 및 컨설팅</p>
+                    <p>데이터 분석 및 활용 서비스</p>
+                </div>
+                <div class="box2_img">
+                    <img src="{% static 'img/dronsol2.jpg' %}">
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        {% endblock %}
+        {% include 'templates/footer.html' %}
+    </div>
+</body>
+</html>

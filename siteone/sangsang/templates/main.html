@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <title>Title</title>
+</head>
+<body>
+    <div class="header">
+        {% include 'templates/header.html' %}
+        {% block content %}
+    </div>
+    <div class="content">
+        <div class="m_video">
+            <img src="{% static 'img/logo.png' %}" id="video_play">
+        </div>
+        <div class="main_content">
+            <div class="section">
+                <p>회사소개</p>
+                <p>고객에게 신뢰를 주는 기업</p>
+                <p>드론 전문업체입니다.</p>
+                <p class="more">더보기</p>
+            </div>
+        <div class="line"></div>
+            <div class="section">
+                <p>상상빌드</p>
+                <p>풍부한 경험과 기술을 기반으로</p>
+                <p>완벽한 서비스를 제공합니다</p>
+                <p class="more">더보기</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        {% endblock %}
+        {% include 'templates/footer.html' %}
+    </div>
+</body>
+</html>

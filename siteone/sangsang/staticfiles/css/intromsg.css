@@ -1,0 +1,282 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+body{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory; /* 스크롤 스냅을 활성화하여 화면 이동 */
+}
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* 원하는 높이로 설정 */
+    background-color: #000; /* 원하는 배경색 */
+    z-index: 1000;
+    border: none;
+}
+.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.intro_msgintro_msg{
+    width: 100vw;
+    height: 100vh;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+.intro_msg{
+    display: flex;
+}
+.content_text{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.content_text > h3{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.content_text > p{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 30px;
+    line-height: 2.05;
+}
+.first_msg{
+    margin-top: 30px;
+}
+.last_msg{
+    text-align: center;
+    font-size: 15px;
+}
+.history{
+    flex-grow: 2;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.tothree {
+    width: 800px;
+    position: relative; /* 자식 요소의 절대 위치를 기준으로 사용할 부모 요소 */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 5px 16px 16px 16px; /* 이미지를 위한 충분한 여백 확보 */
+    border: 2px solid lightgray;
+    border-radius: 12px;
+    gap: 20px;
+    box-sizing: border-box; /* padding과 border를 포함하여 요소 크기를 계산 */
+}
+.cheack_img{
+    width: 60px; /* 이미지 크기 조정 */
+    height: 60px;
+    position: absolute; /* 부모 요소의 좌측 상단에 고정 */
+    top: -20px; /* 부모 요소 위로 이동 */
+    left: -20px; /* 부모 요소 왼쪽으로 이동 */
+    z-index: 1; /* 이미지가 다른 요소들보다 위에 위치하도록 설정 */
+}
+.years_ch{
+    display: flex;
+    gap: 50px;
+    text-align: center;
+    justify-content: left;
+}
+.years{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.year_text{
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+.explanation{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.dot{
+    font-size: 8px;
+}
+.ex_text{
+    font-size: 20px;
+}
+.dron_promotion {
+    flex-grow: 3;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+    gap: 10px;
+}
+
+.gif_area {
+    width: 100%;
+    max-width: 1100px;
+    position: relative; /* 자식 요소의 절대 위치를 위한 기준 요소 */
+    display: flex;
+    justify-content: center;
+}
+
+#gif_img {
+    width: 1100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.dron_text {
+    position: absolute; /* .gif_area 요소를 기준으로 절대 위치 */
+    bottom: 10px; /* GIF의 하단에서 10px 위에 위치 */
+    left: 10px; /* GIF의 왼쪽 경계에서 10px 안쪽에 위치 */
+    background-color: rgba(0, 0, 0, 0.6); /* 텍스트 배경색을 반투명한 검정으로 설정 */
+    color: white;
+    padding: 5px 10px; /* 텍스트 박스에 여백 추가 */
+    border-radius: 4px; /* 텍스트 박스의 모서리를 둥글게 설정 */
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
+.dron_main {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.dron_description > p{
+    font-size: 15px;
+    font-weight: bold;
+    color: #aeaeae;
+}
+.find_cop {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.top-section {
+    background-color: #000; /* 검정색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    text-align: center;
+    padding: 50px 20px; /* 여백 추가 */
+}
+
+.top-section h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.top-section p {
+    font-size: 18px;
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.contact-info {
+    background-color: #1e3a8a; /* 파란색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    padding: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+.contact-details{
+    margin-left: 40%;
+}
+
+.contact-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.map-section {
+    width: 50%;
+    height: 100%;
+}
+
+.map-section iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+/*
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    padding: 10px;
+    text-align: center;
+}*/
+ .find_cop, .intro_msg, .history, .dron_promotion {
+    scroll-margin-top: 60px; /* 스크롤할 때 상단 여백을 추가하여 각 섹션이 상단에 겹치지 않도록 설정 */
+}
+ /* 사이드바 스타일 */
+.navigation-sidebar {
+    position: fixed; /* 페이지 오른쪽에 고정 */
+    top: 80%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: #fff; /* 배경색 */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 버튼 간격 */
+}
+
+.navigation-sidebar button {
+    background-color: #1e3a8a;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navigation-sidebar button:hover {
+    background-color: #3b5998;
+}
+
