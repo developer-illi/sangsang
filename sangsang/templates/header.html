@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <title>Sang Sang BUILD</title>
+</head>
+<heaer>
+    <div class="header_main">
+        <div class="header_left">
+            <a href="{% url 'main' %}"><img id="hd_logo" src="{% static 'img/logo.png' %}" alt="SANGSANGBUILD Logo"></a>
+        </div>
+        <div class="header_right">
+            <div class="menu-item">
+                <h3><a href="{% url 'cop' %}">회사소개</a></h3>
+            </div>
+            <div class="menu-item">
+                <h3><a href="{% url 'sol_intro' %}">솔루션</a></h3>
+            </div>
+            <div class="menu-item">
+                <h3><a href="/적용분야">적용분야</a></h3>
+            </div>
+            <div class="menu-item">
+                <h3><a href="/문의사항">문의사항</a></h3>
+            </div>
+            <div class="menu-item">
+                <h3><a href="https://blog.naver.com/jslabo" target="_blank" rel="noopener noreferrer">블로그</a></h3>
+            </div>
+        </div>
+    </div>
+</heaer>
+</html>

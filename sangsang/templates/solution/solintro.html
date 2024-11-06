@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/solintro.css' %}">
+    <script src="{% static 'js/intro.js' %}"></script>
+    <title>sangsang BUILD</title>
+</head>
+<body>
+    <div class="header">
+        {% include 'templates/header.html' %}
+        {% block content %}
+    </div>
+    <div class="content">
+        <div class="intro-icons">
+            <div class="intro-icon">
+                <div class="intro_bg">
+                    <p><a href="{% url 'dron' %}">자율비행드론</a></p>
+                </div>
+                <div class="intro_bg">
+                    <p><a href="{% url 'bild' %}"> 건설포렌식 기술</a></p>
+                </div>
+            </div>
+            <div class="intro-icon">
+                <div class="intro_bg">
+                    <p><a href="{% url '3dmodel' %}"> 3D 모델 시각화 시스템</a></p>
+                </div>
+                <div class="intro_bg">
+                    <p><a href="{% url 'confessor' %}">고해상도 영상데이터 추출</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        {% endblock %}
+        {% include 'templates/footer.html' %}
+    </div>
+</body>
+</html>

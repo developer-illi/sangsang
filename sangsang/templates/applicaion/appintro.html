@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/appintro.css' %}">
+    <script src="{% static 'js/appintro.js' %}"></script>
+    <title>sangsang BUILD</title>
+</head>
+<body>
+    <div class="header">
+        {% include 'templates/header.html' %}
+        {% block content %}
+    </div>
+    <div class="content">
+        <div class="intro-icons">
+            <div class="intro-icon">
+                <div class="intro_bg">
+                    <p><a href="{% url 'bride' %}">교량안전 점검</a></p>
+                </div>
+                <div class="intro_bg">
+                    <p><a href="{% url 'social' %}">사회기반시설 안전점검</a></p>
+                </div>
+            </div>
+            <div class="intro-icon">
+                <div class="intro_bg">
+                    <p><a href="{% url 'erection' %}">건설시공현장 공정관리</a></p>
+                </div>
+                <div class="intro_bg">
+                    <p><a href="{% url 'dron_sol' %}">드론 솔루션</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        {% endblock %}
+        {% include 'templates/footer.html' %}
+    </div>
+</body>
+</html>
