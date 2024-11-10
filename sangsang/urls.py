@@ -32,4 +32,5 @@ urlpatterns = [
     path('건설시공현장-공정관리', mainvw.erection, name='erection'),
     path('드론-솔루션', mainvw.dron_sol, name='dron_sol'),
     path('문의사항', mainvw.inquiry, name='inquiry'),
+    path('send_email/', mainvw.send_email, name='send_email'),
 ]

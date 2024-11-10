@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os.path
 from pathlib import Path
+from django.core.mail import send_mail
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -123,3 +124,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'  # 이메일 제공자의 SMTP 서버
+EMAIL_PORT = 587  # 일반적으로 587 또는 465
+EMAIL_USE_TLS = True  # TLS 보안 사용 여부
+EMAIL_HOST_USER = 'info@sangsangbuild.com'  # 이메일 주소
+EMAIL_HOST_PASSWORD = 'your-email-password'  # 이메일 비밀번호

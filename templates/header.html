@@ -7,14 +7,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{% static 'js/header.js' %}"></script>
     <title>Sang Sang BUILD</title>
 </head>
-<heaer>
+<body>
+<header>
     <div class="header_main">
         <div class="header_left">
             <a href="{% url 'main' %}"><img id="hd_logo" src="{% static 'img/logo.png' %}" alt="SANGSANGBUILD Logo"></a>
+        </div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            ☰
         </div>
         <div class="header_right">
             <div class="menu-item">
@@ -34,5 +37,6 @@
             </div>
         </div>
     </div>
-</heaer>
+</header>
+</body>
 </html>

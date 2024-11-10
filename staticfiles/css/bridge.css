@@ -6,8 +6,21 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
+    scrollbar-width: thin; /* Firefox에서 얇은 스크롤바 사용 */
+}
+::-webkit-scrollbar {
+    width: 8px; /* 웹킷 브라우저(크롬, 사파리)에서 스크롤바 너비 설정 */
 }
 
+::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 모서리를 둥글게 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바에 마우스를 올릴 때 색상 변경 */
+}
 
 
 .content {
@@ -20,7 +33,7 @@ body {
 
 .brid_sign {
     width: 100%;
-    background: #555;
+    background: url(../img/brigde_bg.jpg) no-repeat center/cover;;
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -148,71 +161,249 @@ body {
     width: 100%;
     height: auto;
 }
+/* 아주 작은 화면 (385px 이하) */
+@media (max-width: 385px) {
+  .content {
+    gap: 50px; /* 간격 줄이기 */
+  }
 
-/* 푸터 스타일 */
+  .brid_sign {
+    height: 200px; /* 높이 줄이기 */
+  }
 
+  .brid_title > h2 {
+    font-size: 24px; /* 제목 크기 줄이기 */
+  }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .brid_content,
-    .brid_content_item {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 20px;
-    }
+  .brid_det p {
+    font-size: 14px; /* 텍스트 크기 줄이기 */
+  }
 
-    .brid_sign {
-        height: 200px;
-    }
+  .brid_content {
+    flex-direction: column; /* 세로 정렬 */
+    width: 100%; /* 너비 100% */
+    gap: 20px; /* 간격 줄이기 */
+  }
 
-    .bc_text,
-    .bc_img {
-        width: 100%;
-    }
+  .bc_img > img {
+    width: 100%; /* 이미지 너비 100% */
+  }
 
-    .bc_text {
-        text-align: center;
-    }
+  .bc_text {
+    gap: 20px; /* 간격 줄이기 */
+  }
 
-    .bc_icon {
-        margin-left: 0;
-    }
+  .bc_text > h2, .bc_title > h2 {
+    font-size: 20px; /* 제목 크기 줄이기 */
+  }
+
+  .bc_text > p, .bc_info > p {
+    font-size: 14px; /* 텍스트 크기 줄이기 */
+    line-height: 1.6; /* 줄 간격 줄이기 */
+  }
+
+  .bc_detail > ul > li {
+    font-size: 12px; /* 리스트 항목 크기 줄이기 */
+    padding-left: 2px; /* 왼쪽 패딩 줄이기 */
+  }
+
+  .brid_content_item {
+    width: 90%; /* 너비 늘리기 */
+    gap: 20px; /* 간격 줄이기 */
+  }
+
+  .brid_item {
+    height: 200px; /* 높이 줄이기 */
+    gap: 20px; /* 간격 줄이기 */
+  }
+
+  .bc_icon {
+    margin-left: 10px; /* 여백 줄이기 */
+  }
 }
 
-@media (max-width: 480px) {
-    .brid_sign {
-        height: 150px;
-        padding: 20px;
+/* 작은 화면 (모바일) */
+@media (min-width: 386px) and (max-width: 600px) {
+  .content {
+    gap: 60px; /* 간격 줄이기 */
+  }
+    .bc_item > h2{
+        font-size: 20px;
     }
 
-    .brid_text h2 {
-        font-size: 1.8rem;
-    }
+  .brid_sign {
+    height: 220px; /* 높이 줄이기 */
+  }
 
-    .brid_content {
-        gap: 20px;
-    }
+  .brid_title > h2 {
+    font-size: 28px; /* 제목 크기 조정 */
+  }
 
-    .bc_text h2 {
-        font-size: 1.5rem;
-    }
+  .brid_det p {
+    font-size: 12px; /* 텍스트 크기 조정 */
+  }
 
-    .bc_text p,
-    .bc_info p {
-        font-size: 0.9rem;
-    }
+  .brid_content {
+    flex-direction: column; /* 세로 정렬 */
+    width: 90%; /* 너비 조정 */
+    gap: 30px; /* 간격 조정 */
+  }
 
-    .brid_item {
-        flex-direction: column;
-        height: auto;
-    }
+  .bc_img > img {
+    width: 100%; /* 이미지 너비 100% */
+  }
 
-    .bc_icon img {
-        max-width: 80px;
-    }
+  .bc_text {
+    gap: 30px; /* 간격 조정 */
+  }
 
-    .bc_detail ul {
-        padding-left: 10px;
-    }
+  .bc_text > h2, .bc_title > h2 {
+    font-size: 24px; /* 제목 크기 조정 */
+  }
+
+  .bc_text > p, .bc_info > p {
+    font-size: 16px; /* 텍스트 크기 조정 */
+    line-height: 1.7; /* 줄 간격 조정 */
+  }
+
+  .bc_detail > ul > li {
+    font-size: 14px; /* 리스트 항목 크기 조정 */
+    padding-left: 3px; /* 왼쪽 패딩 조정 */
+  }
+
+  .brid_content_item {
+    width: 80%; /* 너비 조정 */
+    gap: 25px; /* 간격 조정 */
+  }
+
+  .brid_item {
+    height: 220px; /* 높이 조정 */
+    gap: 30px; /* 간격 조정 */
+  }
+
+  .bc_icon {
+    margin-left: 20px; /* 여백 조정 */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .content {
+    gap: 80px; /* 기본 간격 */
+  }
+
+  .brid_sign {
+    height: 250px; /* 기본 높이 */
+  }
+
+  .brid_title > h2 {
+    font-size: 32px; /* 제목 크기 조정 */
+  }
+
+  .brid_det p {
+    font-size: 18px; /* 텍스트 크기 조정 */
+  }
+
+  .brid_content {
+    flex-direction: row; /* 가로 정렬 */
+    width: 85%; /* 너비 조정 */
+    gap: 40px; /* 간격 조정 */
+  }
+
+  .bc_img > img {
+    width: 100%; /* 이미지 너비 100% */
+  }
+
+  .bc_text {
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .bc_text > h2, .bc_title > h2 {
+    font-size: 28px; /* 제목 크기 조정 */
+  }
+
+  .bc_text > p, .bc_info > p {
+    font-size: 18px; /* 텍스트 크기 조정 */
+    line-height: 1.8; /* 줄 간격 조정 */
+  }
+
+  .bc_detail > ul > li {
+    font-size: 15px; /* 리스트 항목 크기 조정 */
+    padding-left: 5px; /* 왼쪽 패딩 조정 */
+  }
+
+  .brid_content_item {
+    width: 70%; /* 너비 조정 */
+    gap: 30px; /* 간격 조정 */
+  }
+
+  .brid_item {
+    height: 250px; /* 기본 높이 */
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .bc_icon {
+    margin-left: 30px; /* 기본 여백 */
+  }
+}
+
+/* 큰 화면 (데스크탑) */
+@media (min-width: 1025px) {
+  .content {
+    gap: 100px; /* 기본 간격 */
+  }
+
+  .brid_sign {
+    height: 250px; /* 기본 높이 */
+  }
+
+  .brid_title > h2 {
+    font-size: 40px; /* 기본 제목 크기 */
+  }
+
+  .brid_det p {
+    font-size: 18px; /* 기본 텍스트 크기 */
+  }
+
+  .brid_content {
+    flex-direction: row; /* 기본 가로 정렬 */
+    width: 80%; /* 기본 너비 */
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .bc_img > img {
+    width: 100%; /* 기본 이미지 너비 */
+  }
+
+  .bc_text {
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .bc_text > h2, .bc_title > h2 {
+    font-size: 30px; /* 기본 제목 크기 */
+  }
+
+  .bc_text > p, .bc_info > p {
+    font-size: 18px; /* 기본 텍스트 크기 */
+    line-height: 1.8; /* 기본 줄 간격 */
+  }
+
+  .bc_detail > ul > li {
+    font-size: 15px; /* 기본 리스트 항목 크기 */
+    padding-left: 5px; /* 기본 왼쪽 패딩 */
+  }
+
+  .brid_content_item {
+    width: 60%; /* 기본 너비 */
+    gap: 30px; /* 기본 간격 */
+  }
+
+  .brid_item {
+    height: 250px; /* 기본 높이 */
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .bc_icon {
+    margin-left: 30px; /* 기본 여백 */
+  }
 }

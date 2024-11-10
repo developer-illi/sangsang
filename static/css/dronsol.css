@@ -12,7 +12,7 @@
 .cont_sign {
     width: 100%;
     height: 250px;
-    background: skyblue;
+    background: url(../img/dronsol_bg.jpg) no-repeat center/cover;;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -164,156 +164,279 @@
 .box2_img > img {
     max-width: 100%;
 }
+/* 아주 작은 화면 (385px 이하) */
+@media (max-width: 385px) {
+  .content {
+    gap: 20px; /* 간격 줄이기 */
+  }
 
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
-    .erec_content {
-        flex-direction: column;
-        width: 90%;
-        gap: 20px;
-    }
+  .cont_sign {
+    height: 200px; /* 높이 줄이기 */
+    gap: 20px; /* 간격 줄이기 */
+  }
 
-    .cont_sign {
-        height: 250px;
-        gap: 20px;
-    }
+  .cont_sign > h2 {
+    font-size: 24px; /* 제목 크기 줄이기 */
+  }
 
-    .cont_sign > h2 {
-        font-size: 35px;
-    }
+  .cont_sign > p {
+    font-size: 16px; /* 설명 글자 크기 줄이기 */
+  }
 
-    .cont_sign > p {
-        font-size: 20px;
-    }
+  .erec_content {
+    flex-direction: column; /* 세로 정렬 */
+    width: 100%; /* 너비 100% */
+    gap: 15px; /* 간격 줄이기 */
+  }
 
-    .erec_text {
-        gap: 50px;
-    }
+  .erec_text {
+    gap: 40px; /* 간격 줄이기 */
+  }
 
-    .erec_box > p {
-        font-size: 16px;
-    }
+  .erec_title > h2 {
+    font-size: 20px; /* 제목 크기 줄이기 */
+  }
 
-    .dronsol_box1 {
-        flex-direction: column;
-        align-items: center;
-    }
+  .erec_box > p {
+    font-size: 14px; /* 설명 글자 크기 줄이기 */
+  }
 
-    .box1_text {
-        order: 1;
-        text-align: center;
-    }
+  .numbered-circle {
+    width: 20px; /* 크기 줄이기 */
+    height: 20px;
+    line-height: 20px; /* 라인 높이 줄이기 */
+    font-size: 12px; /* 글자 크기 줄이기 */
+  }
 
-    .box1_img {
-        order: 2;
-    }
+  .dronsol_content {
+    gap: 50px; /* 간격 줄이기 */
+  }
+
+  .dronsol_box1,
+  .dronsol_box2 {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 20px; /* 간격 줄이기 */
+  }
+
+  .box1_text, .box2_text {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    order: unset; /* 기본 순서로 변경 */
+  }
+
+  .box1_text > h2, .box2_text > h2 {
+    font-size: 20px; /* 제목 크기 줄이기 */
+    margin-bottom: 20px; /* 간격 줄이기 */
+  }
+
+  .box1_text > p, .box2_text > p {
+    font-size: 14px; /* 텍스트 크기 줄이기 */
+  }
+
+  .box1_img, .box2_img {
+    max-width: 100%; /* 이미지 너비 100% */
+  }
 }
 
-@media (max-width: 768px) {
-    .cont_sign {
-        height: 200px;
-        gap: 15px;
-    }
+/* 작은 화면 (모바일) */
+@media (min-width: 386px) and (max-width: 600px) {
+  .content {
+    gap: 30px; /* 간격 줄이기 */
+  }
 
-    .cont_sign > h2 {
-        font-size: 30px;
-    }
+  .cont_sign {
+    height: 220px; /* 높이 조정 */
+    gap: 30px; /* 간격 조정 */
+  }
 
-    .cont_sign > p {
-        font-size: 18px;
-    }
+  .cont_sign > h2 {
+    font-size: 28px; /* 제목 크기 조정 */
+  }
 
-    .erec_content {
-        width: 100%;
-        gap: 15px;
-    }
+  .cont_sign > p {
+    font-size: 20px; /* 설명 글자 크기 조정 */
+  }
 
-    .erec_text {
-        gap: 40px;
-    }
+  .erec_content {
+    flex-direction: column; /* 세로 정렬 */
+    width: 90%; /* 너비 조정 */
+    gap: 20px; /* 간격 조정 */
+  }
 
-    .erec_box {
-        gap: 10px;
-    }
+  .erec_text {
+    gap: 50px; /* 간격 조정 */
+  }
 
-    .erec_title > h2 {
-        font-size: 25px;
-    }
+  .erec_title > h2 {
+    font-size: 24px; /* 제목 크기 조정 */
+  }
 
-    .erec_box > p {
-        font-size: 15px;
-    }
+  .erec_box > p {
+    font-size: 16px; /* 설명 글자 크기 조정 */
+  }
 
-    .numbered-circle {
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-    }
+  .numbered-circle {
+    width: 25px; /* 크기 조정 */
+    height: 25px;
+    line-height: 25px; /* 라인 높이 조정 */
+    font-size: 14px; /* 글자 크기 조정 */
+  }
 
-    .box1_text > h2 {
-        font-size: 25px;
-    }
+  .dronsol_content {
+    gap: 70px; /* 간격 조정 */
+  }
 
-    .box1_text > p {
-        font-size: 16px;
-    }
+  .dronsol_box1,
+  .dronsol_box2 {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 30px; /* 간격 조정 */
+  }
 
-    .dronsol_box1 {
-        gap: 30px;
-    }
+  .box1_text, .box2_text {
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+  }
+
+  .box1_text > h2, .box2_text > h2 {
+    font-size: 24px; /* 제목 크기 조정 */
+    margin-bottom: 30px; /* 간격 조정 */
+  }
+
+  .box1_text > p, .box2_text > p {
+    font-size: 16px; /* 텍스트 크기 조정 */
+  }
 }
 
-@media (max-width: 480px) {
-    .cont_sign {
-        height: 150px;
-        gap: 10px;
-    }
+/* 중간 화면 (태블릿) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .content {
+    gap: 40px; /* 기본 간격 */
+  }
 
-    .cont_sign > h2 {
-        font-size: 25px;
-    }
+  .cont_sign {
+    height: 250px; /* 기본 높이 */
+    gap: 40px; /* 기본 간격 */
+  }
 
-    .cont_sign > p {
-        font-size: 16px;
-    }
+  .cont_sign > h2 {
+    font-size: 32px; /* 제목 크기 조정 */
+  }
 
-    .erec_content {
-        width: 100%;
-        gap: 10px;
-    }
+  .cont_sign > p {
+    font-size: 22px; /* 설명 글자 크기 조정 */
+  }
 
-    .erec_text {
-        gap: 30px;
-    }
+  .erec_content {
+    flex-direction: row; /* 가로 정렬 */
+    width: 80%; /* 너비 조정 */
+    gap: 25px; /* 간격 조정 */
+  }
 
-    .erec_box {
-        gap: 5px;
-    }
+  .erec_text {
+    gap: 70px; /* 간격 조정 */
+  }
 
-    .erec_title > h2 {
-        font-size: 20px;
-    }
+  .erec_title > h2 {
+    font-size: 26px; /* 제목 크기 조정 */
+  }
 
-    .erec_box > p {
-        font-size: 14px;
-    }
+  .erec_box > p {
+    font-size: 17px; /* 설명 글자 크기 조정 */
+  }
 
-    .numbered-circle {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        font-size: 14px;
-    }
+  .numbered-circle {
+    width: 28px; /* 크기 조정 */
+    height: 28px;
+    line-height: 28px; /* 라인 높이 조정 */
+    font-size: 16px; /* 글자 크기 조정 */
+  }
 
-    .box1_text > h2 {
-        font-size: 20px;
-    }
+  .dronsol_content {
+    gap: 90px; /* 간격 조정 */
+  }
 
-    .box1_text > p {
-        font-size: 14px;
-    }
+  .dronsol_box1,
+  .dronsol_box2 {
+    flex-direction: row; /* 가로 정렬 */
+    gap: 50px; /* 간격 조정 */
+  }
 
-    .dronsol_box1 {
-        gap: 20px;
-    }
+  .box1_text, .box2_text {
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+  }
+
+  .box1_text > h2, .box2_text > h2 {
+    font-size: 28px; /* 제목 크기 조정 */
+    margin-bottom: 40px; /* 간격 조정 */
+  }
+
+  .box1_text > p, .box2_text > p {
+    font-size: 18px; /* 텍스트 크기 조정 */
+  }
+}
+
+/* 큰 화면 (데스크탑) */
+@media (min-width: 1025px) {
+  .content {
+    gap: 50px; /* 기본 간격 */
+  }
+
+  .cont_sign {
+    height: 250px; /* 기본 높이 */
+    gap: 40px; /* 기본 간격 */
+  }
+
+  .cont_sign > h2 {
+    font-size: 40px; /* 기본 제목 크기 */
+  }
+
+  .cont_sign > p {
+    font-size: 25px; /* 기본 설명 글자 크기 */
+  }
+
+  .erec_content {
+    flex-direction: row; /* 기본 가로 정렬 */
+    width: 70%; /* 기본 너비 */
+    gap: 30px; /* 기본 간격 */
+  }
+
+  .erec_text {
+    gap: 90px; /* 기본 간격 */
+  }
+
+  .erec_title > h2 {
+    font-size: 30px; /* 기본 제목 크기 */
+  }
+
+  .erec_box > p {
+    font-size: 18px; /* 기본 설명 글자 크기 */
+  }
+
+  .numbered-circle {
+    width: 30px; /* 기본 크기 */
+    height: 30px;
+    line-height: 30px; /* 기본 라인 높이 */
+    font-size: 18px; /* 기본 글자 크기 */
+  }
+
+  .dronsol_content {
+    gap: 100px; /* 기본 간격 */
+  }
+
+  .dronsol_box1,
+  .dronsol_box2 {
+    flex-direction: row; /* 기본 가로 정렬 */
+    gap: 70px; /* 기본 간격 */
+  }
+
+  .box1_text, .box2_text {
+    text-align: right; /* 기본 텍스트 정렬 */
+  }
+
+  .box1_text > h2, .box2_text > h2 {
+    font-size: 30px; /* 기본 제목 크기 */
+    margin-bottom: 50px; /* 기본 간격 */
+  }
+
+  .box1_text > p, .box2_text > p {
+    font-size: 20px; /* 기본 텍스트 크기 */
+  }
 }

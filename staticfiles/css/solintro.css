@@ -1,3 +1,22 @@
+/* 스크롤바가 공간을 차지하지 않도록 설정 */
+body {
+    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
+    scrollbar-width: thin; /* Firefox에서 얇은 스크롤바 사용 */
+}
+
+::-webkit-scrollbar {
+    width: 8px; /* 웹킷 브라우저(크롬, 사파리)에서 스크롤바 너비 설정 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바 색상 */
+    border-radius: 10px; /* 스크롤바 모서리를 둥글게 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바에 마우스를 올릴 때 색상 변경 */
+}
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -32,4 +51,111 @@
     height: 200px;
     border: 2px solid gray;
     border-radius: 50px;
+}
+/* 아주 작은 화면 (385px 이하) */
+@media (max-width: 385px) {
+  .footer {
+    padding: 5px;
+    font-size: 12px; /* 글자 크기 줄이기 */
+  }
+
+  .content {
+    margin-top: 50px; /* 콘텐츠 상단 여백 줄이기 */
+  }
+
+  .intro-icons {
+    gap: 10px; /* 아이콘 간격 줄이기 */
+  }
+
+  .intro-icon {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 10px; /* 간격 줄이기 */
+  }
+
+  .intro_bg {
+    width: 300px; /* 너비 줄이기 */
+    height: 135px; /* 높이 줄이기 */
+    border-radius: 20px; /* 둥근 정도 줄이기 */
+  }
+}
+
+/* 작은 화면 (모바일) */
+@media (min-width: 386px) and (max-width: 600px) {
+  .footer {
+    padding: 8px;
+    font-size: 14px; /* 글자 크기 조정 */
+  }
+
+  .content {
+    margin-top: 60px; /* 콘텐츠 상단 여백 조정 */
+  }
+
+  .intro-icons {
+    gap: 15px; /* 아이콘 간격 조정 */
+  }
+
+  .intro-icon {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 15px; /* 간격 조정 */
+  }
+
+  .intro_bg {
+    width: 300px; /* 너비 줄이기 */
+    height: 135px; /* 높이 줄이기 */
+    border-radius: 30px; /* 둥근 정도 조정 */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .footer {
+    padding: 10px;
+    font-size: 16px; /* 글자 크기 조정 */
+  }
+
+  .content {
+    margin-top: 70px; /* 콘텐츠 상단 여백 조정 */
+  }
+
+  .intro-icons {
+    gap: 20px; /* 아이콘 간격 조정 */
+  }
+
+  .intro-icon {
+    flex-direction: row; /* 가로 정렬 */
+    gap: 20px; /* 기본 간격 */
+  }
+
+  .intro_bg {
+    width: 350px; /* 너비 줄이기 */
+    height: 180px; /* 높이 줄이기 */
+    border-radius: 40px; /* 둥근 정도 조정 */
+  }
+}
+
+/* 큰 화면 (데스크탑) */
+@media (min-width: 1025px) {
+  .footer {
+    padding: 10px;
+    font-size: 16px; /* 기본 글자 크기 */
+  }
+
+  .content {
+    margin-top: 100px; /* 기본 콘텐츠 상단 여백 */
+  }
+
+  .intro-icons {
+    gap: 20px; /* 기본 아이콘 간격 */
+  }
+
+  .intro-icon {
+    flex-direction: row; /* 기본 가로 정렬 */
+    gap: 20px; /* 기본 간격 */
+  }
+
+  .intro_bg {
+    width: 400px; /* 기본 너비 */
+    height: 200px; /* 기본 높이 */
+    border-radius: 50px; /* 기본 둥근 정도 */
+  }
 }

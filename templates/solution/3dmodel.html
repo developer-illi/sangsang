@@ -16,23 +16,36 @@
         {% include 'templates/header.html' %}
         {% block content %}
     </div>
-    <div class="slider-container">
-        <div class="slide">
-            <div class="text-content">
-                <h2>정확한 3D 모델링 제작</h2>
-                <p>3D 모델링은 스캔한 데이터를 바탕으로 시설물의 디지털 트윈(정확한 가상 모델)을 생성하는 과정입니다. 이를 통해 관리자는 시설물의 구조와 상태를 시각적으로 분석할 수 있으며, 전체 시설물의 상태를 한눈에 파악할 수 있습니다. 특히, 3D 모델링은 시설물의 상태를 기록하고, 시간에 따른 변화를 추적하는 데 매우 유용합니다.</p>
-            </div>
-            <div class="image-content">
-                <img src="{% static 'img/modeling.png' %}" alt="3D 모델링 이미지">
+    <div class="slide-container">
+    <div class="slide">
+        <div class="slide-text">
+            <h2>3D 스캔을 통한 정밀 데이터 수집</h2>
+            <p>3D 스캔 기술은 드론에 장착된 고성능 카메라와 다양한 센서를 통해 대상 시설물의 표면과 구조를 밀리미터 단위로 정밀하게 측정하고 데이터화하는 기술입니다. 이 기술은 복잡한 구조물을 실시간으로 스캔하여 정학한 3D 데이터를 생성하는 데 중요한 역할을 합니다.</p>
+            <div class="slide-icons">
+                <span>×</span>
+                <span>×</span>
+                <span>×</span>
             </div>
         </div>
-
-        <div class="indicator">
-            <p>1 &times; 2 &times; 3</p>
+        <div class="slide-image">
+            <img src="{% static 'img/dronsol1.jpg' %}" alt="Bridge Image">
         </div>
     </div>
-
-
+    <div class="slide">
+        <div class="slide-text">
+            <h2>3D 스캔을 통한 정밀 데이터 수집</h2>
+            <p>3D 스캔 기술은 드론에 장착된 고성능 카메라와 다양한 센서를 통해 대상 시설물의 표면과 구조를 밀리미터 단위로 정밀하게 측정하고 데이터화하는 기술입니다. 이 기술은 복잡한 구조물을 실시간으로 스캔하여 정학한 3D 데이터를 생성하는 데 중요한 역할을 합니다.</p>
+            <div class="slide-icons">
+                <span>×</span>
+                <span>×</span>
+                <span>×</span>
+            </div>
+        </div>
+        <div class="slide-image">
+            <img src="{% static 'img/dronsol1.jpg' %}" alt="Bridge Image">
+        </div>
+    </div>
+</div>
     <div class="footer">
         {% endblock %}
         {% include 'templates/footer.html' %}

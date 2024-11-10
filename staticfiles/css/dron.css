@@ -11,11 +11,12 @@
     text-align: center;
     width: 100%;
     height: 300px;
-    background: #3b5998;
+    background: url(../img/dron_bg.jpg) no-repeat center/cover;;
 }
 .intro_sign{
     display: flex;
     flex-direction: column;
+    z-index: 1;
     gap: 10px;
 }
 .intro_sign > h2{
@@ -70,7 +71,7 @@
     gap: 10px;
 }
 .dron_main_text > p{
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
 }
 .dron_main_cp > p{
@@ -102,7 +103,7 @@
 }
 
 .dron_ct1_text h2 {
-    font-size: 30px;
+    font-size: 25px;
     color: #888;
     font-weight: bold;
     margin-bottom: 10px;
@@ -123,4 +124,182 @@
     width: 100%;
     height: auto;
     border-radius: 5px; /* 이미지 모서리를 약간 둥글게 */
+}
+/* 아주 작은 화면 (385px 이하) */
+@media (max-width: 385px) {
+  .content {
+    gap: 40px; /* 간격 줄이기 */
+  }
+
+  .dron_content {
+    height: 200px; /* 높이 줄이기 */
+    background-size: cover; /* 배경 이미지 크기 조정 */
+  }
+
+  .intro_sign > h2 {
+    font-size: 28px; /* 제목 크기 줄이기 */
+  }
+
+  .intro_sign > p {
+    font-size: 14px; /* 설명 글자 크기 줄이기 */
+  }
+
+  .curved-line {
+    width: 300px; /* 곡선 길이 줄이기 */
+    height: 15px; /* 곡선 높이 줄이기 */
+  }
+
+  .dron_main_cp > p {
+    font-size: 16px; /* 텍스트 크기 줄이기 */
+  }
+
+  .dron_ct1 {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 15px; /* 간격 줄이기 */
+  }
+
+  .dron_ct1_text {
+    max-width: 100%; /* 텍스트 너비 100% */
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+
+  .dron_ct1_img {
+    max-width: 100%; /* 이미지 너비 100% */
+  }
+}
+
+/* 작은 화면 (모바일) */
+@media (min-width: 386px) and (max-width: 600px) {
+  .content {
+    gap: 60px; /* 간격 줄이기 */
+  }
+
+  .dron_content {
+    height: 250px; /* 높이 줄이기 */
+    background-size: cover; /* 배경 이미지 크기 조정 */
+  }
+
+  .intro_sign > h2 {
+    font-size: 35px; /* 제목 크기 줄이기 */
+  }
+
+  .intro_sign > p {
+    font-size: 15px; /* 설명 글자 크기 줄이기 */
+  }
+
+  .curved-line {
+    width: 350px; /* 곡선 길이 줄이기 */
+    height: 18px; /* 곡선 높이 줄이기 */
+  }
+
+  .dron_main_cp > p {
+    font-size: 30px; /* 텍스트 크기 조정 */
+  }
+
+  .dron_ct1 {
+    flex-direction: column; /* 세로 정렬 */
+    gap: 20px; /* 간격 줄이기 */
+  }
+
+  .dron_ct1_text {
+    max-width: 80%; /* 텍스트 너비 80% */
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+
+  .dron_ct1_img {
+    max-width: 80%; /* 이미지 너비 80% */
+  }
+}
+
+/* 중간 화면 (태블릿) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .content {
+    gap: 80px; /* 기본 간격 */
+  }
+
+  .dron_content {
+    height: 300px; /* 기본 높이 */
+    background-size: cover; /* 배경 이미지 크기 유지 */
+  }
+
+  .intro_sign > h2 {
+    font-size: 40px; /* 제목 크기 조정 */
+  }
+
+  .intro_sign > p {
+    font-size: 16px; /* 설명 글자 크기 조정 */
+  }
+
+  .curved-line {
+    width: 400px; /* 기본 곡선 길이 */
+    height: 20px; /* 기본 곡선 높이 */
+  }
+
+  .dron_main_cp > p {
+    font-size: 30px; /* 기본 텍스트 크기 */
+  }
+
+  .dron_ct1 {
+    flex-direction: row; /* 기본 가로 정렬 */
+    gap: 30px; /* 기본 간격 */
+  }
+
+  .dron_ct1_text {
+    max-width: 30%; /* 기본 텍스트 너비 */
+    text-align: left; /* 기본 텍스트 정렬 */
+  }
+
+  .dron_ct1_img {
+    max-width: 30%; /* 기본 이미지 너비 */
+  }
+  .dron_ct1_text h2{
+      font-size: 16px;
+  }
+  .dron_ct1_description{
+      font-size: 11px;
+  }
+}
+
+
+/* 큰 화면 (데스크탑) */
+@media (min-width: 1025px) {
+  .content {
+    gap: 80px; /* 기본 간격 */
+  }
+
+  .dron_content {
+    height: 300px; /* 기본 높이 */
+    background-size: cover; /* 배경 이미지 크기 유지 */
+  }
+
+  .intro_sign > h2 {
+    font-size: 45px; /* 기본 제목 크기 */
+  }
+
+  .intro_sign > p {
+    font-size: 17px; /* 기본 설명 글자 크기 */
+  }
+
+  .curved-line {
+    width: 400px; /* 기본 곡선 길이 */
+    height: 20px; /* 기본 곡선 높이 */
+  }
+
+  .dron_main_cp > p {
+    font-size: 35px; /* 기본 텍스트 크기 */
+  }
+
+  .dron_ct1 {
+    flex-direction: row; /* 기본 가로 정렬 */
+    gap: 30px; /* 기본 간격 */
+  }
+
+  .dron_ct1_text {
+    max-width: 30%; /* 기본 텍스트 너비 */
+    text-align: left; /* 기본 텍스트 정렬 */
+  }
+
+  .dron_ct1_img {
+    max-width: 30%; /* 기본 이미지 너비 */
+  }
 }
