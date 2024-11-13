@@ -82,12 +82,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sangsang',
         'USER': 'postgres',
-        'PASSWORD': '1235gg',
-        #'PASSWORD': 'molly1108',
-        'HOST': 'localhost',
-        #'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': '5432',
-        #'PORT': '31643',
+        #'PASSWORD': '1235gg',
+        'PASSWORD': 'tkdtkd1235',
+        #'HOST': 'localhost',
+        'HOST': 'svc.sel4.cloudtype.app',
+        #'PORT': '5432',
+        'PORT': '31098',
     }
 }
 
