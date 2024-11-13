@@ -10,33 +10,27 @@
     <title>sangsang BUILD</title>
 </head>
 <body>
+<div class="wrapper">
     <div class="header">
         {% include 'templates/header.html' %}
         {% block content %}
-    </div>
-    <div class="content">
-        <div class="intro-icons">
-            <div class="intro-icon">
-                <div class="intro_bg">
-                    <p><a href="{% url 'bride' %}">교량안전 점검</a></p>
-                </div>
-                <div class="intro_bg">
-                    <p><a href="{% url 'social' %}">사회기반시설 안전점검</a></p>
+            </div>
+            <div class="content">
+                <div class="intro-icons">
+                    <div class="intro-icon">
+                        {% for item in app %}
+                            <!--style="background-image: url('{{ item.content_img.url }}') ;"-->
+                            <div class="intro_bg">
+                                <p><a href="{% url 'app_page' item.pk %}">{{ item.title }}</a></p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-            <div class="intro-icon">
-                <div class="intro_bg">
-                    <p><a href="{% url 'erection' %}">건설시공현장 공정관리</a></p>
-                </div>
-                <div class="intro_bg">
-                    <p><a href="{% url 'dron_sol' %}">드론 솔루션</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
+            <div class="footer">
         {% endblock %}
         {% include 'templates/footer.html' %}
+        </div>
     </div>
 </body>
 </html>

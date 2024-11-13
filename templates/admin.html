@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>sangsang BUILD</title>
+</head>
+<body>
+<div class="header">
+    {% include 'templates/header.html' %}
+</div>
+{% block content %}
+
+    <div class="content">
+        <div class="side_text">
+            <div class="tap_add">
+                <p class="tap_add_button">탭 추가</p>
+            </div>
+            <div class="sol">
+                <div class="main_tap">
+                    <p class="toggle-taps">솔루션</p>
+                    {% for sol in solutions %}
+                        <div class="taps">
+                            <p class="item_open_sol" id="{{ sol.pk }}">{{ sol.title }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="apps">
+                <p class="toggle-taps2">적용분야</p>
+                {% for app in apply %}
+                    <div class="taps2">
+                        <p class="item_open_app" id="{{ app.pk }}">{{ app.title }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="main_content">
+            <p>사이드 바에서 선택해주세요.</p>
+        </div>
+        <div class="tap_adds">
+            <div class="form_taps">
+                <form action="{% url 'tapp_adds' %}" id="tap_add_form" method="post" enctype="multipart/form-data">
+                    <label>분류</label>
+                    <select name="qnsfb">
+                        <option value="1">솔루션</option>
+                        <option value="2">적용분야</option>
+                    </select>
+                    <label>제목</label>
+                    <input type="text" name="title" placeholder="제목(중복안되게 주의해주세요)">
+                    <label>설명</label>
+                    <textarea name="title_ex" placeholder="엔터 반영 됩니다"></textarea>
+                    <label>카피</label>
+                    <textarea name="copy" placeholder="엔터 반영 됩니다"></textarea>
+                    <label>카피 설명</label>
+                    <textarea name="copy_ex" placeholder="엔터 반영 됩니다"></textarea>
+                    <label>메인 이미지</label>
+                    <input type="file" name="image" accept="image/*">
+                    <div class="button-container">
+                        <button type="submit">추가</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="sol_additems">
+            <div class="sol_form">
+                <form action="{% url 'sol_item_add' %}" id="sol_item_add" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>솔루션</label>
+                    <select name="sol_item_category">
+                        {% for option in solutions %}
+                            <option value="{{ option.pk }}">{{ option.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="val_items">
+                    </div>
+                    <label class="magin_item">제목</label>
+                    <input name="sol_title" type="text" placeholder="제목을 입력해주세요">
+                    <label>내용</label>
+                    <textarea name="sol_content" placeholder="엔터 반영 됩니다."></textarea>
+                    <label>이미지</label>
+                    <input id="sol-img-edit" type="file" name="sol_image" accept="image/*">
+                    <label>배치 유형</label>
+                    <select name="sol_type">
+                        <option value="1">오른쪽배치</option>
+                        <option value="2">왼쪽배치</option>
+                    </select>
+                    <div class="button-container">
+                        <button type="submit">추가</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="app_additems">
+            <div class="app_form">
+                <form action="{% url 'app_item_add' %}" id="app_item_add" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>적용 분야</label>
+                    <select name="app_item_category">
+                        {% for option in apply %}
+                            <option value="{{ option.pk }}">{{ option.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="val_items_app">
+                    </div>
+                    <label class="magin_item">제목</label>
+                    <input name="app_title" type="text" placeholder="제목을 입력해주세요">
+                    <label>내용</label>
+                    <textarea name="app_content" placeholder="엔터 반영 됩니다."></textarea>
+                    <label>이미지</label>
+                    <input id="app-img-edit" type="file" name="app_image" accept="image/*">
+                    <label>배치 유형</label>
+                    <select name="app_type">
+                        <option value="1">오른쪽배치</option>
+                        <option value="2">왼쪽배치</option>
+                    </select>
+                    <div class="button-container">
+                        <button type="submit">추가</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<div class="footer">
+    {% include 'templates/footer.html' %}
+</div>
+</body>
+</html>

@@ -35,6 +35,7 @@ body {
     align-items: center;
     text-align: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
 }
 .intro-icon{
@@ -42,6 +43,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 .intro_bg{
     display: flex;

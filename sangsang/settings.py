@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -76,8 +77,17 @@ WSGI_APPLICATION = 'sangsang.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sangsang',
+        'USER': 'postgres',
+        'PASSWORD': '1235gg',
+        #'PASSWORD': 'molly1108',
+        'HOST': 'localhost',
+        #'HOST': 'svc.sel4.cloudtype.app',
+        'PORT': '5432',
+        #'PORT': '31643',
     }
 }
 
@@ -132,3 +142,7 @@ EMAIL_PORT = 587  # 일반적으로 587 또는 465
 EMAIL_USE_TLS = True  # TLS 보안 사용 여부
 EMAIL_HOST_USER = 'info@sangsangbuild.com'  # 이메일 주소
 EMAIL_HOST_PASSWORD = 'your-email-password'  # 이메일 비밀번호
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # media 폴더를 기본 경로로 설정
+MEDIA_URL = '/media/'  # 이미지 URL 경로 설정
