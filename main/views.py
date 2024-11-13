@@ -151,6 +151,8 @@ def admin_login(request):
         try:
             username = request.POST['u_id']
             password = request.POST['password']
+            test = Admin.objects.get(user='admin')
+            print(test.password)
             user = Admin.objects.get(user=username, password=password)
             arg = {'user':user}
         except Admin.DoesNotExist:
