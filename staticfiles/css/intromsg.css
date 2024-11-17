@@ -33,6 +33,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 40px;
 }
 .intro_msgintro_msg{
     width: 100vw;

@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 스크롤 이후 첫 번째 섹션에만 margin-top을 100px로 설정
         if (index === 0 && hasScrolled) {
-            sections[index].style.marginTop = "100px";
+
         }
 
         // 부드럽게 해당 섹션으로 스크롤
