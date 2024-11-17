@@ -33,15 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 버튼 클릭 시 해당 섹션으로 스크롤 이동
-    document.querySelectorAll('.navigation-sidebar button').forEach(button => {
+    document.querySelectorAll('.navigation-sidebar button').forEach((button, index) => {
         button.addEventListener('click', function () {
-            const sectionClass = button.getAttribute('data-section');
-            const sectionIndex = sections.findIndex(section => section.classList.contains(sectionClass));
-            if (sectionIndex !== -1) {
-                currentSectionIndex = sectionIndex;
-                hasScrolled = true; // 버튼 클릭으로 스크롤 발생 시에도 설정
-                scrollToSection(currentSectionIndex);
-            }
+            currentSectionIndex = index;
+            hasScrolled = true; // 버튼 클릭으로 스크롤 발생 시에도 설정
+            scrollToSection(currentSectionIndex);
         });
     });
 
@@ -49,26 +45,24 @@ document.addEventListener("DOMContentLoaded", function () {
     function scrollToSection(index) {
         isScrolling = true;
 
-        // 모든 섹션의 margin-top을 초기화
-        sections.forEach(section => section.style.marginTop = "0px");
+        // 헤더 높이를 고려한 스크롤 위치 계산
+        const headerHeight = 60; // 헤더 높이를 픽셀 단위로 설정
+        let sectionTop = sections[index].getBoundingClientRect().top + window.scrollY - headerHeight;
 
-        // 스크롤 이후 첫 번째 섹션에만 margin-top을 100px로 설정
-        if (index === 0 && hasScrolled) {
-
+        // 첫 번째 섹션의 경우 더 윗쪽으로 스크롤되게 조정
+        if (index === 0) {
+            sectionTop -= 150; // 20px 더 윗쪽으로 이동 (원하는 만큼 조정 가능)
         }
 
         // 부드럽게 해당 섹션으로 스크롤
-        setTimeout(() => {
-            sections[index].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-                inline: 'nearest'
-            });
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth'
+        });
 
-            // 스크롤 애니메이션이 끝난 후에 isScrolling을 false로 설정
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000); // 애니메이션 지속 시간을 고려하여 설정
-        }, 100); // 마진 반영 후 스크롤을 위해 약간의 딜레이 추가
+        // 스크롤 애니메이션이 끝난 후에 isScrolling을 false로 설정
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000); // 애니메이션 지속 시간을 고려하여 설정
     }
 });
