@@ -1,3 +1,15 @@
+.header {
+    position: fixed; /* 상단에 고정 */
+    top: 0; /* 상단에서의 위치를 0으로 설정 */
+    left: 0;
+    width: 100%; /* 너비를 전체 화면으로 설정 */
+    z-index: 105; /* 다른 요소 위에 표시되도록 설정 */
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+.header_main{
+    background-color: transparent;
+}
 #video_play{
     width: 100%;
     height: auto;
@@ -9,13 +21,18 @@
     height: 100vh;
     color: black;
     text-align: center;
-    background: #555555;
+    background: no-repeat center/cover;
+    background-image: url("../img/mainbg.jpg");
 }
 .section {
-    width: 30%;
+    width: 20%;
+    background: #939393;
+    border-radius: 45px;
 }
 .section p {
     margin: 10px 0;
+    font-weight: bold;
+    font-size: 18px;
 }
 .line {
     height: 70%;
@@ -52,7 +69,7 @@
   }
 
   .section {
-    width: 80%;
+    width: 40%;
     margin-bottom: 15px;
   }
 
@@ -69,7 +86,7 @@
   }
 
   .section {
-    width: 30%; /* 기본 섹션 너비 */
+    width: 20%; /* 기본 섹션 너비 */
   }
 
   .line {
