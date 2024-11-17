@@ -37,7 +37,6 @@ body{
 }
 .intro_msgintro_msg{
     width: 100vw;
-    height: 100vh;
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -75,7 +74,6 @@ body{
 .history{
     flex-grow: 2;
     width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
