@@ -131,7 +131,7 @@ header {
 }
 
 /* 작은 화면 (모바일, 386px ~ 600px) */
-@media (min-width: 386px) and (max-width: 600px) {
+@media (min-width: 386px) and (max-width: 775px) {
   .header_main {
     flex-direction: row;
     justify-content: space-between; /* 좌우 공간 분배 */
@@ -168,7 +168,7 @@ header {
 }
 
 /* 중간 화면 (태블릿, 601px ~ 1024px) */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 776px) and (max-width: 1024px) {
   .header_main {
     flex-direction: row;
     justify-content: space-between;
@@ -182,7 +182,7 @@ header {
   .header_right {
     flex-direction: row; /* 기본 가로 정렬 */
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     margin-right: 0;
   }
 
@@ -210,7 +210,7 @@ header {
   .header_right {
     flex-direction: row; /* 기본 가로 정렬 */
     display: flex;
-    gap: 4rem;
+    gap: 3rem;
     margin-right: 7rem; /* 기본 여백 */
   }
 
