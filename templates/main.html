@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="header">
-        {% include 'templates/header.html' %}
+        {% include 'header.html' %}
         {% block content %}
     </div>
     <div class="content">
@@ -22,7 +22,7 @@
                 <source src="{% static 'img/sangsang_mg.mp4' %}" type="video/mp4">
             </video>
         </div>
-        <div class="main_content">
+        <div class="main_content" style="background-image: url('{% static 'img/mainbg.jpg' %}') ;">
             <div class="section">
                 <p>회사소개</p>
                 <p>고객에게 신뢰를 주는 기업</p>
@@ -40,7 +40,7 @@
     </div>
     <div class="footer">
         {% endblock %}
-        {% include 'templates/footer.html' %}
+        {% include 'footer.html' %}
     </div>
 </body>
 </html>

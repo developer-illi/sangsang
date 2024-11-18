@@ -22,17 +22,25 @@
     color: black;
     text-align: center;
     background: no-repeat center/cover;
-    background-image: url("../img/mainbg.jpg");
 }
 .section {
     width: 20%;
-    background: #939393;
     border-radius: 45px;
+    transition: background-color 0.3s ease;
+}
+.section:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* 투명한 검정색 배경 */
 }
 .section p {
     margin: 10px 0;
     font-weight: bold;
     font-size: 18px;
+    color: #000;
+    transition: color 0.3s ease, transform 0.3s ease; /* 글씨색과 크기 전환 효과 추가 */
+}
+.section:hover > p{
+    color: #fff; /* 마우스 오버 시 글씨색을 흰색으로 변경 */
+    transform: scale(1.1); /* 마우스 오버 시 글씨를 약간 확대 */
 }
 .line {
     height: 70%;

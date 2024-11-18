@@ -21,7 +21,7 @@
             <div class="intro-icons">
                 <div class="intro-icon">
                     {% for item in sol %}
-                        <div class="intro_bg">
+                        <div class="intro_bg" style="background-image: url('{{ item.content_img.url }}')">
                             <p><a href="{% url 'sol_page' item.pk %}">{{ item.title }}</a></p>
                         </div>
                     {% endfor %}

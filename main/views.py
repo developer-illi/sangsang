@@ -173,6 +173,10 @@ def admin(request):
 @csrf_exempt
 def tapp_adds(request):
     if request.method == 'POST' and request.FILES.get('image'):
+        test =request.FILES.get('image')
+        print('-2------')
+        print(test)
+        print('-2------')
         target = request.POST['qnsfb']
         title = request.POST['title']
         title_ex = request.POST['title_ex']

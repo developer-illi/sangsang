@@ -1,4 +1,14 @@
+import pathlib
 from django.db import models
+
+def image_file_upload_handler(instance, filepath):
+    instance_id = instance.id
+    if not instance.id:
+        instance_id = "0"
+    filepath = pathlib.Path(filepath).resolve()
+    print(instance, filepath)
+    return f"test/{instance_id}/{filepath.name}"
+
 class Taps(models.Model):
     title = models.CharField(max_length=100, default='')
     type = models.IntegerField(default=1) #1 = 솔루션 #2 = 적용분야

@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os.path
 from pathlib import Path
-from django.core.mail import send_mail
+from django.conf import settings
+from decouple import config
+from django.template.defaultfilters import default
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k*f7cv6es=6^8$oik!jjefi6*o8j^76fm_g&qn2uvw4u^t_#3g'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,13 +34,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -80,14 +82,15 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sangsang',
-        'USER': 'postgres',
+        'NAME': config('DATABASE_NAME'),
+        #'USER': 'postgres',
+        'USER': config('DATABASE_USER'),
         #'PASSWORD': '1235gg',
-        'PASSWORD': 'tkdtkd1235',
+        'PASSWORD': config('DATABASE_PASSWORD'),
         #'HOST': 'localhost',
-        'HOST': 'svc.sel4.cloudtype.app',
+        'HOST': config('DATABASE_HOST'),
         #'PORT': '5432',
-        'PORT': '31098',
+        'PORT': config('DATABASE_PORT'),
     }
 }
 
@@ -125,24 +128,40 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_ROOT = os.path.join('staticfiles')
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+CLOUDFLARE_R2_BUCKET=config('CLOUDFLARE_R2_BUCKET', cast=str, default='sangsangmedia')
+CLOUDFLARE_R2_ACCESS_KEY=config('CLOUDFLARE_R2_ACCESS_KEY')
+CLOUDFLARE_R2_SECRET_KEY=config('CLOUDFLARE_R2_SECRET_KEY')
+CLOUDFLARE_R2_BUCKET_ENDPOINT=config('CLOUDFLARE_R2_BUCKET_ENDPOINT')
+
+CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS = {
+    "bucket_name": CLOUDFLARE_R2_BUCKET,
+    "access_key": CLOUDFLARE_R2_ACCESS_KEY,
+    "secret_key": CLOUDFLARE_R2_SECRET_KEY,
+    "endpoint_url": CLOUDFLARE_R2_BUCKET_ENDPOINT,
+    "default_acl" : "public-read",
+    "signature_version": "s3v4"
+}
+
+#storages
+
+STORAGES = {
+    "default": {
+        "BACKEND": "helpers.cloudflare.storages.MediaStorage",
+        "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
+    },
+    "staticfiles" : {
+        "BACKEND": "helpers.cloudflare.storages.StaticStorage",
+        "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
+    }
+}
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.example.com'  # 이메일 제공자의 SMTP 서버
-EMAIL_PORT = 587  # 일반적으로 587 또는 465
-EMAIL_USE_TLS = True  # TLS 보안 사용 여부
-EMAIL_HOST_USER = 'info@sangsangbuild.com'  # 이메일 주소
-EMAIL_HOST_PASSWORD = 'your-email-password'  # 이메일 비밀번호
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # media 폴더를 기본 경로로 설정
-MEDIA_URL = '/media/'  # 이미지 URL 경로 설정
