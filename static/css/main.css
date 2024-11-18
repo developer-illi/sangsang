@@ -52,7 +52,7 @@
   }
 
   .section {
-    width: 90%; /* 섹션 너비를 더 크게 */
+    width: 50%; /* 섹션 너비를 더 크게 */
     margin-bottom: 20px; /* 섹션 간의 간격 추가 */
   }
 
