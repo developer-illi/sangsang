@@ -29,10 +29,6 @@
     text-align: left; /* 텍스트 중앙 정렬 */
     line-height: 1.5; /* 줄 간격 */
 }
-#intro_name{
-    text-align: center;
-}
-
 .ft_social {
     display: flex;
     align-items: center;

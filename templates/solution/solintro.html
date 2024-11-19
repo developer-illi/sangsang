@@ -13,24 +13,26 @@
     <title>sangsang BUILD</title>
 </head>
 <body>
-<div class="header">
-    {% include 'templates/header.html' %}
-    {% block content %}
-        </div>
-        <div class="content">
-            <div class="intro-icons">
-                <div class="intro-icon">
-                    {% for item in sol %}
-                        <div class="intro_bg" style="background-image: url('{{ item.content_img.url }}')">
-                            <p><a href="{% url 'sol_page' item.pk %}">{{ item.title }}</a></p>
-                        </div>
-                    {% endfor %}
+<div class="wrapper">
+    <div class="header">
+        {% include 'templates/header.html' %}
+        {% block content %}
+            </div>
+            <div class="content">
+                <div class="intro-icons">
+                    <div class="intro-icon">
+                        {% for item in sol %}
+                            <div class="intro_bg" style="background-image: url('{{ item.content_img.url }}')">
+                                <p><a href="{% url 'sol_page' item.pk %}">{{ item.title }}</a></p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
+            <div class="footer">
+        {% endblock %}
+        {% include 'templates/footer.html' %}
         </div>
-        <div class="footer">
-    {% endblock %}
-    {% include 'templates/footer.html' %}
-    </div>
+</div>
 </body>
 </html>

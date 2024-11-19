@@ -1,33 +1,17 @@
 /* 스크롤바가 공간을 차지하지 않도록 설정 */
-body {
-    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
-    scrollbar-width: thin; /* Firefox에서 얇은 스크롤바 사용 */
+body{
+    background: black;
 }
-
-::-webkit-scrollbar {
-    width: 8px; /* 웹킷 브라우저(크롬, 사파리)에서 스크롤바 너비 설정 */
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888; /* 스크롤바 색상 */
-    border-radius: 10px; /* 스크롤바 모서리를 둥글게 */
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555; /* 스크롤바에 마우스를 올릴 때 색상 변경 */
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;      /* 화면 전체 너비 */
-    background-color: #000;
-    padding: 10px;
-    text-align: center;
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 전체 화면 높이를 차지 */
 }
 .content{
-    margin-top: 80px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
 }
 .intro-icons{
     display: flex;
@@ -38,14 +22,18 @@ body {
     flex-wrap: wrap;
     gap: 20px;
 }
+.intro-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 .intro_bg {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 400px;
     height: 200px;
-    border: 2px solid gray;
-    border-radius: 50px;
     background: no-repeat center/cover;
     position: relative; /* 부모 요소를 기준으로 자식 요소를 배치하기 위해 설정 */
     overflow: hidden; /* 자식 요소가 넘치지 않도록 설정 */
@@ -61,7 +49,6 @@ body {
     background-color: rgba(0, 0, 0, 0.5); /* 투명한 검정색 배경 */
     opacity: 0; /* 기본적으로 투명하게 설정 */
     transition: opacity 0.3s ease; /* 부드러운 전환 효과 */
-    border-radius: 50px; /* 부모와 동일한 border-radius 설정 */
 }
 
 .intro_bg:hover::before {
@@ -71,7 +58,7 @@ body {
 .intro_bg > p {
     font-size: 25px;
     font-weight: bold;
-    color: #000;
+    color: #505050;
     transition: color 0.3s ease, transform 0.3s ease; /* 글씨색과 크기 전환 효과 추가 */
 }
 
@@ -83,11 +70,6 @@ body {
 
 /* 아주 작은 화면 (385px 이하) */
 @media (max-width: 385px) {
-  .footer {
-    padding: 5px;
-    font-size: 12px; /* 글자 크기 줄이기 */
-  }
-
   .content {
     margin-top: 50px; /* 콘텐츠 상단 여백 줄이기 */
   }
@@ -104,17 +86,11 @@ body {
   .intro_bg {
     width: 300px; /* 너비 줄이기 */
     height: 135px; /* 높이 줄이기 */
-    border-radius: 20px; /* 둥근 정도 줄이기 */
   }
 }
 
 /* 작은 화면 (모바일) */
 @media (min-width: 386px) and (max-width: 600px) {
-  .footer {
-    padding: 8px;
-    font-size: 14px; /* 글자 크기 조정 */
-  }
-
   .content {
     margin-top: 60px; /* 콘텐츠 상단 여백 조정 */
   }
@@ -131,17 +107,11 @@ body {
   .intro_bg {
     width: 300px; /* 너비 줄이기 */
     height: 135px; /* 높이 줄이기 */
-    border-radius: 30px; /* 둥근 정도 조정 */
   }
 }
 
 /* 중간 화면 (태블릿) */
 @media (min-width: 601px) and (max-width: 1024px) {
-  .footer {
-    padding: 10px;
-    font-size: 16px; /* 글자 크기 조정 */
-  }
-
   .content {
     margin-top: 70px; /* 콘텐츠 상단 여백 조정 */
   }
@@ -158,17 +128,11 @@ body {
   .intro_bg {
     width: 350px; /* 너비 줄이기 */
     height: 180px; /* 높이 줄이기 */
-    border-radius: 40px; /* 둥근 정도 조정 */
   }
 }
 
 /* 큰 화면 (데스크탑) */
 @media (min-width: 1025px) {
-  .footer {
-    padding: 10px;
-    font-size: 16px; /* 기본 글자 크기 */
-  }
-
   .content {
     margin-top: 100px; /* 기본 콘텐츠 상단 여백 */
   }
@@ -185,6 +149,5 @@ body {
   .intro_bg {
     width: 400px; /* 기본 너비 */
     height: 200px; /* 기본 높이 */
-    border-radius: 50px; /* 기본 둥근 정도 */
   }
 }

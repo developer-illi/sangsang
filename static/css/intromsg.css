@@ -213,22 +213,20 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
+    padding: 80px;
     flex-grow: 1;
+    background: black;
 }
 
 .contact-info {
-    background-color: #1e3a8a; /* 파란색 배경 */
     color: #fff; /* 흰색 텍스트 */
     padding: 40px;
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
 }
 .contact-details{
-    margin-left: 40%;
 }
 
 .contact-info h2 {
@@ -237,12 +235,11 @@ body{
 }
 
 .contact-info p {
-    margin-bottom: 20px;
+    margin-bottom: 31px;
     font-size: 16px;
 }
 
 .map-section {
-    width: 50%;
     height: 100%;
 }
 
@@ -278,7 +275,7 @@ body{
 }
 
 .navigation-sidebar button {
-    background-color: #1e3a8a;
+    background-color: #000;
     color: #fff;
     border: none;
     padding: 8px 12px;

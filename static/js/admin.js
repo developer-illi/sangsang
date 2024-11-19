@@ -1,7 +1,3 @@
-$(document).ready(function() {
-
-});
-
 document.addEventListener("DOMContentLoaded", function() {
     // 요소 선택
     const tapAddButton = document.querySelector(".tap_add_button");

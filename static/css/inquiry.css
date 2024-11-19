@@ -10,6 +10,7 @@
 .contact_inser{
     display: flex;
     flex-direction: column;
+    width: 40%;
 }
 .contact-section {
     display: flex;
@@ -24,13 +25,17 @@
     flex: 1;
 }
 
+
 .contact-info h2,
 .follow-info h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+.contact-info > img{
+    width: 100%;
+    height: auto;
+}
 .contact-info p,
 .follow-info p {
     margin: 10px 0;
@@ -40,6 +45,7 @@
 
 .form-section {
     flex: 2;
+    width: 100%;
 }
 
 .form-section form {
@@ -58,7 +64,6 @@
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 textarea {
@@ -73,7 +78,6 @@ button[type="submit"] {
     color: #fff;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 button[type="submit"]:hover {
