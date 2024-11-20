@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // 요소 선택
     const tapAddButton = document.querySelector(".tap_add_button");
     const toggleTaps = document.querySelector(".toggle-taps");
@@ -21,38 +21,35 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // tap_add_button 클릭 시
-    tapAddButton.addEventListener("click", function() {
+    tapAddButton.addEventListener("click", function () {
         hideAllContents();
         tapAdds.style.display = "flex"; // tap_adds만 표시
     });
 
     // toggle-taps 클릭 시
-    toggleTaps.addEventListener("click", function() {
+    toggleTaps.addEventListener("click", function () {
         hideAllContents();
         solAddItems.style.display = "flex"; // sol_additems만 표시
     });
 
     // toggle-taps2 클릭 시
-    toggleTaps2.addEventListener("click", function() {
+    toggleTaps2.addEventListener("click", function () {
         hideAllContents();
         appAddItems.style.display = "flex"; // app_additems만 표시
     });
 });
 
 
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("tap_add_form");
     const submitButton = form.querySelector('button[type="submit"]');
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
         let isValid = true;
         let errorMessage = "다음 값을 입력하세요:\n";
 
         // 모든 필드를 검사
-        form.querySelectorAll("input, textarea, select").forEach(function(field) {
+        form.querySelectorAll("input, textarea, select").forEach(function (field) {
             if (field.type === "file") {
                 if (!field.files || field.files.length === 0) {
                     isValid = false;
@@ -68,17 +65,17 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!isValid) {
             event.preventDefault(); // 폼 제출 방지
             alert(errorMessage); // 경고 메시지 표시
-        }else {
+        } else {
             alert('등록 되었습니다.');
         }
     });
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="sol_item_category"]');
     const valItemsContainer = document.querySelector('.val_items');
     const fileInput = document.getElementById('sol-img-edit'); // 파일 입력 요소 선택
 
-    categorySelect.addEventListener('change', function() {
+    categorySelect.addEventListener('change', function () {
         const selectedCategory = categorySelect.value;  // 선택된 value 값 가져오기
 
         // AJAX 요청 보내기
@@ -99,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const delIconDiv = document.createElement('div');
                     delIconDiv.classList.add('del_icon');
                     const delIconImg = document.createElement('img');
-                    delIconImg.id =item.pk;
+                    delIconImg.id = item.pk;
                     delIconImg.src = '/static/img/delete.png';
                     delIconDiv.appendChild(delIconImg);
 
@@ -115,35 +112,35 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="sol_item_category"]');
 
     // 기본 선택 항목 설정
     categorySelect.selectedIndex = -1; // 선택을 초기화하여 아무 항목도 선택되지 않도록 설정
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="sol_type"]');
 
     // 기본 선택 항목 설정
     categorySelect.selectedIndex = -1; // 선택을 초기화하여 아무 항목도 선택되지 않도록 설정
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="app_item_category"]');
 
     // 기본 선택 항목 설정
     categorySelect.selectedIndex = -1; // 선택을 초기화하여 아무 항목도 선택되지 않도록 설정
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="app_type"]');
 
     // 기본 선택 항목 설정
     categorySelect.selectedIndex = -1; // 선택을 초기화하여 아무 항목도 선택되지 않도록 설정
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("sol_item_add");
     const submitButton = form.querySelector('button[type="submit"]');
 
-    submitButton.addEventListener("click", function(event) {
+    submitButton.addEventListener("click", function (event) {
         // 각 입력 요소 가져오기
         const categorySelect = form.querySelector('select[name="sol_item_category"]');
         const titleInput = form.querySelector('input[name="sol_title"]');
@@ -153,11 +150,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 검증할 모든 필드를 배열로 저장
         const fields = [
-            { element: categorySelect,  placeholder: "" },
-            { element: titleInput,  placeholder: "제목을 입력해주세요." },
-            { element: contentTextarea,  placeholder: "내용을 입력해주세요." },
-            { element: imageInput,  placeholder: "" },
-            { element: typeSelect,  placeholder: "" }
+            {element: categorySelect, placeholder: ""},
+            {element: titleInput, placeholder: "제목을 입력해주세요."},
+            {element: contentTextarea, placeholder: "내용을 입력해주세요."},
+            {element: imageInput, placeholder: ""},
+            {element: typeSelect, placeholder: ""}
         ];
 
         // 이전 강조 스타일과 안내 문구 제거
@@ -198,11 +195,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="sol_item_category"]');
     const valItemsContainer = document.querySelector('.val_items');
 
-    categorySelect.addEventListener('change', function() {
+    categorySelect.addEventListener('change', function () {
         const selectedCategory = categorySelect.value;  // 선택된 value 값 가져오기
 
         // AJAX 요청 보내기
@@ -235,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // 삭제 아이콘 클릭 이벤트 추가
                 document.querySelectorAll('.delete-icon').forEach(icon => {
-                    icon.addEventListener('click', function() {
+                    icon.addEventListener('click', function () {
                         const itemId = this.id;
 
                         // AJAX 요청으로 데이터베이스에서 항목 삭제
@@ -245,15 +242,15 @@ document.addEventListener("DOMContentLoaded", function() {
                                 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                             }
                         })
-                        .then(response => {
-                            if (response.ok) {
-                                // 삭제 성공 시 해당 항목 제거
-                                this.parentElement.parentElement.remove();
-                            } else {
-                                console.error('삭제 실패');
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
+                            .then(response => {
+                                if (response.ok) {
+                                    // 삭제 성공 시 해당 항목 제거
+                                    this.parentElement.parentElement.remove();
+                                } else {
+                                    console.error('삭제 실패');
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
                     });
                 });
             })
@@ -262,13 +259,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('select[name="app_item_category"]');
     const valItemsContainer = document.querySelector('.val_items_app');
 
-    categorySelect.addEventListener('change', function() {
+    categorySelect.addEventListener('change', function () {
         const selectedCategory = categorySelect.value;  // 선택된 value 값 가져오기
 
         // AJAX 요청 보내기
@@ -301,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // 삭제 아이콘 클릭 이벤트 추가
                 document.querySelectorAll('.delete-icon').forEach(icon => {
-                    icon.addEventListener('click', function() {
+                    icon.addEventListener('click', function () {
                         const itemId = this.id;
 
                         // AJAX 요청으로 데이터베이스에서 항목 삭제
@@ -311,18 +306,45 @@ document.addEventListener("DOMContentLoaded", function() {
                                 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                             }
                         })
-                        .then(response => {
-                            if (response.ok) {
-                                // 삭제 성공 시 해당 항목 제거
-                                this.parentElement.parentElement.remove();
-                            } else {
-                                console.error('삭제 실패');
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
+                            .then(response => {
+                                if (response.ok) {
+                                    // 삭제 성공 시 해당 항목 제거
+                                    this.parentElement.parentElement.remove();
+                                } else {
+                                    console.error('삭제 실패');
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
                     });
                 });
             })
             .catch(error => console.error('Error:', error));
+    });
+});
+
+// // JavaScript로 버튼 클릭 시 새 창 열기
+document.addEventListener("DOMContentLoaded", function () {
+    const previewButton = document.getElementById("previewButton");
+
+    previewButton.addEventListener("click", function () {
+        const url = previewButton.getAttribute("data-url");
+        const form = document.querySelector("#sol_item_add");
+        const categoryValue = form.querySelector("select[name='sol_item_category']").value;
+        const makeurl = url+'/'+categoryValue;
+        window.open(makeurl, "미리보기", "width=800,height=600,scrollbars=yes");
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const previewButton = document.getElementById("previewButton_app");
+
+    previewButton.addEventListener("click", function () {
+        const url = previewButton.getAttribute("data-url");
+        const form = document.querySelector("#app_item_add");
+        const categoryValue = form.querySelector("select[name='app_item_category']").value;
+        const makeurl = url+'/'+categoryValue;
+        window.open(makeurl, "미리보기", "width=800,height=600,scrollbars=yes");
     });
 });
