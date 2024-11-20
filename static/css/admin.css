@@ -245,6 +245,7 @@
 .val_items{
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
 }
 .sol_item_val {
     display: flex;
