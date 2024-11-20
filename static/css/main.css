@@ -28,6 +28,7 @@
 }
 
 .section {
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
@@ -35,12 +36,32 @@
     justify-content: center;
     transition: background-color 0.3s ease;
     gap: 20px;
+    overflow: hidden;
+    background: no-repeat center/cover;
 }
 
-.section:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* 투명한 검정색 배경 */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* 기본적으로 살짝 어두운 배경 */
+    opacity: 0; /* 기본 상태에서 투명하게 설정 */
+    transition: opacity 0.3s ease; /* 부드러운 전환 효과 */
+    z-index: 1; /* 텍스트 위에 오버레이가 보이지 않게 설정 */
 }
 
+.section:hover::before {
+    opacity: 1; /* 마우스 오버 시 배경이 어두워지도록 설정 */
+}
+.section_title,
+.section_items,
+.more {
+    position: relative; /* 텍스트가 가상 요소보다 위에 표시되도록 설정 */
+    z-index: 2; /* 텍스트가 오버레이 위에 오도록 설정 */
+}
 .section_title {
     font-size: 20px;
     font-weight: bold;
