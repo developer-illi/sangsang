@@ -7,13 +7,16 @@
     background-color: transparent;
     transition: background-color 0.3s;
 }
-.header_main{
+
+.header_main {
     background-color: transparent;
 }
-#video_play{
+
+#video_play {
     width: 100%;
     height: auto;
 }
+
 .main_content {
     display: flex;
     justify-content: space-around;
@@ -23,6 +26,7 @@
     text-align: center;
     background: no-repeat center/cover;
 }
+
 .section {
     display: flex;
     width: 100%;
@@ -30,110 +34,133 @@
     flex-direction: column;
     justify-content: center;
     transition: background-color 0.3s ease;
+    gap: 20px;
 }
+
 .section:hover {
     background-color: rgba(0, 0, 0, 0.5); /* 투명한 검정색 배경 */
 }
-.section p {
-    margin: 10px 0;
+
+.section_title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.section_items{
     font-weight: bold;
     font-size: 18px;
     color: #000;
     transition: color 0.3s ease, transform 0.3s ease; /* 글씨색과 크기 전환 효과 추가 */
 }
-.section:hover > p{
+
+.section:hover > p {
     color: #fff; /* 마우스 오버 시 글씨색을 흰색으로 변경 */
     transform: scale(1.1); /* 마우스 오버 시 글씨를 약간 확대 */
 }
+
 .line {
     height: 70%;
     width: 1px;
     background-color: white;
 }
+
 .more {
     color: #ddd;
     text-decoration: underline;
     cursor: pointer;
 }
+
 /* 작은 화면 (모바일) */
 @media (max-width: 600px) {
-  .main_content {
-    flex-direction: column; /* 콘텐츠를 세로로 정렬 */
-    height: auto;
-  }
+    .main_content {
+        flex-direction: column; /* 콘텐츠를 세로로 정렬 */
+        height: auto;
+    }
 
-  .section {
-    width: 100%; /* 섹션 너비를 더 크게 */
-    margin-bottom: 20px; /* 섹션 간의 간격 추가 */
-  }
+    .section {
+        width: 100%; /* 섹션 너비를 더 크게 */
+        padding: 15px;
+    }
 
-  .line {
-    display: none; /* 세로 라인 숨기기 */
-  }
+    .line {
+        display: none; /* 세로 라인 숨기기 */
+    }
 }
 
 /* 중간 화면 (태블릿) */
 @media (min-width: 601px) and (max-width: 1024px) {
-  .main_content {
-    flex-direction: column;
-    height: auto;
-  }
+    .main_content {
+        flex-direction: column;
+        height: auto;
+    }
 
-  .section {
-    width: 100%;
-    padding: 5px;
-  }
+    .section {
+        width: 100%;
+        padding: 5px;
+    }
 
-  .line {
-    display: none;
-  }
+    .line {
+        display: none;
+    }
 }
 
 /* 큰 화면 (데스크탑) */
 @media (min-width: 1025px) {
-  .main_content {
-    flex-direction: row; /* 기본 가로 정렬 */
-    height: 65vh;
-  }
-  .line {
-    display: block; /* 라인 보이기 */
-  }
+    .main_content {
+        flex-direction: row; /* 기본 가로 정렬 */
+        height: 65vh;
+    }
+
+    .line {
+        display: block; /* 라인 보이기 */
+    }
 }
+
 /* 모바일 (최대 600px) */
 @media (max-width: 600px) {
-  .section p {
-    font-size: 13px; /* 작은 화면에서 글씨 크기 조정 */
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
+    .section_title{
+        font-size: 16px;
+    }
+    .section_items {
+        font-size: 13px; /* 작은 화면에서 글씨 크기 조정 */
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
 
-  .section:hover > p {
-    color: #fff;
-    transform: scale(1.05); /* 마우스 오버 시 약간 작게 확대 */
-  }
+    .section:hover > p {
+        color: #fff;
+        transform: scale(1.05); /* 마우스 오버 시 약간 작게 확대 */
+    }
 }
 
 /* 태블릿 (601px ~ 1024px) */
 @media (min-width: 601px) and (max-width: 1024px) {
-  .section p {
-    font-size: 15px; /* 중간 화면에서 글씨 크기 조정 */
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
+    .section_title{
+        font-size: 18px;
+    }
+    .section_items {
+        font-size: 15px; /* 중간 화면에서 글씨 크기 조정 */
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
 
-  .section:hover > p {
-    color: #fff;
-    transform: scale(1.08); /* 마우스 오버 시 약간 더 확대 */
-  }
+    .section:hover > p {
+        color: #fff;
+        transform: scale(1.08); /* 마우스 오버 시 약간 더 확대 */
+    }
 }
 
 /* 데스크탑 (1025px 이상) */
 @media (min-width: 1025px) {
-  .section p {
-    font-size: 15px; /* 기본 글씨 크기 */
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
+    .section_title{
+        font-size: 18px;
+    }
 
-  .section:hover > p {
-    color: #fff;
-    transform: scale(1.1); /* 마우스 오버 시 기본 확대 */
-  }
+    .section_items {
+        font-size: 15px; /* 기본 글씨 크기 */
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .section:hover > p {
+        color: #fff;
+        transform: scale(1.1); /* 마우스 오버 시 기본 확대 */
+    }
 }
