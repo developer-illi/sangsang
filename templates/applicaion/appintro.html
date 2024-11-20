@@ -22,7 +22,6 @@
                 <div class="intro-icons">
                     <div class="intro-icon">
                         {% for item in app %}
-                            <!--style="background-image: url('{{ item.content_img.url }}') ;"-->
                             <div class="intro_bg">
                                 <p><a href="{% url 'app_page' item.pk %}">{{ item.title }}</a></p>
                             </div>
