@@ -150,14 +150,21 @@ def admin_login(request):
     if request.method == 'POST':
         try:
             username = request.POST['u_id']
-            password = request.POST['password']
-            test = Admin.objects.get(user='admin')
-            print(test.password)
-            user = Admin.objects.get(user=username, password=password)
-            arg = {'user':user}
+            raw_password = request.POST['password']
+
+            # 사용자 가져오기
+            user = Admin.objects.get(user=username)
+            # 비밀번호 검증
+            if user.check_password(raw_password):
+                arg = {'user': user}
+                return render(request, 'admin_login.html', arg)
+            else:
+                return JsonResponse({'status': 'error', 'message': '아이디 또는 비밀번호를 확인해주세요.'})
+
         except Admin.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': '아이디또는 비밀번호를 확인해주세요.'})
-    return render(request,'admin_login.html', arg)
+            return JsonResponse({'status': 'error', 'message': '아이디 또는 비밀번호를 확인해주세요.'})
+
+    return render(request, 'admin_login.html')
 
 @csrf_exempt
 def test(request):
