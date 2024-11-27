@@ -424,3 +424,39 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error('Error:', error));
     });
 });
+
+
+// formHandler.js
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('sol_item_add');
+
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('등록되었습니다'); // 성공 알럿
+                    form.reset(); // 폼 초기화
+                } else {
+                    alert('오류가 발생했습니다: ' + JSON.stringify(data.errors)); // 오류 메시지 표시
+                }
+            })
+            .catch(error => {
+                alert('요청 중 문제가 발생했습니다.');
+                console.error('Error:', error);
+            });
+        });
+    }
+});

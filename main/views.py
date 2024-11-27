@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import JsonResponse
 
@@ -209,20 +211,34 @@ def tapp_adds(request):
             apply.save()
         return redirect('admin_pg')
     return HttpResponse('false')
-@csrf_exempt
+@csrf_protect  # csrf 보호 적용
 def sol_item_add(request):
     if request.method == 'POST' and request.FILES.get('sol_image'):
-        title = request.POST['sol_title']
-        content_text = request.POST['sol_content']
-        content_img = request.FILES['sol_image']
-        type = int(request.POST['sol_type'])
-        selected_category = request.POST['sol_item_category']
-        sol = Solutions.objects.get(pk=selected_category)
-        sol_item = Sol_content.objects.create(title=title, content_text=content_text, content_img=content_img, type=type,solutions=sol)
-        sol_item.save()
+        try:
+            title = request.POST['sol_title']
+            content_text = request.POST['sol_content']
+            content_img = request.FILES['sol_image']
+            sol_type = int(request.POST['sol_type'])
+            selected_category = request.POST['sol_item_category']
 
-        return redirect('admin_pg')
-    return HttpResponse('false')
+            # Solutions 객체 가져오기
+            sol = get_object_or_404(Solutions, pk=selected_category)
+
+            # Sol_content 생성
+            sol_item = Sol_content.objects.create(
+                title=title,
+                content_text=content_text,
+                content_img=content_img,
+                type=sol_type,
+                solutions=sol
+            )
+            sol_item.save()
+
+            return JsonResponse({'success': True, 'message': '등록되었습니다.'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'message': str(e)})
+
+    return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
 
 @csrf_exempt
 def delete_sol_item(request, item_id):
