@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    z-index: 105;
+    position: relative;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    height: 85px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.header_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #000;
+    height: 85px; /* 헤더 높이를 85px로 설정 */
+}
+
+.header_left #hd_logo {
+    height: 55px; /* 로고 크기를 조정 */
+}
+
+.header_right {
+    display: flex;
+    gap: 4rem;
+    margin-right: 25rem;
+}
+
+
+.menu-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-item > h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.menu-item:hover > h3:hover{
+    text-decoration: underline;
+}
+
+.dropdown-content{
+    width: 160px;
+}
+
+.dropdown-content div {
+    font-size: 14px;
+    padding: 10px 0;
+    color: #fff;
+}
+
+.dropdown-content div:hover {
+    background-color: #333; /* 드롭다운 항목에 마우스를 올리면 색 변경 */
+    color: #fff;
+}
+.hide_link{
+    display: none;
+    width: 80%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    position: absolute;
+    flex-direction: column;
+}
+.hide_item{
+
+}
+.hide_item > h3,
+.hide_item > a > h3{
+    font-size: 33px;
+    font-weight: normal;
+}
+/* 기본 스타일 */
+.header_right {
+    display: flex;
+    gap: 4rem;
+}
+
+.hamburger-menu {
+    display: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 아주 작은 화면 (385px 이하) */
+@media (max-width: 385px) {
+  .header_main {
+    flex-direction: row;
+    justify-content: space-between; /* 좌우 공간 분배 */
+    padding: 0 10px; /* 패딩 줄이기 */
+  }
+
+  .header_left #hd_logo {
+    height: 40px; /* 로고 크기 줄이기 */
+  }
+
+  .header_right {
+    display: none; /* 기본 메뉴 숨기기 */
+    flex-direction: column;
+    background-color: #555;
+    position: absolute;
+    top: 105px; /* 헤더 아래에 메뉴 배치 */
+    left: 0; /* 화면 왼쪽에 메뉴 배치 */
+    width: 100%; /* 메뉴 너비를 화면 너비에 맞춤 */
+    padding: 10px;
+    z-index: 100; /* 메뉴가 다른 요소 위에 표시되도록 설정 */
+  }
+
+  .header_right.active {
+    display: flex; /* 활성화된 메뉴 보이기 */
+  }
+
+  .hamburger-menu {
+    display: block; /* 햄버거 메뉴 보이기 */
+  }
+
+  .menu-item > h3 {
+    font-size: 14px; /* 글자 크기 줄이기 */
+  }
+}
+
+/* 작은 화면 (모바일, 386px ~ 600px) */
+@media (min-width: 386px) and (max-width: 775px) {
+  .header_main {
+    flex-direction: row;
+    justify-content: space-between; /* 좌우 공간 분배 */
+    padding: 0 15px; /* 패딩 조정 */
+  }
+
+  .header_left #hd_logo {
+    height: 45px; /* 로고 크기 조정 */
+  }
+
+  .header_right {
+    display: none; /* 기본 메뉴 숨기기 */
+    flex-direction: column;
+    background-color: #555;
+    position: absolute;
+    top: 105px; /* 헤더 아래에 메뉴 배치 */
+    left: 0; /* 화면 왼쪽에 메뉴 배치 */
+    width: 100%; /* 메뉴 너비를 화면 너비에 맞춤 */
+    padding: 10px;
+    z-index: 100;
+  }
+
+  .header_right.active {
+    display: flex; /* 활성화된 메뉴 보이기 */
+  }
+
+  .hamburger-menu {
+    display: block; /* 햄버거 메뉴 보이기 */
+  }
+
+  .menu-item > h3 {
+    font-size: 15px; /* 글자 크기 조정 */
+  }
+}
+
+/* 중간 화면 (태블릿, 601px ~ 1024px) */
+@media (min-width: 776px) and (max-width: 1024px) {
+  .header_main {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .header_left #hd_logo {
+    height: 50px; /* 로고 크기 조정 */
+  }
+
+  .header_right {
+    flex-direction: row; /* 기본 가로 정렬 */
+    display: flex;
+    gap: 2rem;
+    margin-right: 0;
+  }
+
+  .hamburger-menu {
+    display: none; /* 태블릿에서 햄버거 메뉴 숨기기 */
+  }
+
+  .menu-item > h3 {
+    font-size: 14px; /* 기본 글자 크기 */
+  }
+}
+
+/* 큰 화면 (데스크탑, 1025px 이상) */
+@media (min-width: 1025px) {
+  .header_main {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .header_left #hd_logo {
+    height: 55px; /* 로고 크기 */
+  }
+
+  .header_right {
+    flex-direction: row; /* 기본 가로 정렬 */
+    display: flex;
+    gap: 3rem;
+    margin-right: 7rem; /* 기본 여백 */
+  }
+
+  .hamburger-menu {
+    display: none; /* 데스크탑에서 햄버거 메뉴 숨기기 */
+  }
+
+  .menu-item > h3 {
+    font-size: 16px; /* 기본 글자 크기 */
+  }
+}
+
