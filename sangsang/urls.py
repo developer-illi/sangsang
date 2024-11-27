@@ -37,8 +37,10 @@ urlpatterns = [
     path('app_item_add', mainvw.app_item_add, name='app_item_add'),
     path('get_val_items/', mainvw.get_val_items, name='get_val_items'),
     path('get_app_items/', mainvw.get_app_items, name='get_app_items'),
+    path('get_tap_items/', mainvw.get_tap_items, name='get_tap_items'),
     path('delete_sol_item/<int:item_id>/', mainvw.delete_sol_item, name='delete_sol_item'),
     path('delete_app_item/<int:item_id>/', mainvw.delete_app_item, name='delete_app_item'),
+    path('delete_tap_item/<item_id>/', mainvw.delete_tap_item, name='delete_tap_item'),
 
 ]
 if settings.DEBUG:

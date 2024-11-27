@@ -21,7 +21,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
+    border-left: 1px solid white; /* 왼쪽 테두리 */
+    border-top: 1px solid white;  /* 상단 테두리 */
 }
 .main_content > img{
     width: 50%;
@@ -242,22 +243,22 @@
     flex-direction: column;
     gap: 20px; /* 원하는 간격 조정 */
 }
-.val_items{
+.val_items, .tap_items{
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
 }
-.sol_item_val {
+.sol_item_val{
     display: flex;
     width: 300px;
     height: 50px;
-    border: 1px solid gray;
+    border: 1px solid #fdfdfd;
     border-radius: 45px;
     padding: 0 10px; /* 좌우 여백 */
     align-items: center;
 }
 
-.val_title {
+.val_title{
     flex: 1; /* 텍스트 부분이 남은 공간을 사용 */
     text-align: left; /* 텍스트를 왼쪽 정렬 */
 }
@@ -270,7 +271,7 @@
     width: 45px; /* 너비를 고정하지만 충분히 이미지가 보이게 설정 */
 }
 
-.del_icon > img {
+.del_icon > img,.tap_del_icon > img {
     width: 100%; /* 이미지 크기를 조정 */
     height: auto; /* 적절한 높이 설정 */
 }
@@ -385,7 +386,7 @@
     gap: 5px;
 }
 
-.sol_item_val {
+.sol_item_val,.tap_item_val{
     display: flex;
     width: 300px;
     height: 50px;
@@ -395,12 +396,12 @@
     align-items: center;
 }
 
-.val_title {
+.val_title,.tap_title {
     flex: 1; /* 텍스트 부분이 남은 공간을 사용 */
     text-align: left; /* 텍스트를 왼쪽 정렬 */
 }
 
-.del_icon {
+.del_icon, .tap_del_icon {
     padding-left: 10px;
     display: flex;
     justify-content: flex-end;
@@ -408,7 +409,7 @@
     width: 45px; /* 너비를 고정하지만 충분히 이미지가 보이게 설정 */
 }
 
-.del_icon > img {
+.del_icon > img, .tap_del_icon >img {
     width: 100%; /* 이미지 크기를 조정 */
     height: auto; /* 적절한 높이 설정 */
 }

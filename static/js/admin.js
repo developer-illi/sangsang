@@ -348,3 +348,65 @@ document.addEventListener("DOMContentLoaded", function () {
         window.open(makeurl, "미리보기", "width=800,height=600,scrollbars=yes");
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const categorySelect = document.querySelector('select[name="qnsfb"]');
+    const valItemsContainer = document.querySelector('.tap_items');
+
+    categorySelect.addEventListener('change', function () {
+        const selectedCategory = categorySelect.value;  // 선택된 value 값 가져오기
+
+        // AJAX 요청 보내기
+        fetch(`/get_tap_items/?tap_item=${selectedCategory}`)
+            .then(response => response.json())
+            .then(data => {
+                // val_items 업데이트
+                valItemsContainer.innerHTML = '';  // 기존 항목 제거
+
+                data.val_items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('tap_item_val');
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.classList.add('val_title');
+                    titleDiv.textContent = item.title;
+
+                    const delIconDiv = document.createElement('div');
+                    delIconDiv.classList.add('tap_del_icon');
+                    const delIconImg = document.createElement('img');
+                    delIconImg.id = item.pk;
+                    delIconImg.src = '/static/img/delete.png';
+                    delIconImg.classList.add('tap-delete-icon'); // 클래스 추가
+                    delIconDiv.appendChild(delIconImg);
+
+                    itemDiv.appendChild(titleDiv);
+                    itemDiv.appendChild(delIconDiv);
+                    valItemsContainer.appendChild(itemDiv);
+                });
+
+                // 삭제 아이콘 클릭 이벤트 추가
+                document.querySelectorAll('.tap-delete-icon').forEach(icon => {
+                    icon.addEventListener('click', function () {
+                        const itemId = this.id;
+
+                        // AJAX 요청으로 데이터베이스에서 항목 삭제
+                        fetch(`/delete_tap_item/${itemId}/`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                            }
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // 삭제 성공 시 해당 항목 제거
+                                    this.parentElement.parentElement.remove();
+                                } else {
+                                    console.error('삭제 실패');
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                    });
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+});

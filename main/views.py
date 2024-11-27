@@ -81,6 +81,20 @@ def get_app_items(request):
     return JsonResponse({'val_items': []})
 
 @csrf_exempt
+def get_tap_items(request):
+    tap_id = request.GET.get('tap_item')
+    if tap_id:
+        if tap_id == "1":
+            val_items = Solutions.objects.all()
+            items_list = [{'pk': str(item.pk)+'sol', 'title': item.title, 'app_main':tap_id} for item in val_items]
+            return JsonResponse({'val_items': items_list})
+        else:
+            val_items = Apply.objects.all()
+            items_list = [{'pk': str(item.pk)+'app', 'title': item.title, 'app_main': tap_id} for item in val_items]
+            return JsonResponse({'val_items': items_list})
+    return JsonResponse({'val_items': []})
+
+@csrf_exempt
 def dron(request):
     arg = {}
     return render(request, 'solution/dron.html', arg)
@@ -246,4 +260,26 @@ def delete_app_item(request, item_id):
             return JsonResponse({'success': True})
         except Apply_content.DoesNotExist:
             return JsonResponse({'error': 'Item not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+@csrf_exempt
+def delete_tap_item(request, item_id):
+    if request.method == 'DELETE':
+        separator = item_id[-3:]
+        if separator == 'sol':
+            try:
+                id = int(item_id[:-3])
+                del_item = Solutions.objects.get(pk=id)
+                del_item.delete()
+                return JsonResponse({'success': True})
+            except Solutions.DoesNotExist:
+                return JsonResponse({'error': 'Item not found'}, status=404)
+        else:
+            try:
+                id = int(item_id[:-3])
+                del_item = Apply.objects.get(pk=id)
+                del_item.delete()
+                return JsonResponse({'success': True})
+            except Apply.DoesNotExist:
+                return JsonResponse({'error': 'Item not found'}, status=404)
     return JsonResponse({'error': 'Invalid request method'}, status=400)
