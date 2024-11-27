@@ -394,7 +394,7 @@
     height: 50px;
     border: 1px solid gray;
     border-radius: 45px;
-    padding: 0 10px; /* 좌우 여백 */
+    padding: 10px 8px 10px 23px; /* 좌우 여백 */
     align-items: center;
 }
 
@@ -447,6 +447,7 @@ select {
     transform: translateY(-50%); /* 화살표 수직 위치 보정 */
     pointer-events: none; /* 화살표 클릭 방지 (텍스트나 다른 요소를 클릭 가능하게 함) */
 }
+
 .tab_title{
     margin-top: 15px;
 }

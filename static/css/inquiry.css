@@ -107,7 +107,9 @@ button[type="submit"]:hover {
     gap: 30px; /* 간격 줄이기 */
     margin-top: 50px; /* 상단 여백 줄이기 */
   }
-
+  .contact-info{
+      width: 270px;
+  }
   .contact-info h2,
   .follow-info h2 {
     font-size: 20px; /* 제목 크기 줄이기 */
@@ -134,11 +136,13 @@ button[type="submit"]:hover {
     gap: 30px; /* 간격 조정 */
     width: 90%; /* 너비 조정 */
   }
-
   .contact-section {
     flex-direction: column; /* 세로 정렬 */
     gap: 40px; /* 간격 조정 */
     margin-top: 60px; /* 여백 조정 */
+  }
+  .contact-info{
+      width: 300px;
   }
 
   .contact-info h2,

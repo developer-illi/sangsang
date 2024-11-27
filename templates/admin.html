@@ -96,10 +96,12 @@
                     <label>이미지</label>
                     <input id="sol-img-edit" type="file" name="sol_image" accept="image/*">
                     <label>배치 유형</label>
-                    <select name="sol_type">
-                        <option value="1">오른쪽배치</option>
-                        <option value="2">왼쪽배치</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select name="sol_type">
+                            <option value="1">오른쪽배치</option>
+                            <option value="2">왼쪽배치</option>
+                        </select>
+                    </div>
                     <div class="button-container">
                         <!-- URL을 data-url 속성에 저장 -->
                         <button type="button" id="previewButton" data-url="{% url 'sol_intro' %}">미리보기</button>
@@ -129,10 +131,12 @@
                     <label>이미지</label>
                     <input id="app-img-edit" type="file" name="app_image" accept="image/*">
                     <label>배치 유형</label>
-                    <select name="app_type">
-                        <option value="1">오른쪽배치</option>
-                        <option value="2">왼쪽배치</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select name="app_type">
+                            <option value="1">오른쪽배치</option>
+                            <option value="2">왼쪽배치</option>
+                        </select>
+                    </div>
                     <div class="button-container">
                         <button type="button" id="previewButton_app" data-url="{% url 'app_intro' %}">미리보기</button>
                         <button type="submit">추가</button>
