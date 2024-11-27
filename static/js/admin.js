@@ -235,6 +235,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon.addEventListener('click', function () {
                         const itemId = this.id;
 
+                        const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+                        if (!confirmDelete) {
+                            return; // 사용자가 취소를 누르면 삭제 중단
+                        }
+
                         // AJAX 요청으로 데이터베이스에서 항목 삭제
                         fetch(`/delete_sol_item/${itemId}/`, {
                             method: 'DELETE',
@@ -298,6 +303,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll('.delete-icon').forEach(icon => {
                     icon.addEventListener('click', function () {
                         const itemId = this.id;
+
+                        const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+                        if (!confirmDelete) {
+                            return; // 사용자가 취소를 누르면 삭제 중단
+                        }
 
                         // AJAX 요청으로 데이터베이스에서 항목 삭제
                         fetch(`/delete_app_item/${itemId}/`, {
@@ -388,6 +398,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon.addEventListener('click', function () {
                         const itemId = this.id;
 
+                        const confirmDelete = confirm('정말로 삭제하시겠습니까?');
+                        if (!confirmDelete) {
+                            return; // 사용자가 취소를 누르면 삭제 중단
+                        }
                         // AJAX 요청으로 데이터베이스에서 항목 삭제
                         fetch(`/delete_tap_item/${itemId}/`, {
                             method: 'DELETE',
