@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="#">
+  <meta name="keywords" content="#">
+  <meta property="og:title" content="#">
+  <meta property="og:url" content="#">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{% static 'img/common/ogimage.png' %}">
+
+  <meta
+    property="og:description"
+    content="#"
+  />
+  <link rel="icon" href="{% static 'img/common/favicon.png' %}">
+
+  {% comment %}<link rel="stylesheet" href="./style/css/swiper/swiper-bundle.min.css">{% endcomment %}
+
+  <link rel="stylesheet" href="{% static 'css/css/index.css' %}">
+
+  
+  <!-- ** gsap ** -->
+  <script defer src="{% static 'js/gsap/gsap.min.js' %}"></script>
+
+  <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
+
+  <script defer src="{% static 'js/index.js' %}"></script>
+
+  <title>상상</title>
+</head>
+<body>
+  <div class="wrapper">
+
+    <header class="header">
+      <div class="header__content">
+        <h1 class="header__main-logo">
+          <a href="{% url 'main' %}" class="header__main-logo-link">
+            <img src="{% static 'img/common/main-logo.svg' %}" class="header__main-logo-img" alt="메인 로고">
+          </a>
+        </h1>
+        <button class="header__menu">
+          <span class="header__menu-line"></span>
+          <span class="header__menu-line"></span>
+        </button>
+        <nav class="gnb">
+{#            여기다 수정#}
+          <ul class="gnb__list">
+            <li class="gnb__item">
+              <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
+            </li>
+            <li class="gnb__item">
+              <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+            </li>
+            <li class="gnb__item">
+              <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
+            </li>
+            <li class="gnb__item">
+              <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="section --main">
+      <div class="section__content --full">
+        <video src="{% static 'video/main-video.mp4'%}" class="main__video" autoplay muted></video>
+
+      </div>
+    </section>
+
+    <section class="section --business">
+      <div class="section__content">
+        <div class="section__title-wrap">
+          <h3 class="section__title">BUSINESS</h3>
+        </div>
+        <ul class="business__list">
+          <li class="business__item-wrap --01">
+            <div class="business__item">
+              <h4 class="business__num --01">01</h4>
+              <h3 class="business__title --01">
+                교량안전<br>
+                점검
+              </h3>
+              <div class="business__sub-title --01">서브타이틀</div>
+              <div class="business__img-wrap">
+                <img src="{% static 'img/common/img01.jpg' %}" class="business__img" alt="">
+              </div>
+            </div>
+          </li>
+          <li class="business__item-wrap --02">
+            <div class="business__item">
+              <h4 class="business__num --02">02</h4>
+              <h3 class="business__title --02">
+                사회기반 시설물<br>
+                안전점검
+              </h3>
+              <div class="business__sub-title --02">서브타이틀</div>
+              <div class="business__img-wrap">
+                <img src="{% static 'img/common/img02.jpg' %}" class="business__img" alt="">
+
+              </div>
+            </div>
+          </li>
+          <li class="business__item-wrap --03">
+            <div class="business__item">
+              <h4 class="business__num --03">03</h4>
+              <h3 class="business__title --03">
+                건설시공현장<br>
+                공정관리
+              </h3>
+              <div class="business__sub-title --03">서브타이틀</div>
+              <div class="business__img-wrap">
+                <img src="{% static 'img/common/img03.jpg' %}" class="business__img" alt="">
+
+              </div>
+            </div>
+          </li>
+          <li class="business__item-wrap --04">
+            <div class="business__item">
+              <h4 class="business__num --04">04</h4>
+              <h3 class="business__title --04">
+                맞춤형 드론<br>
+                솔루션
+              </h3>
+              <div class="business__sub-title --04">서브타이틀</div>
+              <div class="business__img-wrap">
+                <img src="{% static 'img/common/img04.jpg' %}" class="business__img" alt="">
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section --partners">
+      <div class="section__content">
+        <div class="section__title-wrap">
+          <h3 class="section__title">PARTNERS</h3>
+        </div>
+        <ul class="partners__list">
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo01.png' %}" class="partners__img" alt="">
+
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo02.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo03.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo04.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo05.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo06.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo07.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo08.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo09.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo10.png' %}" class="partners__img" alt="">
+          </li>
+          <li class="partners__item">
+            <img src="{% static 'img/common/logo11.png' %}" class="partners__img" alt="">
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__content">
+        <div class="footer__detail-wrap">
+          <div class="footer__info-wrap">
+            <a href="" class="footer__email">contact@sangsangbuild.com</a>
+            <div class="footer__address">서울특별시 송파구 올림픽로32길 22-13(방이동 62-12), 동도빌딩 301호</div>
+            <div class="footer__tel">+82 2 419 8288</div>
+            <div class="footer__info">info@sangsangbuild.com</div>
+            <div class="footer__copyright mobile-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+          </div>
+          <ul class="footer__social-wrap">
+            <li class="footer__social">
+              <a href="#none" class="footer__social-link">
+                YOUTUBE
+                <div class="footer__social-arrow-wrap">
+                  <span class="footer__social-arrow --01"></span>
+                  <span class="footer__social-arrow --02"></span>
+                </div>
+              </a>
+            </li>
+            <li class="footer__social">
+              <a href="#none" class="footer__social-link">
+                INSTAGRAM
+                <div class="footer__social-arrow-wrap">
+                  <span class="footer__social-arrow --01"></span>
+                  <span class="footer__social-arrow --02"></span>
+                </div>
+              </a>
+            </li>
+            <li class="footer__social">
+              <a href="#none" class="footer__social-link">
+                FACEBOOK
+                <div class="footer__social-arrow-wrap">
+                  <span class="footer__social-arrow --01"></span>
+                  <span class="footer__social-arrow --02"></span>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <div class="footer__copyright pc-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+    // Business 섹션 애니메이션
+  gsap.from(".business__item-wrap", {
+    y: 100, // 아래에서 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 1.2, // 애니메이션 지속 시간
+    stagger: 0.3, // 순차적 실행 간격
+    ease: "power2.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".business__item-wrap", // 트리거 요소
+      start: "top 80%", // 트리거 시작 위치
+      end: "bottom 20%", // 트리거 종료 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+  // Business 타이틀 애니메이션
+  gsap.from(".section.--business .section__title", {
+    y: 50, // 아래에서 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 1.2, // 애니메이션 지속 시간
+    ease: "power2.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".section.--business .section__title", // 트리거 요소
+      start: "top 90%", // 트리거 시작 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+  // Business 아이템 디테일 애니메이션
+  gsap.from(".business__num, .business__title, .business__sub-title", {
+    y: 50, // 아래에서 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 1, // 애니메이션 지속 시간
+    stagger: 0.2, // 순차적 실행 간격
+    ease: "power2.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".business__list", // 트리거 요소
+      start: "top 80%", // 트리거 시작 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+  // Business 이미지 부드럽게 애니메이션
+  gsap.from(".business__img-wrap", {
+    scale: 0.9, // 약간 작게 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 2, // 애니메이션 지속 시간
+    ease: "power3.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".business__list", // 트리거 요소
+      start: "top 80%", // 트리거 시작 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+  // Partners 섹션 애니메이션
+  gsap.from(".partners__item", {
+    y: 100, // 아래에서 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 1.2, // 애니메이션 지속 시간
+    stagger: 0.15, // 순차적 실행 간격
+    ease: "power2.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".partners__item", // 트리거 요소
+      start: "top 80%", // 트리거 시작 위치
+      end: "bottom 20%", // 트리거 종료 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+  // Partners 타이틀 애니메이션
+  gsap.from(".section.--partners .section__title", {
+    y: 50, // 아래에서 시작
+    opacity: 0, // 투명도 0부터 시작
+    duration: 1.2, // 애니메이션 지속 시간
+    ease: "power2.out", // 부드러운 가속 및 감속
+    scrollTrigger: {
+      trigger: ".section.--partners .section__title", // 트리거 요소
+      start: "top 90%", // 트리거 시작 위치
+      toggleActions: "play none none none", // 애니메이션 실행 동작
+      scroller: ".wrapper", // 스크롤 컨테이너 설정
+    },
+  });
+
+});
+
+
+</script>
+
+</body>
+</html>

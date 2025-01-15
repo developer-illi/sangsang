@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from main.models import Sol_content, Solutions, Admin, Apply, Apply_content
+from main.models import Sol_content, Solutions, Admin, Apply, Apply_content, Main_pg, History, Solution, Project
 
 
 # Create your views here.
@@ -14,55 +14,33 @@ from main.models import Sol_content, Solutions, Admin, Apply, Apply_content
 @csrf_exempt
 def main_page(request):
     arg = {}
-    return render(request, 'main.html', arg)
+    return render(request, 'index.html', arg)
 
 @csrf_exempt
-def header_test(request):
-    arg = {}
-    return render(request, 'header.html', arg)
+def about_pg(request):
+    about = Main_pg.objects.get()
+    history = History.objects.all()
+    arg = {'history':history,'about':about}
+    return render(request, 'sub/about.html', arg)
 
 @csrf_exempt
-def footer_test(request):
-    arg = {}
-    return render(request, 'footer.html', arg)
+def contact_pg(request):
+    main_page = Main_pg.objects.get()
+    history = History.objects.all()
+    arg = {'history':history,'main_page':main_page}
+    return render(request, 'sub/contact.html', arg)
 
 @csrf_exempt
-def intro(request):
-    arg = {}
-    return render(request, 'intoduce/intomsg.html', arg)
+def project_pg(request):
+    project = Project.objects.get(pk=1)
+    arg = {'project':project}
+    return render(request, 'sub/project.html', arg)
 
 @csrf_exempt
-def sol_intro(request):
-    solutions = Solutions.objects.all()
-    arg = {'sol':solutions}
-    return render(request, 'solution/solintro.html', arg)
-
-@csrf_exempt
-def sol_page(request, id):
-    try:
-        sol_intro = Solutions.objects.get(pk=id)
-        sol_content = Sol_content.objects.filter(solutions=sol_intro)
-        arg = {'soldata' : sol_content, 'sol_intro':sol_intro}
-    except Sol_content.DoesNotExist:
-        arg = {'error':"올바른 페이지가 아닙니다."}
-    return render(request, 'solution/dron.html',arg)
-
-
-@csrf_exempt
-def app_page(request, id):
-    try:
-        app_intro = Apply.objects.get(pk=id)
-        app_content = Apply_content.objects.filter(apply=app_intro)
-        arg = {'soldata' : app_content, 'sol_intro':app_intro}
-    except Apply_content.DoesNotExist:
-        arg = {'error':"올바른 페이지가 아닙니다."}
-    return render(request, 'solution/dron.html',arg)
-
-@csrf_exempt
-def app_intro(request):
-    app = Apply.objects.all()
-    arg = {'app':app}
-    return render(request, 'applicaion/appintro.html', arg)
+def solution_pg(request):
+    solution = Solution.objects.get(pk=1)
+    arg = {'solution':solution}
+    return render(request, 'sub/solution.html', arg)
 
 @csrf_exempt
 def get_val_items(request):
@@ -96,44 +74,6 @@ def get_tap_items(request):
             return JsonResponse({'val_items': items_list})
     return JsonResponse({'val_items': []})
 
-@csrf_exempt
-def dron(request):
-    arg = {}
-    return render(request, 'solution/dron.html', arg)
-@csrf_exempt
-def bild(request):
-    arg = {}
-    return render(request, 'solution/construction.html', arg)
-
-@csrf_exempt
-def threedmodel(request):
-    arg = {}
-    return render(request, 'solution/3dmodel.html', arg)
-@csrf_exempt
-def confessor(request):
-    arg = {}
-    return render(request, 'solution/confessor.html', arg)
-
-
-@csrf_exempt
-def bride(request):
-    arg = {}
-    return render(request, 'applicaion/bridge.html', arg)
-
-@csrf_exempt
-def social(request):
-    arg = {}
-    return render(request, 'applicaion/social.html', arg)
-
-@csrf_exempt
-def erection(request):
-    arg = {}
-    return render(request, 'applicaion/erection.html', arg)
-
-@csrf_exempt
-def dron_sol(request):
-    arg = {}
-    return render(request, 'applicaion/dronsol.html', arg)
 
 def inquiry(request):
     arg = {}
@@ -182,10 +122,7 @@ def admin_login(request):
 
     return render(request, 'admin_login.html')
 
-@csrf_exempt
-def test(request):
-    arg = {}
-    return render(request, 'sol_item_viewer.html', arg)
+
 @csrf_exempt
 def admin(request):
     solutions = Solutions.objects.all()
@@ -193,24 +130,6 @@ def admin(request):
     arg = {'solutions': solutions, 'apply':apply}
     return render(request, 'admin.html', arg)
 
-@csrf_exempt
-def tapp_adds(request):
-    if request.method == 'POST' and request.FILES.get('image'):
-        target = request.POST['qnsfb']
-        title = request.POST['title']
-        title_ex = request.POST['title_ex']
-        copy = request.POST['copy']
-        copy_ex = request.POST['copy_ex']
-        img = request.FILES['image']
-
-        if target == '1':
-            sol_create = Solutions.objects.create(title=title, title_ex=title_ex, main_cp=copy, main_text=copy_ex,content_img=img)
-            sol_create.save()
-        else:
-            apply = Apply.objects.create(title=title, title_ex=title_ex, main_cp=copy, main_text=copy_ex,content_img=img)
-            apply.save()
-        return redirect('admin_pg')
-    return HttpResponse('false')
 @csrf_protect  # csrf 보호 적용
 def sol_item_add(request):
     if request.method == 'POST' and request.FILES.get('sol_image'):
