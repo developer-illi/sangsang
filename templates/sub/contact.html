@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+    <meta property="og:title" content="#">
+    <meta property="og:url" content="#">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'img/common/ogimage.png' %}">
+    <meta
+            property="og:description"
+            content="#"
+    />
+    <link rel="stylesheet" href="{% static 'css/css/index.css' %}">
+
+    <!-- ** gsap ** -->
+    <script defer src="{% static 'js/gsap/gsap.min.js' %}"></script>
+    <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
+
+    <script defer src="{% static 'js/index.js' %}"></script>
+
+    <title>상상</title>
+</head>
+<body>
+<div class="wrapper">
+
+    <header class="header">
+        <div class="header__content">
+            <h1 class="header__main-logo">
+                <a href="{% url 'main' %}" class="header__main-logo-link">
+                    <img src="{% static 'img/common/main-logo.svg' %}" class="header__main-logo-img" alt="메인 로고">
+                </a>
+            </h1>
+            <button class="header__menu">
+                <span class="header__menu-line"></span>
+                <span class="header__menu-line"></span>
+            </button>
+            <nav class="gnb">
+                <ul class="gnb__list">
+                    <li class="gnb__item">
+                        <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section --sub-main --contact">
+        <div class="section__content">
+            <div class="sub-main__wrap --contact">
+                <div class="sub-main__sub-title --contact">
+                    <div class="sub-main__sub-title-home">
+                        <img src="{% static 'img/common/icon-home-wh.svg' %}" alt="홈 아이콘" class="sub-main__sub-title-home-img">
+                    </div>
+                    <h4 class="sub-main__sub-title-text">Contact</h4>
+                </div>
+                <h2 class="sub-main__main-title --contact">
+                    CONTACT US
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section --inquiry">
+        <div class="section__content">
+            <div class="inquiry__wrap">
+                <div class="inquiry__form-wrap --input">
+                    <label for="name" class="inquiry__form-label">이름 / 직함<span class="blue">*</label>
+                    <input type="text" id="name" class="inquiry__form --input" placeholder="이름/직함을 작성해주세요.">
+                </div>
+                <div class="inquiry__form-wrap --input">
+                    <label for="" class="inquiry__form-label">기업(단체)명<span class="blue">*</label>
+                    <input type="text" class="inquiry__form --input" placeholder="기업(단체)명을 작성해주세요.">
+                </div>
+                <div class="inquiry__form-wrap --input">
+                    <label for="" class="inquiry__form-label">연락처<span class="blue">*</label>
+                    <input type="text" class="inquiry__form --input" placeholder="연락 가능한 번호를 작성해주세요.">
+                </div>
+                <div class="inquiry__form-wrap --input">
+                    <label for="" class="inquiry__form-label">이메일<span class="blue">*</label>
+                    <input type="text" class="inquiry__form --input" placeholder="이메일 주소를 작성해주세요.">
+                </div>
+                <div class="inquiry__form-wrap --textarea">
+                    <label for="" class="inquiry__form-label">문의 요청 내용<span class="blue">*</label>
+                    <textarea name="" id="" class="inquiry__form --textarea"></textarea>
+                </div>
+                <div class="inquiry__agree-wrap">
+                    <div class="inquiry__agree-title">
+                        문의를 위해 다음 사항을 확인해 주세요.
+                    </div>
+                    <div class="inquiry__agree-detail-wrap">
+                        개인정보처리방침<br>
+                        <br>
+                        (주)상상빌드는 회원가입 시 제공받는 개인정보를 중요하게 생각하며, 이를 보호하기 위해 최선을 다하고 있습니다. 본 개인정보처리방침은 회원님의 개인정보가 어떻게 수집, 이용, 보관 및 처리되는지에 대한 내용을 담고 있습니다.
+                        <br>
+                        1. 개인정보의 수집 항목 및 방법<br>
+                        <br>
+                        회사는 다음과 같은 항목의 개인정보를 수집합니다:<br>
+                        <br>
+                        필수항목: 이름, 이메일 주소, 비밀번호, 휴대전화번호<br>
+                        <br>
+                        선택항목: 생년월일, 성별, 주소<br>
+                        <br>
+                        수집 방법:<br>
+                        <br>
+                        회원가입 시 이용자가 직접 입력<br>
+                        <br>
+                        고객센터 문의 시 수집<br>
+                        <br>
+                        이벤트 및 설문조사 참여 시 수집<br>
+                        <br>
+                        2. 개인정보의 수집 및 이용 목적<br>
+                        <br>
+                        회사는 수집한 개인정보를 다음과 같은 목적으로 사용합니다:<br>
+                        <br>
+                        회원 관리:<br>
+                        <br>
+                        본인 확인 및 회원가입 의사 확인<br>
+                        <br>
+                        회원 서비스 제공 및 유지 관리<br>
+                        <br>
+                        서비스 제공:<br>
+                        <br>
+                        맞춤형 서비스 제공 및 콘텐츠 추천<br>
+                        <br>
+                        이벤트 참여 및 혜택 제공<br>
+                        <br>
+                        법적 의무 이행:<br>
+                        <br>
+                        관련 법령에 따른 기록 보존 및 의무 준수<br>
+                        <br>
+                        3. 개인정보의 보유 및 이용 기간<br>
+                        <br>
+                        회사는 회원님의 개인정보를 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 다만, 다음과 같은 경우에는 해당 기간 동안 보관합니다:<br>
+                        <br>
+                        관계 법령에 따른 보관:<br>
+                        <br>
+                        계약 또는 청약철회 기록: 5년 (전자상거래 등에서의 소비자보호에 관한 법률)<br>
+                        <br>
+                        소비자의 불만 또는 분쟁처리 기록: 3년<br>
+                        <br>
+                        웹사이트 방문 기록: 3개월 (통신비밀보호법)<br>
+                        <br>
+                        4. 개인정보의 제3자 제공<br>
+                        <br>
+                        회사는 원칙적으로 회원님의 개인정보를 제3자에게 제공하지 않습니다. 다만, 다음의 경우에는 예외로 합니다:<br>
+
+                        회원님의 사전 동의를 얻은 경우<br>
+                        <br>
+                        법령에 의거하거나 수사기관의 요청에 따라 제공이 필요한 경우<br>
+                        <br>
+                        5. 개인정보 처리 위탁<br>
+                        <br>
+                        회사는 서비스 향상을 위해 개인정보 처리를 외부 전문업체에 위탁할 수 있습니다. 이 경우, 회사는 위탁 업체와의 계약을 통해 개인정보가 안전하게 관리될 수 있도록 합니다.<br>
+                        <br>
+                        위탁 대상 및 업무 내용:<br>
+                        <br>
+                        ILLI: 홈페이지 개발<br>
+                        <br>
+                        6. 회원의 권리와 행사 방법<br>
+                        <br>
+                        회원님은 언제든지 자신의 개인정보에 대한 열람, 수정, 삭제, 처리 정지를 요청할 수 있습니다. 이러한 요청은 다음과 같은 방법으로 가능합니다:<br>
+                        <br>
+                        [고객센터 이메일]: [이메일 주소]<br>
+                        <br>
+                        <br>
+                        <br>
+                        회사는 요청을 받은 즉시 처리하며, 법령에 따라 필요한 경우에는 처리 결과를 안내드립니다.<br>
+                        <br>
+                        7. 개인정보 보호를 위한 기술적 및 관리적 조치<br>
+                        <br>
+                        회사는 회원님의 개인정보를 안전하게 보호하기 위해 다음과 같은 조치를 취하고 있습니다:<br>
+                        <br>
+                        개인정보의 암호화 저장 및 전송<br>
+                        <br>
+                        정기적인 보안 점검 및 개선<br>
+                        <br>
+                        개인정보 접근 권한의 최소화<br>
+                        <br>
+                        8. 개인정보 보호책임자 및 문의처<br>
+                        <br>
+                        회사는 개인정보 보호와 관련된 업무를 총괄하는 개인정보 보호책임자를 지정하고 있습니다. 문의 사항이 있으시면 아래의 연락처로 연락주시기 바랍니다:<br>
+                        <br>
+                        책임자: [이름]<br>
+                        <br>
+                        연락처: [이메일], [전화번호]<br>
+                        <br>
+                        9. 정책 변경에 대한 고지<br>
+                        <br>
+                        본 개인정보처리방침이 변경되는 경우, 회사는 변경 사항을 웹사이트를 통해 공지하며, 필요한 경우 개별적으로 안내드립니다.<br>
+                        <br>
+                        본 방침은 [시행일자]부터 적용됩니다.<br>
+                        <br>
+                        [마지막 업데이트: [2025.01.09]]
+                    </div>
+                    <div class="inquiry__agree-checkbox-wrap">
+                        <input type="checkbox" id="checkbox" class="inquiry__agree-checkbox">
+                        <label for="checkbox" class="inquiry__agree-checkbox-label"></label>
+                        <div class="inquiry__agree-checkbox-detail-wrap">
+                            <div class="inquiry__agree-checkbox-title">
+                                개인정보 수집 및 이용 동의 (필수<span class="blue">*</span>)
+                            </div>
+                            <div class="inquiry__agree-checkbox-desc blue">
+                                개인정보 수집 및 이용약관에 동의하셔야 접수가 가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inquiry__submit-wrap">
+                        <button class="inquiry__submit">
+                            문의하기
+                            <span class="inquiry__submit-arrow"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section --contact">
+        <div class="section__content">
+            <div class="contact__wrap">
+                <div class="contact__map-wrap">
+
+                </div>
+                <div class="contact__detail-wrap">
+                    <div class="contact__detail">
+                        <h3 class="contact__detail-title">ADDRESS</h3>
+                        <div class="contact__detail-name-wrap">
+                            <p class="contact__detail-desc">
+                                서울특별시 송파구 올림픽로32길 22-13(방이동 62-12), 동도빌딩 301호
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact__detail">
+                        <h3 class="contact__detail-title">E-MAIL</h3>
+                        <div class="contact__detail-name-wrap">
+                            <span class="contact__detail-name">대표문의</span>
+                            <span class="contact__detail-desc">
+                  info@sangsangbuild.com<br>
+                  +82 2 419 8288
+                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__detail-wrap">
+                <div class="footer__info-wrap">
+                    <a href="" class="footer__email">contact@sangsangbuild.com</a>
+                    <div class="footer__address">서울특별시 송파구 올림픽로32길 22-13(방이동 62-12), 동도빌딩 301호</div>
+                    <div class="footer__tel">+82 2 419 8288</div>
+                    <div class="footer__info">info@sangsangbuild.com</div>
+                    <div class="footer__copyright mobile-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+                </div>
+                <ul class="footer__social-wrap">
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            YOUTUBE
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            INSTAGRAM
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            FACEBOOK
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copyright pc-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const textarea = document.querySelector('.inquiry__form.--textarea');
+        textarea.value = `기업(단체) 소개:
+사업 진행 시점:
+사업 형태:
+협업 희망 크리에이터:
+상세 문의 내용:`;
+
+        // 사용자가 입력 시 기본 텍스트를 유지
+        textarea.addEventListener("input", (event) => {
+            if (!textarea.value.startsWith(initialText)) {
+                textarea.value = initialText + textarea.value.replace(initialText, "");
+            }
+        });
+
+
+        // --contact 클래스가 포함된 요소의 애니메이션
+        gsap.from(".sub-main__sub-title.--contact, .sub-main__main-title.--contact, .sub-main__desc.--contact", {
+            y: 50, // 아래에서 시작
+            opacity: 0, // 투명도 0부터 시작
+            duration: 1, // 애니메이션 지속 시간
+            stagger: 0.3, // 순차적 실행 간격
+            ease: "power2.out", // 부드러운 가속 및 감속
+        });
+    </script>
+
+</div>
+</body>
+</html>

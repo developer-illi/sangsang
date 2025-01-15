@@ -88,8 +88,8 @@ class Admin(models.Model):
     # 여기부터 추가
 class Main_pg(models.Model):
     ceo_name = models.CharField(max_length=100, null=True, blank=True)
-    main_title = models.CharField(max_length=100, null=True, blank=True)
-    sub_script = models.CharField(max_length=100, null=True, blank=True)
+    main_title = models.TextField(null=True, blank=True)
+    sub_script = models.TextField(max_length=100, null=True, blank=True)
     main_img = models.ImageField(upload_to='main_pg/main_img', null=True, blank=True)
     history_title = models.CharField(max_length=100, null=True, blank=True)
 
@@ -109,13 +109,13 @@ class History_content(models.Model):
         return self.pk
 
 class Solution(models.Model):
-    title = models.CharField(max_length=100, null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.pk
 
 class Solution_title(models.Model):
-    title = models.CharField(max_length=100, null=True, blank=True)
+    title = models.TextField(null=True, blank=True)
     img = models.ImageField(upload_to='solutions/main_img/', null=True, blank=True)
     solution = models.ForeignKey(Solution, on_delete=models.CASCADE, related_name='sol_title')
 
@@ -125,8 +125,8 @@ class Solution_title(models.Model):
 class Solution_content(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
     eg_title = models.CharField(max_length=100, null=True, blank=True)
-    content = models.CharField(max_length=100, null=True, blank=True)
-    details = models.CharField(max_length=100, null=True, blank=True)
+    content = models.TextField(max_length=100, null=True, blank=True)
+    details = models.TextField(max_length=100, null=True, blank=True)
     solution_title = models.OneToOneField(Solution_title, on_delete=models.CASCADE, related_name='sol_details')
 
     def __str__(self):
@@ -141,7 +141,7 @@ class Solution_option(models.Model):
 
 class Solution_contentop(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
-    content = models.CharField(max_length=100, null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
     img = models.ImageField(upload_to='solutions/sub_img/', null=True, blank=True)
     Solution_title = models.ForeignKey(Solution_title, on_delete=models.CASCADE, related_name='sol_content_op' ,null=True)
 
@@ -151,40 +151,40 @@ class Solution_contentop(models.Model):
 
 
 
-class Project(models.Model):
-    title = models.CharField(max_length=100, null=True, blank=True)
+class Project(models.Model):#프로젝트 기본 세팅
+    title = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.pk
 
-class Project_title(models.Model):
-    title = models.CharField(max_length=100, null=True, blank=True)
-    img = models.ImageField(upload_to='solutions/main_img/', null=True, blank=True)
+class Project_title(models.Model):#프로젝트 메인단위
+    title = models.TextField(null=True, blank=True)
+    img = models.ImageField(upload_to='project/main_img/', null=True, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='proj_title')
 
     def __str__(self):
         return self.pk
 
-class Project_content(models.Model):
+class Project_content(models.Model):#프로젝트 설명
     title = models.CharField(max_length=100, null=True, blank=True)
     eg_title = models.CharField(max_length=100, null=True, blank=True)
-    content = models.CharField(max_length=100, null=True, blank=True)
-    details = models.CharField(max_length=100, null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
+    details = models.TextField(null=True, blank=True)
     project_title = models.OneToOneField(Project_title, on_delete=models.CASCADE, related_name='proj_details')
 
     def __str__(self):
         return self.pk
 
 class Project_option(models.Model):
-    content =  models.CharField(max_length=100, null=True, blank=True)
+    content =  models.TextField(max_length=100, null=True, blank=True)
     project_title = models.ForeignKey(Project_title, on_delete=models.CASCADE, related_name='proj_option')
 
     def __str__(self):
         return self.pk
 
-class Project_contentop(models.Model):
+class Project_contentop(models.Model):#
     title = models.CharField(max_length=100, null=True, blank=True)
-    content = models.CharField(max_length=100, null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
     img = models.ImageField(upload_to='project/sub_img/', null=True, blank=True)
     project_title = models.ForeignKey(Project_title, on_delete=models.CASCADE, related_name='proj_content_op' ,null=True)
 

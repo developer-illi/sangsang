@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+    <meta property="og:title" content="#">
+    <meta property="og:url" content="#">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'img/common/ogimage.png' %}">
+    <meta
+            property="og:description"
+            content="#"
+    />
+    <link rel="stylesheet" href="{% static 'css/css/index.css' %}">
+
+    <!-- ** gsap ** -->
+    <script defer src="{% static 'js/gsap/gsap.min.js' %}"></script>
+    <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
+
+    <script defer src="{% static 'js/index.js' %}"></script>
+
+    <title>상상</title>
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__content">
+            <h1 class="header__main-logo">
+                <a href="{% url 'main' %}" class="header__main-logo-link">
+                    <img src="{% static 'img/common/main-logo.svg' %}" class="header__main-logo-img" alt="메인 로고">
+                </a>
+            </h1>
+            <button class="header__menu">
+                <span class="header__menu-line"></span>
+                <span class="header__menu-line"></span>
+            </button>
+            <nav class="gnb">
+                <ul class="gnb__list">
+                    <li class="gnb__item">
+                        <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
+                    </li>
+                    <li class="gnb__item">
+                        <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section --sub-main --about">
+        <div class="section__content">
+            <div class="sub-main__wrap">
+                <div class="sub-main__sub-title">
+                    <div class="sub-main__sub-title-home">
+                        <img src="{% static 'img/common/icon-home-wh.svg' %}" alt="홈 아이콘" class="sub-main__sub-title-home-img">
+                    </div>
+                    <h4 class="sub-main__sub-title-text">About</h4>
+                </div>
+                <h2 class="sub-main__main-title">
+                    SANGSANG<br>
+                    BUILD
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section --about">
+        <div class="section__content">
+            <div class="about__wrap">
+                <div class="about__ceo-wrap">
+                    <div class="about__ceo-position">CEO</div>
+                    <h4 class="about__ceo-name">{{ about.ceo_name }}</h4>
+                </div>
+                <div class="about__text-wrap">
+                    <div class="about__detail-wrap">
+                        <div class="about__detail-text-wrap">
+                            <h3 class="about__detail-title">
+                                {{ about.main_title }}
+                            </h3>
+                            <p class="about__detail-desc">
+                                {{ about.sub_script }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="about__img-wrap">
+                        <img src="{% static 'img/common/img01.jpg' %}" alt="어바웃 이미지">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section --history">
+        <div class="section__content">
+            <div class="section__title-wrap --align-left">
+                <h2 class="section__title">HISTORY</h2>
+                <p class="section__title-desc">
+                    {{ about.history_title }}
+                </p>
+            </div>
+            <div class="history__wrap">
+                <ul class="history__list">
+                    {% for historys in history reversed %}
+                        <li class="history__item">
+                            <h3 class="history__num">{{ historys.years }}</h3>
+                            <ul class="history__cnt-list">
+                                {% for content in historys.his_content.all reversed %}
+                                    <li class="history__cnt-item">
+                                        <span class="history__cnt-item-date">{{ content.months }}</span>
+                                        <div class="history__cnt-item-desc">
+                                            {{ content.content }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <button class="history__btn"></button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <div class="footer__detail-wrap">
+                <div class="footer__info-wrap">
+                    <a href="" class="footer__email">contact@sangsangbuild.com</a>
+                    <div class="footer__address">서울특별시 송파구 올림픽로32길 22-13(방이동 62-12), 동도빌딩 301호</div>
+                    <div class="footer__tel">+82 2 419 8288</div>
+                    <div class="footer__info">info@sangsangbuild.com</div>
+                    <div class="footer__copyright mobile-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+                </div>
+                <ul class="footer__social-wrap">
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            YOUTUBE
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            INSTAGRAM
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="footer__social">
+                        <a href="#none" class="footer__social-link">
+                            FACEBOOK
+                            <div class="footer__social-arrow-wrap">
+                                <span class="footer__social-arrow --01"></span>
+                                <span class="footer__social-arrow --02"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copyright pc-hidden">Copyright © 2024 SANGSANG All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const historyMenu = () => {
+            const historyItems = document.querySelectorAll('.history__item');
+
+            // 열려 있는 항목의 높이를 업데이트하는 함수
+            const updateHistoryHeight = () => {
+                historyItems.forEach((historyItem) => {
+                    const historyCntList = historyItem.querySelector('.history__cnt-list');
+                    if (historyCntList.classList.contains('on')) {
+                        historyCntList.style.height = 'auto'; // 임시로 auto 설정
+                        const scrollHeight = historyCntList.scrollHeight; // 전체 높이를 계산
+                        historyCntList.style.height = `${scrollHeight + 60}px`; // 정확한 높이를 적용
+                    }
+                });
+            };
+
+            historyItems.forEach((historyItem) => {
+                historyItem.addEventListener('click', () => {
+                    const historyCntList = historyItem.querySelector('.history__cnt-list');
+                    const historyNum = historyItem.querySelector('.history__num');
+                    const historyBtn = historyItem.querySelector('.history__btn');
+
+                    // Close all other open items
+                    historyItems.forEach((item) => {
+                        if (item !== historyItem) {
+                            const otherCntList = item.querySelector('.history__cnt-list');
+                            const otherNum = item.querySelector('.history__num');
+                            const otherBtn = item.querySelector('.history__btn');
+
+                            const scrollHeight = otherCntList.scrollHeight; // 현재 높이를 읽음
+                            otherCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
+                            requestAnimationFrame(() => {
+                                otherCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
+                            });
+                            otherCntList.classList.remove('on');
+                            otherNum.classList.remove('on');
+                            otherBtn.classList.remove('on');
+                        }
+                    });
+
+                    // Toggle the clicked item
+                    if (historyCntList.classList.contains('on')) {
+                        const scrollHeight = historyCntList.scrollHeight; // 현재 높이를 읽음
+                        historyCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
+                        requestAnimationFrame(() => {
+                            historyCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
+                        });
+                        historyCntList.classList.remove('on');
+                        historyNum.classList.remove('on');
+                        historyBtn.classList.remove('on');
+                    } else {
+                        historyCntList.style.height = '0'; // 초기 높이를 0으로 설정
+                        historyCntList.classList.add('on');
+                        historyNum.classList.add('on');
+                        historyBtn.classList.add('on');
+                        const scrollHeight = historyCntList.scrollHeight; // 콘텐츠 높이를 계산
+                        requestAnimationFrame(() => {
+                            historyCntList.style.height = `${scrollHeight + 60}px`; // 다음 프레임에서 높이 설정
+                        });
+                    }
+                });
+            });
+
+            // 리사이즈 이벤트 처리
+            window.addEventListener('resize', updateHistoryHeight);
+        };
+
+        historyMenu();
+
+
+        // about__ceo-wrap 애니메이션
+        gsap.from(".about__ceo-wrap", {
+            opacity: 0, // 투명도 0부터 시작
+            duration: 1.2, // 애니메이션 지속 시간
+            ease: "power2.out", // 부드러운 가속 및 감속
+            stagger: 0.3, // 순차적 실행 간격 추가
+            scrollTrigger: {
+                trigger: ".about__ceo-wrap", // 트리거 요소
+                start: "top 80%", // 트리거 시작 위치
+                end: "bottom 20%", // 트리거 종료 위치
+                toggleActions: "play none none none", // 애니메이션 실행 동작
+                scroller: ".wrapper", // 스크롤 컨테이너 설정
+            },
+        });
+
+        // about__detail-wrap 애니메이션
+        gsap.from(".about__detail-wrap", {
+            opacity: 0, // 투명도 0부터 시작
+            duration: 1.5, // 애니메이션 지속 시간
+            ease: "power2.out", // 부드러운 가속 및 감속
+            scrollTrigger: {
+                trigger: ".about__detail-wrap", // 트리거 요소
+                start: "top 80%", // 트리거 시작 위치
+                end: "bottom 20%", // 트리거 종료 위치
+                toggleActions: "play none none none", // 애니메이션 실행 동작
+                scroller: ".wrapper", // 스크롤 컨테이너 설정
+            },
+        });
+
+        // about__img-wrap 애니메이션
+        gsap.from(".about__img-wrap img", {
+            opacity: 0, // 투명도 0부터 시작
+            duration: 1.5, // 애니메이션 지속 시간
+            delay: .4, // about__detail-wrap 이후에 시작
+            ease: "power2.out", // 부드러운 가속 및 감속
+            scrollTrigger: {
+                trigger: ".about__img-wrap", // 트리거 요소
+                start: "top 80%", // 트리거 시작 위치
+                end: "bottom 20%", // 트리거 종료 위치
+                toggleActions: "play none none none", // 애니메이션 실행 동작
+                scroller: ".wrapper", // 스크롤 컨테이너 설정
+            },
+        });
+
+
+        // section__title-wrap 애니메이션
+        gsap.from([".section__title-wrap.--align-left h2", ".section__title-wrap.--align-left p"], {
+            y: 100, // 아래에서 시작
+            opacity: 0, // 투명도 0부터 시작
+            duration: 1.5, // 애니메이션 지속 시간
+            stagger: 0.3, // h2와 p 사이에 딜레이 추가
+            ease: "power2.out", // 부드러운 가속 및 감속
+            scrollTrigger: {
+                trigger: ".section__title-wrap.--align-left", // 트리거 요소
+                start: "top 80%", // 트리거 시작 위치
+                end: "bottom 20%", // 트리거 종료 위치
+                toggleActions: "play none none none", // 애니메이션 실행 동작
+                scroller: ".wrapper", // 스크롤 컨테이너 설정
+            },
+        });
+
+
+    });
+
+</script>
+</body>
+</html>

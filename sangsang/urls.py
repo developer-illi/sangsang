@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from main import views as mainvw
+
 urlpatterns = [
     path('',mainvw.main_page, name='main'),
     path('about', mainvw.about_pg, name='about'),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('project', mainvw.project_pg, name='project'),
     path('solution', mainvw.solution_pg, name='solution'),
     path('admin', mainvw.admin_pg, name='admin'),
+    path('admin_pg', mainvw.login, name='login'),
     path('sol_item_add', mainvw.sol_item_add, name='sol_item_add'),
     path('app_item_add', mainvw.app_item_add, name='app_item_add'),
     path('get_val_items/', mainvw.get_val_items, name='get_val_items'),

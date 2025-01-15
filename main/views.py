@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import JsonResponse
 
-from main.models import Sol_content, Solutions, Admin, Apply, Apply_content, Main_pg, History, Solution, Project
+from main.models import Sol_content, Solutions, Admin, Apply, Apply_content, Main_pg, History, Solution, Project, \
+    Project_title
 
 
 # Create your views here.
@@ -98,9 +99,14 @@ def send_email(request):
 @csrf_exempt
 def admin_pg(request):
     arg = {}
-    return render(request,'admin_login.html', arg)
+    return render(request,'admin/login.html', arg)
 
+@csrf_exempt
+def login(request):
+    arg = {
 
+    }
+    return render(request, 'admin/about.html', arg)
 @csrf_exempt
 def admin_login(request):
     if request.method == 'POST':
