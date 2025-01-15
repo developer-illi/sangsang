@@ -149,16 +149,16 @@ CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS = {
 
 #storages
 
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "helpers.cloudflare.storages.MediaStorage",
-#         "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
-#     },
-#     "staticfiles" : {
-#         "BACKEND": "helpers.cloudflare.storages.StaticStorage",
-#         "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
-#     }
-# }
+STORAGES = {
+    "default": {
+        "BACKEND": "helpers.cloudflare.storages.MediaStorage",
+        "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
+    },
+    "staticfiles" : {
+        "BACKEND": "helpers.cloudflare.storages.StaticStorage",
+        "OPTIONS" : CLOUDFLARE_R2_BUCKET_CONFIG_OPTIONS
+    }
+}
 
 
 # Default primary key field type
