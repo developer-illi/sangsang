@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import json
 import datetime
+from django.contrib import messages
 from main.models import *
 import logging
 
@@ -79,10 +80,6 @@ def get_tap_items(request):
             return JsonResponse({'val_items': items_list})
     return JsonResponse({'val_items': []})
 
-
-def inquiry(request):
-    arg = {}
-    return render(request, 'inquiry.html', arg)
 
 
 
@@ -180,7 +177,9 @@ def delete_history_item(request, item_id):
     return JsonResponse({"success": False, "message": "잘못된 요청입니다."}, status=400)
 
 @csrf_exempt
-def login(request):
+def about_admin(request):
+    if "admin_id" not in request.session:
+        return redirect("admin")
     about = Main_pg.objects.get()
     history = History.objects.all()
     arg = {
@@ -189,6 +188,9 @@ def login(request):
     return render(request, 'admin/about.html', arg)
 @csrf_exempt
 def sol_admin(request):
+    if "admin_id" not in request.session:
+        return redirect("admin")
+
     solution = Solution.objects.get(pk=1)
     arg = {
         'solution':solution
@@ -197,6 +199,8 @@ def sol_admin(request):
 
 @csrf_exempt
 def pro_admin(request):
+    if "admin_id" not in request.session:
+        return redirect("admin")
     project = Project.objects.get(pk=1)
     arg = {'project': project}
     return render(request, 'admin/project.html', arg)
@@ -339,25 +343,29 @@ def project_content_create(request):
 
 @csrf_exempt
 def admin_login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
+        id = request.POST["username"]
+        pw = request.POST["password"]
+
         try:
-            username = request.POST['u_id']
-            raw_password = request.POST['password']
-
-            # 사용자 가져오기
-            user = Admin.objects.get(user=username)
-            # 비밀번호 검증
-            if user.check_password(raw_password):
-                arg = {'user': user}
-                return render(request, 'admin_login.html', arg)
-            else:
-                return JsonResponse({'status': 'error', 'message': '아이디 또는 비밀번호를 확인해주세요.'})
-
+            admin = Admin.objects.get(user=id)  # 사용자 조회
         except Admin.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': '아이디 또는 비밀번호를 확인해주세요.'})
+            messages.error(request, "아이디 또는 비밀번호가 올바르지 않습니다.")
+            return redirect("admin")
 
-    return render(request, 'admin_login.html')
+        if admin.check_password(pw):  # 비밀번호 검증
+            request.session["admin_id"] = admin.id  # ✅ 세션에 로그인 정보 저장
+            request.session["admin_user"] = admin.user
+            request.session.set_expiry(60 * 60 * 24)  # 24시간 세션 유지
+            return redirect("about_admin")  # 로그인 성공 시 이동할 페이지
+        else:
+            messages.error(request, "아이디 또는 비밀번호가 올바르지 않습니다.")
 
+        return redirect("admin")
+
+def admin_logout(request):
+    request.session.flush()  # ✅ 세션 삭제 (로그아웃)
+    return redirect("admin")
 
 @csrf_exempt
 def admin(request):

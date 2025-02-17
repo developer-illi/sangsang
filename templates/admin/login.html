@@ -83,16 +83,13 @@
             <nav class="gnb">
                 <ul class="gnb__list">
                     <li class="gnb__item">
-                        <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
+                        <a href="{% url 'about_admin' %}" class="gnb__link">ABOUT</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+                        <a href="{% url 'sol_admin' %}" class="gnb__link">SOLUTION</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
-                    </li>
-                    <li class="gnb__item">
-                        <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
+                        <a href="{% url 'pro_admin' %}" class="gnb__link">PROJECT</a>
                     </li>
                 </ul>
             </nav>
@@ -101,7 +98,7 @@
     <section class="section --about">
         <div class="login-container">
         <h1>Admin Login</h1>
-        <form method="post" action="{% url 'login' %}">
+        <form method="post" action="{% url 'admin_login' %}">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
