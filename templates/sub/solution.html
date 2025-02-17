@@ -85,7 +85,7 @@
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all %}
                         <li class="solution__item --{{ sol_info.pk }}" data-img="{{ sol_info.img.url }}">
-                            <div class="solution__num">{{ sol_info.pk|floatformat:"02d" }}</div>
+                            <div class="solution__num">{{ sol_info.pk|stringformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
                             <ul class="solution__desc-wrap">
                                 {% for option in sol_info.sol_option.all %}
