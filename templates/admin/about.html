@@ -15,13 +15,14 @@
             content="#"
     />
     <link rel="stylesheet" href="{% static 'css/css/index.css' %}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <!-- ** gsap ** -->
     <script defer src="{% static 'js/gsap/gsap.min.js' %}"></script>
 
     <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
-
+    <link rel="icon" href="{% static 'img/common/favicon.png' %}">
     <script defer src="{% static 'js/index.js' %}"></script>
+    <script defer src="{% static 'js/admin.js' %}"></script>
 
     <title>상상</title>
 </head>
@@ -45,10 +46,10 @@
                         <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+                        <a href="{% url 'sol_admin' %}" class="gnb__link">SOLUTION</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
+                        <a href="{% url 'pro_admin' %}" class="gnb__link">PROJECT</a>
                     </li>
                     <li class="gnb__item">
                         <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
@@ -57,7 +58,7 @@
             </nav>
         </div>
     </header>
-    <section class="section --sub-main --about">
+    <section class="section --sub-main --about" style="background: url({% static 'img/common/sub-main-img01.jpg' %}) no-repeat center/cover;">
         <div class="section__content">
             <div class="sub-main__wrap">
                 <div class="sub-main__sub-title">
@@ -79,7 +80,7 @@
             <div class="about__wrap">
                 <div class="about__ceo-wrap">
                     <div class="about__ceo-position">CEO</div>
-                    <h4 class="about__ceo-name">신동연</h4>
+                    <h4 class="about__ceo-name">{{ about.ceo_name }}</h4>
                 </div>
                 <div class="about__text-wrap">
                     <div class="about__detail-wrap">
@@ -87,40 +88,30 @@
 
                             <!-- ** admin mode ** -->
                             <!-- 클래스명에 --editable 붙을시에 수정모드로 변환됨 -->
-                            <h3 class="about__detail-title --editable">
-                                “혁신적인 기술과 다양한 경험을 바탕으로 신뢰할 수 있는 안전점검
-                                서비스를 제공하겠습니다.”
-                            </h3>
-                            <p class="about__detail-desc">
-                                상상빌드는 드론 기술을 기반으로 교량을 비롯한 다양한 사회기반시
-                                설물의 안전점검 서비스를 전문으로 수행하는 기업입니다.<br>
-                                <br>
-                                미래의 안전을 책임진다는 사명 아래 혁신적인 기술력과 지속적인,
-                                연구개발을 통해 보다 나은 안전점검 솔루션을 제공하는 데 최선을
-                                다하고 있습니다. 또한 환경과 사회의 지속가능성을 고려한 서비스를 제공함으로써, 안전한 사회 기반을 구축하는 데 기여하고자 합니다.
-                            </p>
+                            <textarea id="main_text" name="main_text" class="about__detail-title">{{ about.main_title }}</textarea>
+                            <textarea id="sub_text" name="sub_text" class="about__detail-desc">{{ about.sub_script }}</textarea>
                         </div>
                     </div>
                     <div class="about__img-wrap">
-                        <img src="../img/common/img01.jpg" alt="어바웃 이미지">
+                        <img src="{% if about.main_img %}{{ about.main_img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
+                                             alt="어바웃 이미지"
+                                             onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
                         <!-- ** admin mode ** -->
                         <div class="editable-btn-wrap --align-right">
-                            <button class="editable-btn --edit-image">
+                            <button class="editable-btn --edit-image" onclick="openFileDialog()">
                                 Choose Image
                             </button>
+                            <input type="file" id="main_img" accept="image/*" style="display: none;">
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
             <!-- ** admin mode ** -->
             <div class="editable-btn-wrap --align-center">
-                <button class="editable-btn --cancel">
+                <button id="about_text_cancle" class="editable-btn --cancel">
                     cancel
                 </button>
-                <button class="editable-btn --save">
+                <button id="about_text_save" class="editable-btn --save">
                     save
                 </button>
             </div>
@@ -132,7 +123,7 @@
             <div class="section__title-wrap --align-left">
                 <h2 class="section__title">HISTORY</h2>
                 <p class="section__title-desc">
-                    (주)상상빌드를 방문해 주셔서 감사합니다
+                    {{ about.history_title }}
                 </p>
             </div>
             <div class="history__wrap">
@@ -140,125 +131,54 @@
 
                     <!-- ** admin mode ** -->
                     <div class="editable-btn-wrap --align-center">
-                        <button class="editable-btn --add-white"></button>
+                        <button class="editable-btn --add-white --his_add_btn" style="background: url({% static 'img/common/icon-plus-circle-wh.svg' %}"></button>
                     </div>
 
                     <!-- ** 관리자 모드일때, -->
                     <!-- history__item에 클래스 .edit-history 추가하기 -->
-                    <li class="history__item --edit-history">
-                        <h3 class="history__num --editable">2024</h3>
-                        <ul class="history__cnt-list">
-                            <li class="history__cnt-item">
-                                <!-- ** admin mode ** -->
-                                <div class="editable-btn-wrap --no-margin">
-                                    <button class="editable-btn --delete"></button>
-                                </div>
-                                <div class="history__cnt-item-date">
-                                    2024.08
-                                    <!-- ** admin mode ** -->
-                                    <div class="editable-btn-wrap --no-margin">
-                                        <button class="editable-btn --add-calendar"></button>
-                                    </div>
-                                </div>
-                                <div class="history__cnt-item-desc --editable">
-                                    한국도로공사와 전략분야 인력양성사업 협약 체결
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    GPS음영구간 자율비행 드론 제작
-                                </div>
-                            </li>
+                    <!-- 시작 싸이클 -->
+                    {% for item in history reversed %}
+                        <li class="history__item">
+                            <input type="text" class="history__num --his_edit" value="{{ item.years }}">
+                            <input type="hidden" class="--about_edit --his_edit" value="{{ item.pk }}">
+                            <ul class="history__cnt-list">
+                                {% for content in item.his_content.all reversed %}
+                                    <li class="history__cnt-item">
+                                        <!-- ** admin mode ** -->
 
-                            <!-- ** admin mode ** -->
-                            <div class="editable-btn-wrap --align-center">
-                                <button class="editable-btn --add-blue"></button>
-                            </div>
-                        </ul>
-                        <button class="history__btn"></button>
-                    </li>
-                    <!-- ** admin mode ** -->
-                    <div class="editable-btn-wrap --align-right">
-                        <button class="editable-btn --cancel">
-                            cancel
-                        </button>
-                        <button class="editable-btn --save">
-                            save
-                        </button>
-                    </div>
-                    <li class="history__item">
-                        <h3 class="history__num">2023</h3>
-                        <ul class="history__cnt-list">
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    '울진 청량초등학교 건물 해체공사'를 위한 안전점검
+                                        <div class="editable-btn-wrap --no-margin">
+                                            <button class="editable-btn --delete" data-id="{{ content.pk }}" style="background: url({% static 'img/common/icon-delete-blue.svg' %}) no-repeat center/contain;"></button>
+                                        </div>
+                                        <div class="history__cnt-item-date">
+                                            <input type="text" class="--about_edit" value="{{ content.months }}">
+                                            <!-- ** admin mode ** -->
+                                            <div class="editable-btn-wrap --no-margin" data-id="{{ content.pk }}"><!-- 삭제버튼 -->
+                                            </div>
+                                        </div>
+                                        <input type="text" class="history__cnt-item-desc --about_edit" value="{{ content.content }}">
+                                        <button class="editable-btn --save --about_edit" data-id="{{ content.pk }}" style="margin-left: 100px">
+                                            save
+                                        </button>
+                                    </li>
+                                {% endfor %}
+                                <!-- ** admin mode ** -->
+                                <div class="editable-btn-wrap --align-center">
+                                    <button class="editable-btn --add-blue --month_add" style="background: url({% static 'img/common/icon-plus-circle-blue.svg' %}) no-repeat center/contain;"></button>
                                 </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    '제주 납읍초등학교 건물 해체공사'를 위한 안전점검
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    주택도시보증공사 '대구 인터불고 라비다 신축공사장' 안전점검
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    한국도로공사 '대전 세천교' 안전점검
-                                </div>
-                            </li>
-                        </ul>
-                        <button class="history__btn"></button>
-                    </li>
-                    <li class="history__item">
-                        <h3 class="history__num">2022</h3>
-                        <ul class="history__cnt-list">
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    한국도로공사 ‘중부내륙선 교량 무차단 정밀안전점검’
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    쿠팡 덕평물류센터 화재현장 실내드론 정밀안전점검
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    주택도시보증공사 ‘군산 수페리체 아파트 건설현장' 안전점검
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    주택도시보증공사 '제주 레이크 샤이어 사업장' 안전점검
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    1억 화소 페이로드 드론 제작
-                                </div>
-                            </li>
-                            <li class="history__cnt-item">
-                                <div class="history__cnt-item-date">2024.08</div>
-                                <div class="history__cnt-item-desc">
-                                    Vision sensor을 활용한 장애물회피 드론 제작
-                                </div>
-                            </li>
-                        </ul>
-                        <button class="history__btn"></button>
-                    </li>
+                            </ul>
+                            <button class="history__btn" style="background: url({% static 'img/common/icon-history-btn.png' %}) no-repeat center/contain;" data-img-url="{% static 'img/common/icon-history-btn.png' %}"></button>
+                        </li>
+                        <!-- ** admin mode ** -->
+                        <div class="editable-btn-wrap --align-right">
+                            <button class="editable-btn --cancel --his_edit" data-id="{{ item.pk }}">
+                                delete
+                            </button>
+                            <button class="editable-btn --save --his_edit" data-id="{{ item.pk }}">
+                                save
+                            </button>
+                        </div>
+                    {% endfor %}
+                    <!-- 여기까지 한싸이클 -->
                 </ul>
             </div>
         </div>
@@ -268,7 +188,7 @@
         <div class="footer__content">
             <div class="footer__detail-wrap">
                 <div class="footer__info-wrap">
-                    <a href="" class="footer__email">contact@sangsangbuild.com</a>
+                    <a href="" class="footer__email">info@sangsangbuild.com</a>
                     <div class="footer__address">서울특별시 송파구 올림픽로32길 22-13(방이동 62-12), 동도빌딩 301호</div>
                     <div class="footer__tel">+82 2 419 8288</div>
                     <div class="footer__info">info@sangsangbuild.com</div>
@@ -351,55 +271,65 @@
             };
 
             historyItems.forEach((historyItem) => {
-                historyItem.addEventListener('click', () => {
-                    const historyCntList = historyItem.querySelector('.history__cnt-list');
-                    const historyNum = historyItem.querySelector('.history__num');
-                    const historyBtn = historyItem.querySelector('.history__btn');
+                const historyBtn = historyItem.querySelector('.history__btn');
 
-                    // Close all other open items
-                    historyItems.forEach((item) => {
-                        if (item !== historyItem) {
-                            const otherCntList = item.querySelector('.history__cnt-list');
-                            const otherNum = item.querySelector('.history__num');
-                            const otherBtn = item.querySelector('.history__btn');
+                // ✅ `.history__btn` 버튼이 존재하는 경우에만 이벤트 추가
+                if (historyBtn) {
+                    historyBtn.addEventListener('click', (event) => {
+                        event.stopPropagation(); // 클릭 이벤트가 부모로 전달되지 않도록 방지
 
-                            const scrollHeight = otherCntList.scrollHeight; // 현재 높이를 읽음
-                            otherCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
+                        const historyCntList = historyItem.querySelector('.history__cnt-list');
+                        const historyNum = historyItem.querySelector('.history__num');
+
+                        // Close all other open items
+                        historyItems.forEach((item) => {
+                            if (item !== historyItem) {
+                                const otherCntList = item.querySelector('.history__cnt-list');
+                                const otherNum = item.querySelector('.history__num');
+                                const otherBtn = item.querySelector('.history__btn');
+
+                                if (otherCntList) {
+                                    const scrollHeight = otherCntList.scrollHeight; // 현재 높이를 읽음
+                                    otherCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
+                                    requestAnimationFrame(() => {
+                                        otherCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
+                                    });
+                                    otherCntList.classList.remove('on');
+                                }
+
+                                if (otherNum) otherNum.classList.remove('on');
+                                if (otherBtn) otherBtn.classList.remove('on');
+                            }
+                        });
+
+                        // Toggle the clicked item
+                        if (historyCntList.classList.contains('on')) {
+                            const scrollHeight = historyCntList.scrollHeight; // 현재 높이를 읽음
+                            historyCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
                             requestAnimationFrame(() => {
-                                otherCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
+                                historyCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
                             });
-                            otherCntList.classList.remove('on');
-                            otherNum.classList.remove('on');
-                            otherBtn.classList.remove('on');
+                            historyCntList.classList.remove('on');
+                            historyNum.classList.remove('on');
+                            historyBtn.classList.remove('on');
+                        } else {
+                            historyCntList.style.height = '0'; // 초기 높이를 0으로 설정
+                            historyCntList.classList.add('on');
+                            historyNum.classList.add('on');
+                            historyBtn.classList.add('on');
+                            const scrollHeight = historyCntList.scrollHeight; // 콘텐츠 높이를 계산
+                            requestAnimationFrame(() => {
+                                historyCntList.style.height = `${scrollHeight + 60}px`; // 다음 프레임에서 높이 설정
+                            });
                         }
                     });
-
-                    // Toggle the clicked item
-                    if (historyCntList.classList.contains('on')) {
-                        const scrollHeight = historyCntList.scrollHeight; // 현재 높이를 읽음
-                        historyCntList.style.height = `${scrollHeight}px`; // 현재 높이를 설정
-                        requestAnimationFrame(() => {
-                            historyCntList.style.height = '0'; // 다음 프레임에서 0으로 전환
-                        });
-                        historyCntList.classList.remove('on');
-                        historyNum.classList.remove('on');
-                        historyBtn.classList.remove('on');
-                    } else {
-                        historyCntList.style.height = '0'; // 초기 높이를 0으로 설정
-                        historyCntList.classList.add('on');
-                        historyNum.classList.add('on');
-                        historyBtn.classList.add('on');
-                        const scrollHeight = historyCntList.scrollHeight; // 콘텐츠 높이를 계산
-                        requestAnimationFrame(() => {
-                            historyCntList.style.height = `${scrollHeight + 60}px`; // 다음 프레임에서 높이 설정
-                        });
-                    }
-                });
+                }
             });
 
             // 리사이즈 이벤트 처리
             window.addEventListener('resize', updateHistoryHeight);
         };
+
 
         historyMenu();
 
