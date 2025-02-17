@@ -439,30 +439,23 @@ def edit_soldetail(request):
 @csrf_exempt
 def sol_item_add(request):
     if request.method == 'POST':
-        logger.info('POST 요청을 받음')
         try:
-            title = request.POST.get('sol_title')
-            content_text = request.POST.get('sol_content')
-            content_img = request.FILES.get('sol_image')
-            selected_category = request.POST.get('sol_item_category')
-
-            logger.info(f"전달된 데이터: title={title}, content_text={content_text}, selected_category={selected_category}")
-
-            sol_pk = int(selected_category)
-
-            # Solutions 객체 가져오기
-            sol = Solution_title.objects.get(pk=sol_pk)
-
-            # Sol_content 생성
-            sol_item = Solution_contentop.objects.create(
-                title=title,
-                content=content_text,
-                img=content_img,
-                Solution_title=sol
-            )
-            logger.info('Sol_item 저장 완료')
-            sol_item.save()
-            logger.info('JSON 응답 반환')
+            title = request.POST.get('title')
+            content_text = request.POST.get('content')
+            content_img = request.FILES.get('image')
+            mainId = request.POST.get('mainId')
+            contentId = request.POST.get('itemId')
+            if not contentId:
+                solution_title = get_object_or_404(Solution_title, pk=int(mainId))
+                sol_item = Solution_contentop.objects.create(
+                    title=title, content=content_text, img=content_img, Solution_title=solution_title)
+                sol_item.save()
+            else:
+                sol_item = get_object_or_404(Solution_contentop, pk=int(contentId))
+                sol_item.title = title
+                sol_item.content = content_text
+                sol_item.img = content_img
+                sol_item.save()
 
             return JsonResponse({'success': True, 'message': '등록되었습니다.'})
 
@@ -473,10 +466,12 @@ def sol_item_add(request):
     return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
 
 @csrf_exempt
-def delete_sol_item(request, item_id):
+def delete_sol_item(request):
     if request.method == 'POST':
         try:
-            sol_item = get_object_or_404(Solution_contentop, id=item_id)
+            item_id = request.POST.get('itemId')
+            print(item_id)
+            sol_item = get_object_or_404(Solution_contentop, id=int(item_id))
             sol_item.delete()  # 삭제 실행
 
             return JsonResponse({"success": True, "message": "삭제되었습니다."}, status=200)

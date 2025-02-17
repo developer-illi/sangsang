@@ -134,31 +134,33 @@
                                 </button>
                             </div>
                         </div>
-                        <ul class="solution-info__list">
+                        <ul class="solution-info__list" data-id="{{ sol.pk }}">
                             {% for content in sol.sol_content_op.all %}
                                 <li class="solution-info__item">
                                     <div class="solution-info__item-detail-wrap">
                                         <div class="solution-info__item-num">{{ forloop.counter|stringformat:"02d" }}</div>
-                                        <textarea class="solution-info__item-title">{{ content.title }}</textarea>
-                                        <textarea class="solution-info__item-desc">{{ content.content }}</textarea>
+                                        <textarea class="solution-info__item-title --sol_item_edit">{{ content.title }}</textarea>
+                                        <textarea class="solution-info__item-desc --sol_item_edit">{{ content.content }}</textarea>
                                     </div>
                                     <div class="solution-info__item-img-wrap">
                                         <img id="solution-image-{{ content.id }}" src="{% if content.img %}{{ content.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
                                              alt="솔루션 인포 이미지"
                                              onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
+                                        <input type="file" class="--sol_item_edit">
                                     </div>
                                     <div class="editable-btn-wrap --no-margin--solution">
-                                        <button class="editable-btn --delete" data-id="{{ content.pk }}"></button>
+
                                     </div>
                                 </li>
                                 <div class="editable-btn-wrap --align-center">
-                                    <button class="editable-btn --save" data-id="sol_item_edit{{ content.pk }}">
+                                    <button class="editable-btn --cancel --sol_item_edit" data-id="{{ content.pk }}">delete</button>
+                                    <button class="editable-btn --save --sol_item_edit" data-id="{{ sol.pk }}">
                                         save
                                     </button>
                                 </div>
 
                                 {% if forloop.last %}
-                                    <div class="editable-btn-wrap --align-center" id="sol_add">
+                                    <div class="editable-btn-wrap --align-center --add-itembox">
                                         <button class="editable-btn --add-white --add-itembox" style="background: url({% static 'img/common/icon-plus-circle-wh.svg' %}"></button>
                                     </div>
                                 {% endif %}
