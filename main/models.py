@@ -87,9 +87,9 @@ class Admin(models.Model):
 
     # 여기부터 추가
 class Main_pg(models.Model):
-    ceo_name = models.CharField(max_length=100, null=True, blank=True)
+    ceo_name = models.CharField(max_length=100, null=True, blank=True, default="신동연")
     main_title = models.TextField(null=True, blank=True)
-    sub_script = models.TextField(max_length=100, null=True, blank=True)
+    sub_script = models.TextField(null=True, blank=True)
     main_img = models.ImageField(upload_to='main_pg/main_img', null=True, blank=True)
     history_title = models.CharField(max_length=100, null=True, blank=True)
 
@@ -153,6 +153,7 @@ class Solution_contentop(models.Model):
 
 class Project(models.Model):#프로젝트 기본 세팅
     title = models.TextField(null=True, blank=True)
+    img = models.ImageField(upload_to='projects/title_img/', null=True, blank=True)
 
     def __str__(self):
         return self.pk

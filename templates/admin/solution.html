@@ -21,6 +21,10 @@
     <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
     <link rel="icon" href="{% static 'img/common/favicon.png' %}">
     <script defer src="{% static 'js/index.js' %}"></script>
+    <script defer src="{% static 'js/sol_admin.js' %}"></script>
+    <script>
+        document.cookie = "csrftoken={{ csrf_token }}; path=/";
+    </script>
 
     <title>상상</title>
 </head>
@@ -44,10 +48,10 @@
                         <a href="{% url 'about' %}" class="gnb__link">ABOUT</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'solution' %}" class="gnb__link">SOLUTION</a>
+                        <a href="{% url 'sol_admin' %}" class="gnb__link">SOLUTION</a>
                     </li>
                     <li class="gnb__item">
-                        <a href="{% url 'project' %}" class="gnb__link">PROJECT</a>
+                        <a href="{% url 'pro_admin' %}" class="gnb__link">PROJECT</a>
                     </li>
                     <li class="gnb__item">
                         <a href="{% url 'contact' %}" class="gnb__link">CONTACT</a>
@@ -69,9 +73,13 @@
                 <h2 class="sub-main__main-title">
                     SOLUTION
                 </h2>
-                <p class="sub-main__desc">
-                    {{ solution.title }}<br class="mobile-hidden">
-                </p>
+                <textarea class="sub-main__desc" id="sol_main_title">{{ solution.title }}</textarea>
+                <div class="editable-btn-wrap --align-center">
+                    <button class="editable-btn --save" id="sol_title_saver">
+                        save
+                    </button>
+                </div>
+                <br class="mobile-hidden">
             </div>
         </div>
     </section>
@@ -99,43 +107,61 @@
                         </li>
                     {% endfor %}
                 </ul>
+                <ul class="solution__list">
+                    {% for sol_info in solution.sol_title.all %}
+                        <li class="sol_input_img">
+                            <input type="file" id="sol_file_input_{{ sol_info.pk }}">
+                            <button class="editable-btn --save --titleimg" id="sol_title_img_btn{{ sol_info.pk }}" data-id="{{ sol_info.pk }}">
+                                save
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+
             </div>
             <div class="solution-info__wrap">
                 {% for sol in solution.sol_title.all %}
                     <div class="solution-info --{{ sol.pk }}">
                         <div class="solution-info__title-wrap">
-                            <h3 class="solution-info__title --ko">
-                                {{ sol.sol_details.title|linebreaks }}
-                            </h3>
-                            <h5 class="solution-info__title --en">
-                                {{ sol.sol_details.eg_title|linebreaks }}
-                            </h5>
-                            <div class="solution-info__title-quotation">
-                                {{ sol.sol_details.content|linebreaks }}
+                            <textarea class="solution-info__title --ko">{{ sol.sol_details.title }}</textarea>
+                            <textarea class="solution-info__title --en">{{ sol.sol_details.eg_title }}</textarea>
+                            <textarea class="solution-info__title-quotation">{{ sol.sol_details.content }}</textarea>
+                            <textarea class="solution-info__title-desc">{{ sol.sol_details.details }}</textarea>
+                            <br class="mobile-hidden">
+                            <div class="editable-btn-wrap --align-center">
+                                <button class="editable-btn --save --sol_detail" data-id="{{ sol.sol_details.pk }}">
+                                    save
+                                </button>
                             </div>
-                            <p class="solution-info__title-desc">
-                                {{ sol.sol_details.details|linebreaks }}
-                                <br class="mobile-hidden">
-                            </p>
                         </div>
                         <ul class="solution-info__list">
                             {% for content in sol.sol_content_op.all %}
                                 <li class="solution-info__item">
                                     <div class="solution-info__item-detail-wrap">
                                         <div class="solution-info__item-num">{{ forloop.counter|stringformat:"02d" }}</div>
-                                        <h6 class="solution-info__item-title">
-                                            {{ content.title }}
-                                        </h6>
-                                        <p class="solution-info__item-desc">
-                                            {{ content.content }}
-                                        </p>
+                                        <textarea class="solution-info__item-title">{{ content.title }}</textarea>
+                                        <textarea class="solution-info__item-desc">{{ content.content }}</textarea>
                                     </div>
                                     <div class="solution-info__item-img-wrap">
                                         <img id="solution-image-{{ content.id }}" src="{% if content.img %}{{ content.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
                                              alt="솔루션 인포 이미지"
                                              onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
                                     </div>
+                                    <div class="editable-btn-wrap --no-margin--solution">
+                                        <button class="editable-btn --delete" data-id="{{ content.pk }}"></button>
+                                    </div>
                                 </li>
+                                <div class="editable-btn-wrap --align-center">
+                                    <button class="editable-btn --save" data-id="sol_item_edit{{ content.pk }}">
+                                        save
+                                    </button>
+                                </div>
+
+                                {% if forloop.last %}
+                                    <div class="editable-btn-wrap --align-center" id="sol_add">
+                                        <button class="editable-btn --add-white --add-itembox" style="background: url({% static 'img/common/icon-plus-circle-wh.svg' %}"></button>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
@@ -187,6 +213,24 @@
             </div>
         </div>
     </footer>
+    <div class="alert-popup">
+        <div class="alert-popup__close"></div>
+        <!-- <div class="alert-popup__calendar">
+          <input type="text" class="alert-popup__calendar-year" placeholder="예) 2025">
+        </div> -->
+        <div class="alert-popup__cnt">
+            <h3 class="alert-popup__title">
+                취소하시겠습니까?
+            </h3>
+            <!-- <p class="alert-popup__desc">
+              수정한 내용은 초기화되며, 변경 전으로 돌아갑니다.
+            </p> -->
+        </div>
+        <div class="alert-popup__btn-wrap">
+            <!-- <button class="alert-popup__btn --cancel">cancel</button> -->
+            <button class="alert-popup__btn --confirm">ok</button>
+        </div>
+    </div>
 </div>
 
 <script>
