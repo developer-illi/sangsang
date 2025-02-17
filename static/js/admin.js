@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="editable-btn --delete" data-img="${deleteImgSrc}"></button>
             </div>
             <div class="history__cnt-item-date">
-                <input type="text" class="--about_edit" placeholder="월 입력">
+                <input type="text" class="--about_edit" placeholder="ex)2024.02">
                 <div class="editable-btn-wrap --no-margin"></div>
             </div>
             <input type="text" class="history__cnt-item-desc --about_edit" placeholder="내용 입력">

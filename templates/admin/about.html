@@ -95,10 +95,7 @@
                              onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
                         <!-- ** admin mode ** -->
                         <div class="editable-btn-wrap --align-right">
-                            <button class="editable-btn --edit-image" onclick="openFileDialog()">
-                                Choose Image
-                            </button>
-                            <input type="file" id="main_img" accept="image/*" style="display: none;">
+                            <input type="file" id="main_img" accept="image/*">
                         </div>
                     </div>
                 </div>
@@ -142,7 +139,6 @@
                                 {% for content in item.his_content.all reversed %}
                                     <li class="history__cnt-item">
                                         <!-- ** admin mode ** -->
-
                                         <div class="editable-btn-wrap --no-margin">
                                             <button class="editable-btn --delete" data-id="{{ content.pk }}" data-img="{% static 'img/common/icon-delete-blue.svg' %}" style="background: url({% static 'img/common/icon-delete-blue.svg' %}) no-repeat center/contain;"></button>
                                         </div>

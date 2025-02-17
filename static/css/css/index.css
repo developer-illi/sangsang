@@ -345,7 +345,7 @@ input[type=radio] {
   }
 }
 .about__detail-title {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   font-size: clamp(22px, 1.7708333333vw, 34px);
   line-height: 1.3;
 }
