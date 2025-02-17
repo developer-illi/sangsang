@@ -71,15 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
             updateHistoryHeight(historyList); // 높이 다시 계산
         });
 
-        // 🗑️ "삭제" 버튼 이벤트 추가
+        // 🗑️ "삭제" 버튼 이벤트 추가 (기존 요소)
         historyList.querySelectorAll(".--delete").forEach(button => {
-            button.addEventListener("click", function () {
-                deleteHistoryItem(this, historyList);
-                updateHistoryHeight(historyList); // 삭제 후 높이 갱신
-            });
+            applyDeleteButtonStyle(button);
+            addDeleteButtonEvent(button, historyList);
         });
 
-        // 💾 "저장" 버튼 이벤트 추가
+        // 💾 "저장" 버튼 이벤트 추가 (기존 요소)
         historyList.querySelectorAll(".--save").forEach(button => {
             button.addEventListener("click", function () {
                 saveHistoryItem(this);
@@ -87,13 +85,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // ✅ **삭제 버튼 스타일 적용 함수**
+    function applyDeleteButtonStyle(button) {
+        const imgSrc = button.getAttribute("data-img");
+        if (imgSrc) {
+            button.style.backgroundImage = `url(${imgSrc})`;
+            button.style.backgroundRepeat = "no-repeat";
+            button.style.backgroundPosition = "center";
+            button.style.backgroundSize = "contain";
+        }
+    }
+
+    // ✅ **삭제 버튼 이벤트 추가 함수**
+    function addDeleteButtonEvent(button, historyList) {
+        button.addEventListener("click", function () {
+            deleteHistoryItem(this, historyList);
+            updateHistoryHeight(historyList);
+        });
+    }
+
     // ✅ **새로운 히스토리 아이템 추가 함수**
     function addNewHistoryItem(historyList) {
         const newItem = document.createElement("li");
         newItem.classList.add("history__cnt-item");
+
+        // `data-img` 속성에서 이미지 URL 가져오기
+        const deleteImgSrc = document.querySelector(".--delete")?.getAttribute("data-img") || "";
+
         newItem.innerHTML = `
             <div class="editable-btn-wrap --no-margin">
-                <button class="editable-btn --delete"></button>
+                <button class="editable-btn --delete" data-img="${deleteImgSrc}"></button>
             </div>
             <div class="history__cnt-item-date">
                 <input type="text" class="--about_edit" placeholder="월 입력">
@@ -108,12 +129,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // 리스트에 새로운 항목 추가
         historyList.insertBefore(newItem, historyList.querySelector(".--month_add").parentNode);
 
-        // 새롭게 추가된 삭제/저장 버튼에도 이벤트 추가
-        newItem.querySelector(".--delete").addEventListener("click", function () {
-            deleteHistoryItem(this, historyList);
-            updateHistoryHeight(historyList);
-        });
+        // ✅ 새롭게 추가된 삭제 버튼에 스타일 적용 및 이벤트 추가
+        const newDeleteButton = newItem.querySelector(".--delete");
+        applyDeleteButtonStyle(newDeleteButton);
+        addDeleteButtonEvent(newDeleteButton, historyList);
 
+        // ✅ 새롭게 추가된 저장 버튼에 이벤트 추가
         newItem.querySelector(".--save").addEventListener("click", function () {
             saveHistoryItem(this);
         });
@@ -222,11 +243,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const addHistoryButton = document.querySelector(".--his_add_btn");
     const historyList = document.querySelector(".history__list");
-
-    // ✅ "히스토리 추가" 버튼 클릭 이벤트
     addHistoryButton.addEventListener("click", function () {
         const newHistoryItem = document.createElement("li");
         newHistoryItem.classList.add("history__item");
@@ -237,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <ul class="history__cnt-list">
                 <li class="history__cnt-item">
                     <div class="editable-btn-wrap --no-margin">
-                        <button class="editable-btn --delete" data-id=""></button>
+                        <button class="editable-btn --delete"></button>
                     </div>
                     <div class="history__cnt-item-date">
                         <input type="text" class="--about_edit" placeholder="Month">
@@ -250,10 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button class="editable-btn --add-blue --month_add"></button>
                 </div>
             </ul>
-            <button class="history__btn" 
-                data-img-url="/static/img/common/icon-history-btn.png">
-            </button>
         `;
+
         // ✅ "관리자용 삭제 & 저장 버튼" 추가
         const newControlBtns = document.createElement("div");
         newControlBtns.classList.add("editable-btn-wrap", "--align-right");
@@ -266,13 +285,13 @@ document.addEventListener("DOMContentLoaded", () => {
         addHistoryButton.parentNode.insertAdjacentElement("afterend", newHistoryItem);
         newHistoryItem.insertAdjacentElement("afterend", newControlBtns);
 
-        const newHistoryBtn = newHistoryItem.querySelector(".history__btn");
-        if (newHistoryBtn) {
-            const imgUrl = newHistoryBtn.getAttribute("data-img-url");
-            newHistoryBtn.style.backgroundImage = `url('${imgUrl}')`;
-            newHistoryBtn.style.backgroundRepeat = "no-repeat";
-            newHistoryBtn.style.backgroundPosition = "center";
-            newHistoryBtn.style.backgroundSize = "contain";
+        // 🔥 추가된 `delete` 버튼의 `background` 속성 설정
+        const newDeleteBtn = newHistoryItem.querySelector(".--delete");
+        if (newDeleteBtn) {
+            const imgSrc = newDeleteBtn.getAttribute("data-img");
+            if (imgSrc) {
+                newDeleteBtn.style.background = `url(${imgSrc}) no-repeat center/contain`;
+            }
         }
     });
 
@@ -302,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // ✅ "히스토리 삭제 버튼" 클릭 시
         if (target.classList.contains("--cancel") && target.classList.contains("--his_edit")) {
             if (confirm("정말 삭제하시겠습니까?")) {
-                let itemToDelete = target.closest(".history__item");  // 원래 방식
+                let itemToDelete = target.closest(".history__item");
 
                 if (!itemToDelete) {
                     itemToDelete = target.parentElement.previousElementSibling;
@@ -313,16 +332,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // ✅ 삭제할 ID 가져오기 (input[type=hidden]에 저장된 값)
+                // ✅ 삭제할 ID 가져오기
                 const itemId = itemToDelete.querySelector("input.--about_edit.--his_edit")?.value;
                 const formData = new FormData();
                 formData.append("itemId", itemId);
 
-
                 // 🔥 서버에 삭제 요청 보내기 (AJAX)
                 fetch("/delete_history", {
                     method: "POST",
-                    body:formData,
+                    body: formData,
                     headers: {
                         "X-CSRFToken": getCSRFToken(),
                     }
@@ -330,13 +348,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-
                             // 🔥 서버에서 삭제 성공하면 화면에서도 삭제
-                            const controlBtns = itemToDelete.nextElementSibling; // "삭제 & 저장" 버튼 그룹
-                            itemToDelete.remove(); // `li.history__item` 삭제
+                            const controlBtns = itemToDelete.nextElementSibling;
+                            itemToDelete.remove();
 
                             if (controlBtns && controlBtns.classList.contains("--align-right")) {
-                                controlBtns.remove(); // 관련된 버튼도 삭제
+                                controlBtns.remove();
                             }
 
                             alert("히스토리가 삭제되었습니다!");
@@ -351,22 +368,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-
-        //  "히스토리 저장 버튼" 클릭 시
+        // ✅ "히스토리 저장 버튼" 클릭 시
         if (target.classList.contains("--save") && target.classList.contains("--his_edit")) {
-            let historyItem = target.closest(".history__item");  // 원래 방식
+            let historyItem = target.closest(".history__item");
 
-            // `.history__item`을 못 찾았다면
             if (!historyItem) {
-                console.log("❌ `.history__item`을 직접 찾지 못함. 이전 요소를 확인합니다.");
-
-                // 🔥 해결책: 버튼의 `previousElementSibling` 또는 `parentElement.previousElementSibling`을 활용
                 historyItem = target.parentElement.previousElementSibling;
-
-                console.log("✅ 새롭게 찾은 `.history__item`:", historyItem);
             }
 
-            // ❗ 그래도 못 찾으면 실행 중단
             if (!historyItem) {
                 console.error("🚨 `.history__item`을 찾을 수 없습니다. HTML 구조 확인 필요!");
                 return;
@@ -375,14 +384,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const year = historyItem.querySelector(".history__num").value;
             const content = historyItem.querySelector(".--about_edit").value;
 
-            console.log("📌 year:", year,"content:",content);
+            console.log("📌 year:", year, "content:", content);
             const formData = new FormData();
             formData.append("year", year);
             formData.append("content", content);
 
             fetch("/add_history", {
                 method: "POST",
-                body:formData,
+                body: formData,
                 headers: {
                     "X-CSRFToken": getCSRFToken(),
                 }
@@ -390,8 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert("작업이 완료 되었습니다!");
-                        location.reload()
+                        alert("작업이 완료되었습니다!");
+                        location.reload();
                     } else {
                         alert("추가 실패: " + data.message);
                     }
@@ -408,9 +417,16 @@ document.addEventListener("DOMContentLoaded", () => {
             .find(row => row.startsWith("csrftoken="))
             ?.split("=")[1];
     }
+
+    // ✅ `DOMContentLoaded` 후 기존의 모든 `delete` 버튼에도 `background` 적용
+    document.querySelectorAll(".editable-btn.--delete").forEach(button => {
+        const imgSrc = button.getAttribute("data-img");
+        if (imgSrc) {
+            button.style.background = `url(${imgSrc}) no-repeat center/contain`;
+        }
+    });
+
 });
-
-
 
 
 

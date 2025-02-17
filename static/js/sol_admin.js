@@ -407,3 +407,20 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const monthPicker = document.getElementById('monthPicker');
+
+    // 입력 필드의 값이 변경될 때마다 실행
+    monthPicker.addEventListener('input', function() {
+        // 선택된 값 가져오기 (형식: YYYY-MM)
+        const selectedValue = this.value; // 예: "2025-02"
+
+        if (selectedValue) {
+            // YYYY-MM을 YYYY.MM으로 변환
+            const formattedValue = selectedValue.replace('-', '.');
+            // 변환된 값을 입력 필드에 표시
+            this.value = formattedValue;
+        }
+    });
+});
+

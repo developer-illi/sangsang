@@ -147,7 +147,7 @@
                                 {{ proj.proj_details.content|linebreaks }}
                             </h4>
                             <p class="project-list__desc-body">
-                                {{ proj.proj_details.details }}<br class="mobile-hidden">
+                                {{ proj.proj_details.details|linebreaks }}<br class="mobile-hidden">
                             </p>
                         </div>
                         <ul class="project-list__info-list">
@@ -156,7 +156,7 @@
                                     <div class="project-list__info-item-detail-wrap">
                                         <h6 class="project-list__info-item-num">{{ forloop.counter|stringformat:"02d" }}</h6>
                                         <div class="project-list__info-item-title">
-                                            {{ proj_op.title }}
+                                            {{ proj_op.title|linebreaks }}
                                         </div>
                                         <p class="project-list__info-item-desc">
                                             {{ proj_op.content|linebreaks }}

@@ -238,71 +238,14 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", () => {
-
-            // 섹션 타이틀 애니메이션
-            gsap.from(".project-info__detail-title", {
-                y: 50, // 아래에서 위로 이동
-                opacity: 0, // 투명도 0부터 시작
-                duration: 1, // 애니메이션 지속 시간
-                ease: "power2.out", // 부드러운 가속 및 감속
-                scrollTrigger: {
-                    trigger: ".project-info__detail-title", // 트리거 요소
-                    start: "top 80%", // 트리거 시작 위치
-                    toggleActions: "play none none none", // 애니메이션 실행 동작
-                    scroller: ".wrapper", // 스크롤 컨테이너
-                },
-            });
-
-// 섹션 설명 애니메이션
-            gsap.from(".project-info__detail-desc", {
-                y: 50, // 아래에서 위로 이동
-                opacity: 0, // 투명도 0부터 시작
-                duration: 1, // 애니메이션 지속 시간
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".project-info__detail-desc",
-                    start: "top 80%",
-                    toggleActions: "play none none none",
-                    scroller: ".wrapper",
-                },
-            });
-
-// 이미지 애니메이션
-            gsap.from(".project-info__img-wrap", {
-                scale: 0.9, // 약간 축소된 상태에서 시작
-                opacity: 0, // 투명도 0부터 시작
-                duration: 1.2, // 애니메이션 지속 시간
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".project-info__img-wrap",
-                    start: "top 80%",
-                    toggleActions: "play none none none",
-                    scroller: ".wrapper",
-                },
-            });
-
-// 섹션 텍스트 애니메이션
-            gsap.from(".section__text-ani.--project", {
-                x: -100, // 왼쪽에서 오른쪽으로 이동
-                opacity: 0, // 투명도 0부터 시작
-                duration: 1.2, // 애니메이션 지속 시간
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".section__text-ani.--project",
-                    start: "top 90%",
-                    toggleActions: "play none none none",
-                    scroller: ".wrapper",
-                },
-            });
-
-
             const tabs = document.querySelectorAll(".project-list__tab-item");
             const items = document.querySelectorAll(".project-list__item");
+
+            let activeTabIndex = 0; // 현재 활성화된 탭 인덱스 저장
 
             // 스크롤 애니메이션 활성화 함수
             const enableScrollAnimations = () => {
                 items.forEach((item) => {
-                    // 섹션 제목 애니메이션
                     gsap.fromTo(
                         item.querySelectorAll(".project-list__title, .project-list__sub-title"),
                         { y: 50, opacity: 0 },
@@ -321,7 +264,6 @@
                         }
                     );
 
-                    // 설명 애니메이션
                     gsap.fromTo(
                         item.querySelectorAll(".project-list__desc-wrap"),
                         { y: 50, opacity: 0 },
@@ -340,7 +282,6 @@
                         }
                     );
 
-                    // 리스트 항목 애니메이션
                     gsap.fromTo(
                         item.querySelectorAll(".project-list__info-item"),
                         { y: 50, opacity: 0 },
@@ -361,30 +302,40 @@
                 });
             };
 
-            // 초기 탭 활성화 함수
+            // ✅ 탭 변경 함수
             const activateTab = (index) => {
                 tabs.forEach((tab, i) => {
-                    tab.classList.toggle("on", i === index); // 활성화된 탭 스타일
+                    tab.classList.toggle("on", i === index);
                 });
 
                 items.forEach((item, i) => {
-                    item.style.display = i === index ? "block" : "none"; // 선택된 탭 표시
+                    item.style.display = i === index ? "block" : "none";
                 });
+
+                activeTabIndex = index; // 현재 선택된 탭 인덱스 업데이트
             };
 
-            // 초기 탭 활성화 및 애니메이션 적용
+            // ✅ 초기 탭 활성화
             activateTab(0);
             enableScrollAnimations();
 
-            // 탭 클릭 이벤트
+            // ✅ 탭 클릭 이벤트
             tabs.forEach((tab, index) => {
-                tab.addEventListener("click", () => {
+                tab.addEventListener("click", (event) => {
+                    if (activeTabIndex !== index) {
+                        const confirmChange = confirm("이동하시겠습니까?\n수정한 내용이 저장되지 않습니다.");
+                        if (!confirmChange) {
+                            event.preventDefault(); // 탭 변경 취소
+                            return;
+                        }
+                    }
+
                     activateTab(index);
                     enableScrollAnimations();
                 });
             });
 
-            // Swiper 초기화
+            // ✅ Swiper 초기화
             const initializeSwiper = () => {
                 const swipers = document.querySelectorAll(".swiper");
                 swipers.forEach((swiper) => {
@@ -399,10 +350,9 @@
             };
 
             initializeSwiper();
-
         });
-    </script>
 
+    </script>
 </div>
 </body>
 </html>

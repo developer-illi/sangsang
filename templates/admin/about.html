@@ -91,8 +91,8 @@
                     </div>
                     <div class="about__img-wrap">
                         <img src="{% if about.main_img %}{{ about.main_img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
-                                             alt="어바웃 이미지"
-                                             onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
+                             alt="어바웃 이미지"
+                             onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
                         <!-- ** admin mode ** -->
                         <div class="editable-btn-wrap --align-right">
                             <button class="editable-btn --edit-image" onclick="openFileDialog()">
@@ -144,7 +144,7 @@
                                         <!-- ** admin mode ** -->
 
                                         <div class="editable-btn-wrap --no-margin">
-                                            <button class="editable-btn --delete" data-id="{{ content.pk }}" style="background: url({% static 'img/common/icon-delete-blue.svg' %}) no-repeat center/contain;"></button>
+                                            <button class="editable-btn --delete" data-id="{{ content.pk }}" data-img="{% static 'img/common/icon-delete-blue.svg' %}" style="background: url({% static 'img/common/icon-delete-blue.svg' %}) no-repeat center/contain;"></button>
                                         </div>
                                         <div class="history__cnt-item-date">
                                             <input type="text" class="--about_edit" value="{{ content.months }}">
@@ -249,7 +249,6 @@
 </div>
 
 <script>
-
     document.addEventListener("DOMContentLoaded", () => {
 
         const historyMenu = () => {
@@ -391,10 +390,7 @@
                 scroller: ".wrapper", // 스크롤 컨테이너 설정
             },
         });
-
-
     });
-
 </script>
 </body>
 </html>

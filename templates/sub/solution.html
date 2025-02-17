@@ -84,9 +84,7 @@
             <div class="solution__wrap">
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all %}
-                        <li class="solution__item --{{ sol_info.pk }}"
-                            onmouseover="this.style.background='url({{ sol_info.img.url }}) no-repeat center/cover'"
-                            onmouseout="this.style.backgroundImage='none'">
+                        <li class="solution__item --{{ sol_info.pk }}" data-img="{{ sol_info.img.url }}">
                             <div class="solution__num">{{ sol_info.pk|floatformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
                             <ul class="solution__desc-wrap">
@@ -195,7 +193,6 @@
         const items = document.querySelectorAll(".solution__item");
 
         const activateAnimations = (info) => {
-            // solution-info__title-wrap 애니메이션
             gsap.fromTo(info.querySelector(".solution-info__title-wrap"),
                 { opacity: 0, y: 50 },
                 {
@@ -213,7 +210,6 @@
                 }
             );
 
-            // solution-info__list 내부 항목 순차적 애니메이션
             info.querySelectorAll(".solution-info__list > .solution-info__item").forEach((item, index) => {
                 gsap.fromTo(item,
                     { opacity: 0, y: 30, visibility: "hidden" },
@@ -239,28 +235,57 @@
         const showInfo = (index) => {
             solutionInfos.forEach((info, i) => {
                 if (i === index) {
-                    info.style.display = "block"; // 선택된 info 표시
+                    info.style.display = "block";
                 } else {
-                    info.style.display = "none"; // 나머지는 숨김
+                    info.style.display = "none";
                 }
             });
         };
 
-        // 초기 활성화 설정
+        // ✅ 초기 활성화 설정
         showInfo(0);
         solutionInfos.forEach((info) => activateAnimations(info));
 
         items.forEach((item, index) => {
+            const imgUrl = item.getAttribute("data-img");
+
+            // ✅ 마우스 오버 효과 적용
+            item.addEventListener("mouseover", () => {
+                if (!item.classList.contains("on")) {
+                    item.style.background = `url(${imgUrl}) no-repeat center/cover`;
+                    item.style.transform = "scale(1.05)";
+                }
+            });
+
+            // ✅ 마우스 아웃 효과 적용 (클릭되지 않은 경우만)
+            item.addEventListener("mouseout", () => {
+                if (!item.classList.contains("on")) {
+                    item.style.background = "none";
+                    item.style.transform = "scale(1)";
+                }
+            });
+
+            // ✅ 클릭 시 `on` 클래스 추가하여 유지
             item.addEventListener("click", () => {
-                showInfo(index); // 선택된 info 표시
+                items.forEach((el) => {
+                    el.classList.remove("on");
+                    el.style.background = "none";
+                    el.style.transform = "scale(1)";
+                });
+
+                // ✅ 선택된 요소에 `on` 클래스 추가
+                item.classList.add("on");
+                item.style.background = `url(${imgUrl}) no-repeat center/cover`;
+
+                showInfo(index);
 
                 const info = solutionInfos[index];
 
-                // 클릭 시 기존 애니메이션 재설정
+                // ✅ 클릭 시 기존 애니메이션 재설정
                 gsap.set(info.querySelectorAll(".solution-info__item"), { opacity: 0, y: 30 });
                 activateAnimations(info);
 
-                // 스크롤 이동
+                // ✅ 스크롤 이동
                 info.scrollIntoView({
                     behavior: "smooth",
                     block: "start",
@@ -268,6 +293,8 @@
             });
         });
     });
+
+
 </script>
 
 </body>

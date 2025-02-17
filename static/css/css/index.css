@@ -14,7 +14,9 @@ reset
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 6px;
 }
-
+p{
+  line-height: 1.8;
+}
 body,
 h1,
 h2,
@@ -138,6 +140,8 @@ textarea {
   all : unset;
   width: 100%;
   background: none;
+  box-sizing: border-box;
+  overflow: hidden;
   font-family: "Pretendard", "돋움", sans-serif;
   border: 0;
   margin: 0;
@@ -312,6 +316,9 @@ input[type=radio] {
 }
 .about__ceo-name {
   font-size: clamp(30px, 4.1666666667vw, 80px);
+  border-bottom: 3px solid white;  /* 밑줄 스타일 */
+  display: inline-block;  /* 텍스트 크기만큼 밑줄 적용 */
+  padding-bottom: 2px;  /* 텍스트와 밑줄 간격 */
 }
 .about__text-wrap {
   display: flex;
@@ -442,6 +449,9 @@ input.history__num{
   padding-top: 0.5vw;
   font-size: 12px;
   color: #2e87d3;
+}
+input.history__cnt-item-desc{
+  width: 100%;
 }
 .history__cnt-item-desc {
   font-size: 20px;
@@ -688,8 +698,8 @@ input.history__num{
   }
 }
 .solution-info__item-desc {
-  font-size: clamp(11px, 1.25vw, 24px);
-  line-height: 1.5;
+  /*font-size: clamp(11px, 1.25vw, 24px);*/
+  line-height: 1.8;
 }
 .solution-info__item-img-wrap {
   width: 50%;
@@ -896,13 +906,13 @@ input.history__num{
   font-size: clamp(12px, 1.875vw, 36px);
 }
 .project-list__desc-body {
-  font-size: clamp(10px, 1.25vw, 24px);
+  /*font-size: clamp(10px, 1.25vw, 24px);*/
   line-height: 1.5;
 }
 .project-list__info-list {
   display: flex;
   flex-direction: column;
-  gap: 178px;
+  gap: 50px;
 }
 @media screen and (max-width: 768px) {
   .project-list__info-list {
@@ -912,7 +922,9 @@ input.history__num{
 .project-list__info-item {
   display: flex;
   align-items: center;
-  gap: 118px;
+  gap: 120px;
+  padding: 50px 0;
+  border-top: 1px solid #4D4D4D;
 }
 @media screen and (max-width: 768px) {
   .project-list__info-item {
