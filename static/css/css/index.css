@@ -161,6 +161,9 @@ textarea,input{
   color: #fff;
   font-family: "Pretendard", "돋움", sans-serif;
 }
+#sub_text{
+  height: 150px;
+}
 a,
 keygen,
 select,
