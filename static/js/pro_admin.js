@@ -210,105 +210,107 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     // "추가" 버튼 이벤트 추가
-    const addButton = document.querySelector("#sol_add .--add-itembox");
+    const addButtons = document.querySelectorAll("#sol_add .--add-itembox");
 
-    addButton.addEventListener("click", function () {
-        // 🔹 `data-id` 값 가져오기
-        const projectId = addButton.getAttribute("data-id");
+    addButtons.forEach(addButton => {
+        addButton.addEventListener("click", function () {
+            // 🔹 `data-id` 값 가져오기
+            const projectId = addButton.getAttribute("data-id");
 
-        // 1️⃣ 새로운 리스트 항목(`.project-list__info-item`) 생성
-        const newItem = document.createElement("li");
-        newItem.classList.add("project-list__info-item");
-        newItem.innerHTML = `
-            <div class="project-list__info-item-detail-wrap">
-                <h6 class="project-list__info-item-num">NEW</h6>
-                <textarea class="project-list__info-item-title --proj_sub_edit" placeholder="새로운 제목 입력"></textarea>
-                <textarea class="project-list__info-item-desc --proj_sub_edit" placeholder="새로운 설명 입력"></textarea>
-            </div>
-            <div class="project-list__info-item-img-wrap">
-                <img src="/static/img/common/Vector.png" alt="새로운 이미지를 추가해주세요"
-                     onerror="this.onerror=null; this.src='/static/img/common/Vector.png';" class="project-list__info-item-img">
-                <input type="file" class="--proj_sub_edit --proj_sub_preview">
-            </div>
-        `;
+            // 1️⃣ 새로운 리스트 항목(`.project-list__info-item`) 생성
+            const newItem = document.createElement("li");
+            newItem.classList.add("project-list__info-item");
+            newItem.innerHTML = `
+                <div class="project-list__info-item-detail-wrap">
+                    <h6 class="project-list__info-item-num">NEW</h6>
+                    <textarea class="project-list__info-item-title --proj_sub_edit" placeholder="새로운 제목 입력"></textarea>
+                    <textarea class="project-list__info-item-desc --proj_sub_edit" placeholder="새로운 설명 입력"></textarea>
+                </div>
+                <div class="project-list__info-item-img-wrap">
+                    <img src="/static/img/common/Vector.png" alt="새로운 이미지를 추가해주세요"
+                         onerror="this.onerror=null; this.src='/static/img/common/Vector.png';" class="project-list__info-item-img">
+                    <input type="file" class="--proj_sub_edit --proj_sub_preview">
+                </div>
+            `;
 
-        // 2️⃣ 새로운 "저장" 버튼 생성
-        const newButtonWrap = document.createElement("div");
-        newButtonWrap.classList.add("editable-btn-wrap", "--align-center");
-        newButtonWrap.innerHTML = `
-            <button class="editable-btn --cancel --proj_sub_create">cancel</button>
-            <button class="editable-btn --save --proj_sub_create" data-id="${projectId}">
-                save
-            </button>
-        `;
+            // 2️⃣ 새로운 "저장" 버튼 생성
+            const newButtonWrap = document.createElement("div");
+            newButtonWrap.classList.add("editable-btn-wrap", "--align-center");
+            newButtonWrap.innerHTML = `
+                <button class="editable-btn --cancel --proj_sub_create">cancel</button>
+                <button class="editable-btn --save --proj_sub_create" data-id="${projectId}">
+                    save
+                </button>
+            `;
 
-        // 3️⃣ 추가 버튼(#sol_add) 위에 새로운 아이템과 저장 버튼 추가
-        const solAdd = document.getElementById("sol_add");
-        solAdd.parentNode.insertBefore(newItem, solAdd);
-        solAdd.parentNode.insertBefore(newButtonWrap, solAdd);
+            // 3️⃣ 추가 버튼(`sol_add`) 위에 새로운 아이템과 저장 버튼 추가
+            const solAdd = addButton.closest("#sol_add");
+            solAdd.parentNode.insertBefore(newItem, solAdd);
+            solAdd.parentNode.insertBefore(newButtonWrap, solAdd);
 
-        // 🔹 "취소" 버튼 클릭 시 요소 제거
-        const cancelBtn = newButtonWrap.querySelector(".--cancel");
-        cancelBtn.addEventListener("click", () => {
-            newItem.remove();
-            newButtonWrap.remove();
-        });
+            // 🔹 "취소" 버튼 클릭 시 요소 제거
+            const cancelBtn = newButtonWrap.querySelector(".--cancel");
+            cancelBtn.addEventListener("click", () => {
+                newItem.remove();
+                newButtonWrap.remove();
+            });
 
-        // ✅ **이미지 미리보기 기능 추가**
-        const fileInput = newItem.querySelector("input[type='file']");
-        const previewImage = newItem.querySelector(".project-list__info-item-img");
+            // ✅ **이미지 미리보기 기능 추가**
+            const fileInput = newItem.querySelector("input[type='file']");
+            const previewImage = newItem.querySelector(".project-list__info-item-img");
 
-        fileInput.addEventListener("change", function () {
-            const file = this.files[0];
-            if (!file) return;
+            fileInput.addEventListener("change", function () {
+                const file = this.files[0];
+                if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage.src = e.target.result; // 🔥 이미지 변경
-            };
-            reader.readAsDataURL(file);
-        });
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result; // 🔥 이미지 변경
+                };
+                reader.readAsDataURL(file);
+            });
 
-        // 🔹 "저장" 버튼 클릭 시 데이터 전송
-        const saveBtn = newButtonWrap.querySelector(".--save");
-        saveBtn.addEventListener("click", async () => {
-            const titleInput = newItem.querySelector(".project-list__info-item-title").value;
-            const descInput = newItem.querySelector(".project-list__info-item-desc").value;
-            const fileInput = newItem.querySelector("input[type='file']"); // ⬅️ 파일 입력 필드 찾기
+            // 🔹 "저장" 버튼 클릭 시 데이터 전송
+            const saveBtn = newButtonWrap.querySelector(".--save");
+            saveBtn.addEventListener("click", async () => {
+                const titleInput = newItem.querySelector(".project-list__info-item-title").value;
+                const descInput = newItem.querySelector(".project-list__info-item-desc").value;
+                const fileInput = newItem.querySelector("input[type='file']"); // ⬅️ 파일 입력 필드 찾기
 
-            let fileData = null;
-            if (fileInput && fileInput.files.length > 0) { // ⬅️ undefined 체크
-                fileData = fileInput.files[0];
-            }
-
-            const formData = new FormData();
-            formData.append("project_id", projectId);
-            formData.append("title", titleInput);
-            formData.append("content", descInput);
-            if (fileData) {
-                formData.append("image", fileData);
-            }
-
-            try {
-                const response = await fetch("/project_content_create", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "X-CSRFToken": getCookie("csrftoken") // CSRF 토큰 추가
-                    }
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    alert("저장 되었습니다.");
-                    location.reload(true);
-                } else {
-                    alert("저장 실패: " + data.message);
+                let fileData = null;
+                if (fileInput && fileInput.files.length > 0) { // ⬅️ undefined 체크
+                    fileData = fileInput.files[0];
                 }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("서버 오류 발생");
-            }
+
+                const formData = new FormData();
+                formData.append("project_id", projectId);
+                formData.append("title", titleInput);
+                formData.append("content", descInput);
+                if (fileData) {
+                    formData.append("image", fileData);
+                }
+
+                try {
+                    const response = await fetch("/project_content_create", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-CSRFToken": getCookie("csrftoken") // CSRF 토큰 추가
+                        }
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert("저장 되었습니다.");
+                        location.reload(true);
+                    } else {
+                        alert("저장 실패: " + data.message);
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("서버 오류 발생");
+                }
+            });
         });
     });
 
@@ -345,6 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     }
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -404,10 +407,3 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     }
 });
-
-
-
-
-
-
-
