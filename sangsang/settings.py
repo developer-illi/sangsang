@@ -15,6 +15,7 @@ from django.conf import settings
 from decouple import config
 from django.template.defaultfilters import default
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +31,13 @@ DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'  # 네이버 SMTP 서버
+EMAIL_PORT = 587  # SMTP 포트 (TLS)
+EMAIL_USE_TLS = True  # 보안 프로토콜 (TLS)
+EMAIL_HOST_USER = "info@sangsangbuild.com"  # 발신할 이메일 주소
+EMAIL_HOST_PASSWORD = "앱 비밀번호 설정해야함" # 네이버 앱 비밀번호
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Application definition
 

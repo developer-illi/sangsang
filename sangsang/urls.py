@@ -23,6 +23,7 @@ urlpatterns = [
     path('',mainvw.main_page, name='main'),
     path('about', mainvw.about_pg, name='about'),
     path('contact', mainvw.contact_pg, name='contact'),
+    path('contact_send', mainvw.contact_send, name='contact_send'),
     path('project', mainvw.project_pg, name='project'),
     path('solution', mainvw.solution_pg, name='solution'),
     path('admin', mainvw.admin_pg, name='admin'),
