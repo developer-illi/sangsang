@@ -5,7 +5,12 @@ reset
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
+.--title_save{
+  margin-top: 8px;
+}
+.sol_img_preview{
+  width: 60%;
+}
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -639,9 +644,9 @@ input.history__cnt-item-desc{
     margin: 18px 0;
   }
 }
-.solution-info__title-quotation:before {
-  content: "“";
-}
+/*.solution-info__title-quotation:before {*/
+/*  content: "“";*/
+/*}*/
 .solution-info__title-desc {
   font-size: clamp(10px, 1.25vw, 24px);
   line-height: 1.5;
@@ -1081,7 +1086,7 @@ input.history__cnt-item-desc{
   border: 1px solid #343434;
   background-color: #181818;
   overflow-y: auto;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
 }
 .inquiry__agree-checkbox {
   display: none;

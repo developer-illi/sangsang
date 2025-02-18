@@ -105,7 +105,7 @@
                 </ul>
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all|order %}
-                        <li class="sol_input_img">
+                        <li class="sol_input_img --title_save">
                             <input type="file" class="sol_img_preview" id="sol_file_input_{{ sol_info.pk }}">
                             <button class="editable-btn --save --titleimg" id="sol_title_img_btn{{ sol_info.pk }}" data-id="{{ sol_info.pk }}">
                                 save
