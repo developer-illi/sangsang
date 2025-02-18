@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     {% load static %}
+    {% load custom_filters %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="#">
@@ -83,12 +84,12 @@
             </div>
             <div class="solution__wrap">
                 <ul class="solution__list">
-                    {% for sol_info in solution.sol_title.all %}
+                    {% for sol_info in solution.sol_title.all|order %}
                         <li class="solution__item --{{ sol_info.pk }} {% if forloop.first %}on{% endif %}" data-img="{{ sol_info.img.url }}">
                             <div class="solution__num">{{ sol_info.pk|stringformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
                             <ul class="solution__desc-wrap">
-                                {% for option in sol_info.sol_option.all %}
+                                {% for option in sol_info.sol_option.all|order %}
                                     <li class="solution__desc">
                                         {{ option.content|linebreaks }}
                                     </li>
@@ -99,7 +100,7 @@
                 </ul>
             </div>
             <div class="solution-info__wrap">
-                {% for sol in solution.sol_title.all %}
+                {% for sol in solution.sol_title.all|order %}
                     <div class="solution-info --{{ sol.pk }}">
                         <div class="solution-info__title-wrap">
                             <h3 class="solution-info__title --ko">
@@ -117,7 +118,7 @@
                             </p>
                         </div>
                         <ul class="solution-info__list">
-                            {% for content in sol.sol_content_op.all %}
+                            {% for content in sol.sol_content_op.all|order %}
                                 <li class="solution-info__item">
                                     <div class="solution-info__item-detail-wrap">
                                         <div class="solution-info__item-num">{{ forloop.counter|stringformat:"02d" }}</div>

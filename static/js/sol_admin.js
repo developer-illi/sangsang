@@ -264,43 +264,51 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const solAddButton = document.querySelector(".editable-btn-wrap.--add-itembox .--add-itembox");
-    const solutionList = document.querySelector(".solution-info__item").parentNode; // ul 또는 적절한 부모 요소
+    // 모든 "추가" 버튼을 선택
+    const solAddButtons = document.querySelectorAll(".editable-btn-wrap.--add-itembox .--add-itembox");
 
-    // ✅ "추가" 버튼 클릭 시 새로운 아이템 추가
-    solAddButton.addEventListener("click", () => {
-        const itemCount = solutionList.querySelectorAll(".solution-info__item").length + 1;
+    solAddButtons.forEach(solAddButton => {
+        solAddButton.addEventListener("click", () => {
+            const solutionList = solAddButton.closest(".solution-info__list"); // 해당 버튼이 속한 리스트 찾기
 
-        // 새로운 리스트 항목 생성
-        const newItem = document.createElement("li");
-        newItem.classList.add("solution-info__item");
+            if (!solutionList) {
+                console.error("`.solution-info__list`을 찾을 수 없습니다.");
+                return;
+            }
 
-        newItem.innerHTML = `
-            <div class="solution-info__item-detail-wrap">
-                <div class="solution-info__item-num">${String(itemCount).padStart(2, '0')}</div>
-                <textarea class="solution-info__item-title --sol_item_edit" placeholder="제목 입력"></textarea>
-                <textarea class="solution-info__item-desc --sol_item_edit" placeholder="설명 입력"></textarea>
-            </div>
-            <div class="solution-info__item-img-wrap">
-                <img id="solution-image-new-${itemCount}" src="/static/img/common/Vector.png"
-                     alt="솔루션 인포 이미지"
-                     onerror="this.onerror=null; this.src='/static/img/common/Vector.png';">
-                <input type="file" class="--sol_item_edit img-preview-input">
-            </div>
-            <div class="editable-btn-wrap --no-margin--solution"></div>
-        `;
+            const itemCount = solutionList.querySelectorAll(".solution-info__item").length + 1;
 
-        // 새로운 버튼 그룹 생성
-        const newButtonWrap = document.createElement("div");
-        newButtonWrap.classList.add("editable-btn-wrap", "--align-center");
-        newButtonWrap.innerHTML = `
-            <button class="editable-btn --cancel --sol_item_edit" data-id="">delete</button>
-            <button class="editable-btn --save --sol_item_edit" data-id="">save</button>
-        `;
+            // 새로운 리스트 항목 생성
+            const newItem = document.createElement("li");
+            newItem.classList.add("solution-info__item");
 
-        // 추가 버튼 위에 새로운 항목 추가
-        solAddButton.parentNode.insertAdjacentElement("beforebegin", newItem);
-        solAddButton.parentNode.insertAdjacentElement("beforebegin", newButtonWrap);
+            newItem.innerHTML = `
+                <div class="solution-info__item-detail-wrap">
+                    <div class="solution-info__item-num">New</div>
+                    <textarea class="solution-info__item-title --sol_item_edit" placeholder="제목 입력"></textarea>
+                    <textarea class="solution-info__item-desc --sol_item_edit" placeholder="설명 입력"></textarea>
+                </div>
+                <div class="solution-info__item-img-wrap">
+                    <img id="solution-image-new-${itemCount}" src="/static/img/common/Vector.png"
+                        alt="솔루션 인포 이미지"
+                        onerror="this.onerror=null; this.src='/static/img/common/Vector.png';">
+                    <input type="file" class="--sol_item_edit img-preview-input">
+                </div>
+                <div class="editable-btn-wrap --no-margin--solution"></div>
+            `;
+
+            // 새로운 버튼 그룹 생성
+            const newButtonWrap = document.createElement("div");
+            newButtonWrap.classList.add("editable-btn-wrap", "--align-center");
+            newButtonWrap.innerHTML = `
+                <button class="editable-btn --cancel --sol_item_edit" data-id="">delete</button>
+                <button class="editable-btn --save --sol_item_edit" data-id="">save</button>
+            `;
+
+            // 추가 버튼 위에 새로운 항목 추가
+            solAddButton.parentNode.insertAdjacentElement("beforebegin", newItem);
+            solAddButton.parentNode.insertAdjacentElement("beforebegin", newButtonWrap);
+        });
     });
 
     // ✅ 이벤트 위임을 사용하여 동적 요소도 작동하도록 설정
@@ -311,12 +319,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (target.classList.contains("--cancel") && target.classList.contains("--sol_item_edit")) {
             if (confirm("정말 삭제하시겠습니까?")) {
                 let itemToDelete = target.closest(".solution-info__item");
-
                 const controlBtns = target.parentElement; // 버튼 그룹
 
                 if (!itemToDelete) {
                     itemToDelete = target.parentElement.previousElementSibling;
                 }
+
                 // 🔥 서버에서 삭제 요청 보내기
                 const itemId = target.getAttribute("data-id");
                 let formData = new FormData();
@@ -428,10 +436,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ?.split("=")[1];
     }
 });
-
-
-
-
 
 // ✅ CSRF 토큰 가져오는 함수 (Django 보안 정책)
 function getCookie(name) {

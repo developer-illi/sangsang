@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     {% load static %}
+    {% load custom_filters %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="#">
@@ -88,7 +89,7 @@
             </div>
             <div class="solution__wrap">
                 <ul class="solution__list">
-                    {% for sol_info in solution.sol_title.all %}
+                    {% for sol_info in solution.sol_title.all|order %}
                         <li class="solution__item --{{ sol_info.pk }} {% if forloop.first %}on{% endif %}" data-img="{{ sol_info.img.url }}">
                             <div class="solution__num">{{ sol_info.pk|stringformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
@@ -103,7 +104,7 @@
                     {% endfor %}
                 </ul>
                 <ul class="solution__list">
-                    {% for sol_info in solution.sol_title.all %}
+                    {% for sol_info in solution.sol_title.all|order %}
                         <li class="sol_input_img">
                             <input type="file" class="sol_img_preview" id="sol_file_input_{{ sol_info.pk }}">
                             <button class="editable-btn --save --titleimg" id="sol_title_img_btn{{ sol_info.pk }}" data-id="{{ sol_info.pk }}">
@@ -115,7 +116,7 @@
 
             </div>
             <div class="solution-info__wrap">
-                {% for sol in solution.sol_title.all %}
+                {% for sol in solution.sol_title.all|order %}
                     <div class="solution-info --{{ sol.pk }}">
                         <div class="solution-info__title-wrap">
                             <textarea class="solution-info__title --ko">{{ sol.sol_details.title }}</textarea>
@@ -130,7 +131,7 @@
                             </div>
                         </div>
                         <ul class="solution-info__list" data-id="{{ sol.pk }}">
-                            {% for content in sol.sol_content_op.all %}
+                            {% for content in sol.sol_content_op.all|order %}
                                 <li class="solution-info__item">
                                     <div class="solution-info__item-detail-wrap">
                                         <div class="solution-info__item-num">{{ forloop.counter|stringformat:"02d" }}</div>

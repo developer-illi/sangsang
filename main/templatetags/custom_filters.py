@@ -10,3 +10,9 @@ def linebreaks_to_p(value):
     return wrapped_text
 
 linebreaks_to_p.is_safe = True  # HTML로 안전하게 처리
+
+
+@register.filter(name='order')
+def sort_by_pk(queryset):
+    return queryset.order_by("pk")  # 오름차순 정렬
+    # return queryset.order_by("-pk")  # 내림차순 정렬 (내림차순 필요하면 사용)

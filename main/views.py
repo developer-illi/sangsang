@@ -190,7 +190,6 @@ def about_admin(request):
 def sol_admin(request):
     if "admin_id" not in request.session:
         return redirect("admin")
-
     solution = Solution.objects.get(pk=1)
     arg = {
         'solution':solution
@@ -209,9 +208,7 @@ def pro_admin(request):
 def project_main_update(request):
     if request.method == "POST":
         title = request.POST.get("title")
-        print(title)
         image = request.FILES.get("image")
-        print(image)
 
         try:
             # ✅ 프로젝트 데이터 가져오기 (기존 데이터 업데이트)

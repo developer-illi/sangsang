@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     {% load static %}
+    {% load custom_filters %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="#">
@@ -111,7 +112,7 @@
         <div class="section__content">
             <div class="project-list__tab-wrap">
                 <ul class="project-list__tab-list">
-                    {% for proj_title in project.proj_title.all %}
+                    {% for proj_title in project.proj_title.all|order %}
                         <li class="project-list__tab-item --{{ proj_title.pk }}">
                             {{ proj_title.title }}
                         </li>
@@ -119,7 +120,7 @@
                 </ul>
             </div>
             <div class="project-list__item-wrap">
-                {% for proj in project.proj_title.all %}
+                {% for proj in project.proj_title.all|order %}
                     <div class="project-list__item --{{ proj.pk }}">
                         <div class="project-list__title-wrap">
                             <h3 class="project-list__title">{{ proj.proj_details.title }}</h3>
@@ -128,7 +129,7 @@
                         <div class="project-list__slide-wrap">
                             <div class="swiper">
                                 <div class="swiper-wrapper">
-                                    {% for proj_img in proj.proj_content_op.all %}
+                                    {% for proj_img in proj.proj_content_op.all|order %}
                                         <div class="swiper-slide">
                                             <img src="{% if proj_img.img %}{{ proj_img.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
                                                  alt="프로젝트 이미지"
@@ -151,7 +152,7 @@
                             </p>
                         </div>
                         <ul class="project-list__info-list">
-                            {% for proj_op in proj.proj_content_op.all %}
+                            {% for proj_op in proj.proj_content_op.all|order %}
                                 <li class="project-list__info-item">
                                     <div class="project-list__info-item-detail-wrap">
                                         <h6 class="project-list__info-item-num">{{ forloop.counter|stringformat:"02d" }}</h6>

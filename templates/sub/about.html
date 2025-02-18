@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     {% load static %}
+    {% load custom_filters %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="#">
@@ -115,7 +116,7 @@
                         <li class="history__item">
                             <h3 class="history__num">{{ historys.years }}</h3>
                             <ul class="history__cnt-list">
-                                {% for content in historys.his_content.all reversed %}
+                                {% for content in historys.his_content.all|order reversed %}
                                     <li class="history__cnt-item">
                                         <span class="history__cnt-item-date">{{ content.months }}</span>
                                         <div class="history__cnt-item-desc">
