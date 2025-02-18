@@ -11,7 +11,6 @@ document.addEventListener("focusout", function (event) {
         event.target.classList.remove("--editable");
     }
 });
-
 document.addEventListener("DOMContentLoaded", () => {
     const fileInputs = document.querySelectorAll(".sol_img_preview");
 
@@ -468,4 +467,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const textareas = document.querySelectorAll("textarea");
+
+    // ✅ 모든 textarea에 높이 조절 이벤트 추가
+    textareas.forEach(textarea => {
+        adjustHeight(textarea);
+
+        textarea.addEventListener("input", function () {
+            adjustHeight(this);
+        });
+    });
+
+    function adjustHeight(textarea) {
+        if (!textarea) return;
+
+        const parent = textarea.closest(".solution-info"); // solution-info가 display: none일 경우 대응
+
+        // ✅ 부모가 숨겨져 있으면 임시로 표시 후 높이 측정
+        let wasHidden = false;
+        if (parent && window.getComputedStyle(parent).display === "none") {
+            wasHidden = true;
+            parent.style.visibility = "hidden";
+            parent.style.position = "absolute";
+            parent.style.display = "block";
+        }
+
+        // ✅ textarea 높이 자동 조정
+        textarea.style.height = "auto"; // 높이 초기화
+        textarea.style.height = textarea.scrollHeight + "px"; // 입력 내용에 따라 높이 조정
+
+        // ✅ 원래 상태로 되돌리기
+        if (wasHidden) {
+            parent.style.display = "none";
+            parent.style.visibility = "";
+            parent.style.position = "";
+        }
+    }
+
+    // ✅ 윈도우 리사이즈 시 높이 재조정 (반응형 대응)
+    window.addEventListener("resize", () => {
+        document.querySelectorAll(".solution-info textarea").forEach(adjustHeight);
+    });
+});
+
+
+
+
 

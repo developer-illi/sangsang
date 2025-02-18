@@ -85,7 +85,7 @@
             <div class="solution__wrap">
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all|order %}
-                        <li class="solution__item --{{ sol_info.pk }} {% if forloop.first %}on{% endif %}" data-img="{{ sol_info.img.url }}">
+                        <li class="solution__item --{{ sol_info.pk }} {% if forloop.first %}on{% endif %}"{% if forloop.first %}style="background: url({{ sol_info.img.url }}) center center / cover no-repeat; transform: scale(1);" {% endif %} data-img="{{ sol_info.img.url }}">
                             <div class="solution__num">{{ sol_info.pk|stringformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
                             <ul class="solution__desc-wrap">

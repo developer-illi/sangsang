@@ -407,6 +407,48 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const adjustTextareaHeight = (textarea) => {
+        if (!textarea) return;
+
+        const parent = textarea.closest(".project-list__item"); // .project-list__item 안의 textarea인지 확인
+
+        // ✅ 부모가 display: none 상태인지 확인
+        let wasHidden = false;
+        if (parent && window.getComputedStyle(parent).display === "none") {
+            wasHidden = true;
+            parent.style.visibility = "hidden";
+            parent.style.position = "absolute";
+            parent.style.display = "block";
+        }
+
+        // ✅ textarea 높이 자동 조정
+        textarea.style.height = "auto"; // 초기화
+        textarea.style.height = textarea.scrollHeight + "px"; // 내용에 맞게 조정
+
+        // ✅ 원래 상태로 되돌리기
+        if (wasHidden) {
+            parent.style.display = "none";
+            parent.style.visibility = "";
+            parent.style.position = "";
+        }
+    };
+
+    // ✅ 모든 `.project-list__item` 안의 `textarea` 적용
+    document.querySelectorAll(".project-list__item textarea").forEach(textarea => {
+        adjustTextareaHeight(textarea);
+
+        // ✅ 입력 시 높이 자동 조절
+        textarea.addEventListener("input", function () {
+            adjustTextareaHeight(this);
+        });
+    });
+
+    // ✅ 창 크기 변경 시 textarea 높이 재조정
+    window.addEventListener("resize", () => {
+        document.querySelectorAll(".project-list__item textarea").forEach(adjustTextareaHeight);
+    });
+});
 
 
 
