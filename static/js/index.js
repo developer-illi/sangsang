@@ -61,24 +61,3 @@ gsap.registerPlugin(ScrollTrigger);
         reader.readAsDataURL(file);
     }
 }
-document.addEventListener('DOMContentLoaded', function () {
-    // 모든 textarea 요소를 선택
-    const textareas = document.querySelectorAll('textarea');
-
-    // 각 textarea에 이벤트 리스너 추가
-    textareas.forEach(textarea => {
-        // 초기 높이 설정
-        adjustHeight(textarea);
-
-        // 입력 이벤트가 발생할 때마다 높이 조절
-        textarea.addEventListener('input', function () {
-            adjustHeight(textarea);
-        });
-    });
-
-    // 높이를 조절하는 함수
-    function adjustHeight(element) {
-        element.style.height = 'auto'; // 높이 초기화
-        element.style.height = element.scrollHeight + 'px'; // 스크롤 높이에 따라 높이 설정
-    }
-});

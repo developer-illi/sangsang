@@ -92,7 +92,9 @@
                         </div>
                     </div>
                     <div class="about__img-wrap">
-                        <img src="{% static 'img/common/img01.jpg' %}" alt="어바웃 이미지">
+                        <img src="{% if about.main_img %}{{ about.main_img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
+                             alt="어바웃 이미지"
+                             onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
                     </div>
                 </div>
             </div>

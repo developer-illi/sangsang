@@ -94,10 +94,10 @@
                     <textarea class="project-info__detail-desc --pro_main_title">{{ project.title }}</textarea>
                 </div>
                 <div class="project-info__img-wrap">
-                    <img src="{% if project.img %}{{ project.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
+                    <img id="pro_main_img" src="{% if project.img %}{{ project.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
                          alt="프로젝트 이미지"
                          onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
-                    <input type="file" class="--pro_main_title">
+                    <input type="file" id="pro_main_preview" class="--pro_main_title">
                     <button class="editable-btn --save --projectsaver --pro_main_title" >
                         save
                     </button>
@@ -165,9 +165,9 @@
                                     </div>
                                     <div class="project-list__info-item-img-wrap">
                                         <img src="{% if proj_op.img %}{{ proj_op.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
-                                             alt="솔루션 인포 이미지"
+                                             alt="프로젝트 인포 이미지"
                                              onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}'; " class="project-list__info-item-img">
-                                        <input type="file" class="--proj_sub_edit">
+                                        <input type="file" class="--proj_sub_edit --proj_sub_preview">
                                     </div>
                                 </li>
                                 <div class="editable-btn-wrap --align-center">
@@ -243,99 +243,100 @@
 
             let activeTabIndex = 0; // 현재 활성화된 탭 인덱스 저장
 
-            // 스크롤 애니메이션 활성화 함수
-            const enableScrollAnimations = () => {
-                items.forEach((item) => {
-                    gsap.fromTo(
-                        item.querySelectorAll(".project-list__title, .project-list__sub-title"),
-                        { y: 50, opacity: 0 },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 1,
-                            stagger: 0.2,
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 80%",
-                                toggleActions: "play none none none",
-                                scroller: ".wrapper",
-                            },
-                        }
-                    );
+            // ✅ **애니메이션 활성화 함수**
+            const enableScrollAnimations = (targetItem) => {
+                gsap.fromTo(
+                    targetItem.querySelectorAll(".project-list__title, .project-list__sub-title"),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.2,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: targetItem,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                            scroller: ".wrapper",
+                        },
+                    }
+                );
 
-                    gsap.fromTo(
-                        item.querySelectorAll(".project-list__desc-wrap"),
-                        { y: 50, opacity: 0 },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 1,
-                            stagger: 0.3,
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 80%",
-                                toggleActions: "play none none none",
-                                scroller: ".wrapper",
-                            },
-                        }
-                    );
+                gsap.fromTo(
+                    targetItem.querySelectorAll(".project-list__desc-wrap"),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.3,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: targetItem,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                            scroller: ".wrapper",
+                        },
+                    }
+                );
 
-                    gsap.fromTo(
-                        item.querySelectorAll(".project-list__info-item"),
-                        { y: 50, opacity: 0 },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 1.2,
-                            stagger: 0.4,
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 80%",
-                                toggleActions: "play none none none",
-                                scroller: ".wrapper",
-                            },
-                        }
-                    );
-                });
+                gsap.fromTo(
+                    targetItem.querySelectorAll(".project-list__info-item"),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1.2,
+                        stagger: 0.4,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: targetItem,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                            scroller: ".wrapper",
+                        },
+                    }
+                );
             };
 
-            // ✅ 탭 변경 함수
+            // ✅ **탭 변경 함수**
             const activateTab = (index) => {
                 tabs.forEach((tab, i) => {
                     tab.classList.toggle("on", i === index);
                 });
 
                 items.forEach((item, i) => {
-                    item.style.display = i === index ? "block" : "none";
+                    if (i === index) {
+                        item.style.display = "block";
+                        enableScrollAnimations(item); // 🎯 애니메이션 실행
+                    } else {
+                        item.style.display = "none";
+                    }
                 });
 
                 activeTabIndex = index; // 현재 선택된 탭 인덱스 업데이트
             };
 
-            // ✅ 초기 탭 활성화
+            // ✅ **초기 탭 활성화**
             activateTab(0);
-            enableScrollAnimations();
 
-            // ✅ 탭 클릭 이벤트
+            // ✅ **탭 클릭 이벤트**
             tabs.forEach((tab, index) => {
                 tab.addEventListener("click", (event) => {
                     if (activeTabIndex !== index) {
                         const confirmChange = confirm("이동하시겠습니까?\n수정한 내용이 저장되지 않습니다.");
                         if (!confirmChange) {
-                            event.preventDefault(); // 탭 변경 취소
+                            event.preventDefault();
                             return;
                         }
                     }
 
                     activateTab(index);
-                    enableScrollAnimations();
                 });
             });
 
-            // ✅ Swiper 초기화
+            // ✅ **Swiper 초기화**
             const initializeSwiper = () => {
                 const swipers = document.querySelectorAll(".swiper");
                 swipers.forEach((swiper) => {
@@ -351,7 +352,6 @@
 
             initializeSwiper();
         });
-
     </script>
 </div>
 </body>

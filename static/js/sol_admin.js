@@ -12,6 +12,27 @@ document.addEventListener("focusout", function (event) {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const fileInputs = document.querySelectorAll(".sol_img_preview");
+
+    fileInputs.forEach(input => {
+        input.addEventListener("change", function () {
+            const file = this.files[0]; // 선택한 파일
+            if (!file) return; // 파일이 선택되지 않았다면 종료
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const solId = input.getAttribute("id").replace("sol_file_input_", ""); // ID에서 PK 추출
+                const targetItem = document.querySelector(`.solution__item.--${solId}`); // 해당하는 li 찾기
+                if (targetItem) {
+                    targetItem.style.background = `url(${e.target.result}) no-repeat center/cover`;
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         // 클릭한 요소가 삭제 버튼인지 확인
@@ -264,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img id="solution-image-new-${itemCount}" src="/static/img/common/Vector.png"
                      alt="솔루션 인포 이미지"
                      onerror="this.onerror=null; this.src='/static/img/common/Vector.png';">
-                <input type="file" class="--sol_item_edit">
+                <input type="file" class="--sol_item_edit img-preview-input">
             </div>
             <div class="editable-btn-wrap --no-margin--solution"></div>
         `;
@@ -299,12 +320,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 🔥 서버에서 삭제 요청 보내기
                 const itemId = target.getAttribute("data-id");
                 let formData = new FormData();
-                formData.append('itemId',itemId)
+                formData.append('itemId', itemId);
 
                 if (!itemId.startsWith("new-")) {
                     fetch("/delete_solution", {
                         method: "POST",
-                        body:formData,
+                        body: formData,
                         headers: {
                             "X-CSRFToken": getCSRFToken(),
                         }
@@ -381,6 +402,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // ✅ **이미지 미리보기 기능 추가**
+    document.addEventListener("change", (event) => {
+        if (event.target.classList.contains("img-preview-input")) {
+            const fileInput = event.target;
+            const solutionItem = fileInput.closest(".solution-info__item");
+            const previewImage = solutionItem.querySelector("img");
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                previewImage.src = "/static/img/common/Vector.png"; // 기본 이미지로 복원
+            }
+        }
+    });
+
     // ✅ CSRF 토큰 가져오는 함수
     function getCSRFToken() {
         return document.cookie.split("; ")
@@ -388,6 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ?.split("=")[1];
     }
 });
+
 
 
 

@@ -12,6 +12,17 @@ document.addEventListener("focusout", function (event) {
     }
 });
 
+document.getElementById("pro_main_preview").addEventListener("change", function(event) {
+    const file = event.target.files[0]; // 파일 가져오기
+    if (file) {
+        const reader = new FileReader(); // 파일 읽기 객체 생성
+        reader.onload = function(e) {
+            const previewImage = document.getElementById("pro_main_img");
+            previewImage.src = e.target.result; // 미리보기 이미지 적용
+        };
+        reader.readAsDataURL(file); // 파일을 읽어 데이터 URL로 변환
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".--projectsaver").addEventListener("click", async function () {
@@ -217,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="project-list__info-item-img-wrap">
                 <img src="/static/img/common/Vector.png" alt="새로운 이미지를 추가해주세요"
                      onerror="this.onerror=null; this.src='/static/img/common/Vector.png';" class="project-list__info-item-img">
-                <input type="file" class="--proj_sub_edit">
+                <input type="file" class="--proj_sub_edit --proj_sub_preview">
             </div>
         `;
 
@@ -236,14 +247,29 @@ document.addEventListener("DOMContentLoaded", () => {
         solAdd.parentNode.insertBefore(newItem, solAdd);
         solAdd.parentNode.insertBefore(newButtonWrap, solAdd);
 
-        // 🔹 취소 버튼 클릭 시 요소 제거
+        // 🔹 "취소" 버튼 클릭 시 요소 제거
         const cancelBtn = newButtonWrap.querySelector(".--cancel");
         cancelBtn.addEventListener("click", () => {
             newItem.remove();
             newButtonWrap.remove();
         });
 
-        // 🔹 저장 버튼 클릭 시 데이터 전송
+        // ✅ **이미지 미리보기 기능 추가**
+        const fileInput = newItem.querySelector("input[type='file']");
+        const previewImage = newItem.querySelector(".project-list__info-item-img");
+
+        fileInput.addEventListener("change", function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // 🔥 이미지 변경
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // 🔹 "저장" 버튼 클릭 시 데이터 전송
         const saveBtn = newButtonWrap.querySelector(".--save");
         saveBtn.addEventListener("click", async () => {
             const titleInput = newItem.querySelector(".project-list__info-item-title").value;
@@ -286,6 +312,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // ✅ **기존의 input[type='file']에도 미리보기 적용**
+    document.querySelectorAll(".--proj_sub_preview").forEach(input => {
+        input.addEventListener("change", function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const previewImage = input.previousElementSibling;
+                if (previewImage) {
+                    previewImage.src = e.target.result; // 🔥 기존 이미지 변경
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
     // 🔹 CSRF 토큰 가져오는 함수
     function getCookie(name) {
         let cookieValue = null;
@@ -302,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return cookieValue;
     }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", function (event) {

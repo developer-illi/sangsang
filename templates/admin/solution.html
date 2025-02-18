@@ -89,8 +89,8 @@
             <div class="solution__wrap">
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all %}
-                        <li class="solution__item --{{ sol_info.pk }}" data-img="{{ sol_info.img.url }}">
-                            <div class="solution__num">{{ sol_info.pk|floatformat:"02d" }}</div>
+                        <li class="solution__item --{{ sol_info.pk }} {% if forloop.first %}on{% endif %}" data-img="{{ sol_info.img.url }}">
+                            <div class="solution__num">{{ sol_info.pk|stringformat:"02d" }}</div>
                             <h4 class="solution__title">{{ sol_info.title|linebreaks }}</h4>
                             <ul class="solution__desc-wrap">
                                 {% for option in sol_info.sol_option.all %}
@@ -105,7 +105,7 @@
                 <ul class="solution__list">
                     {% for sol_info in solution.sol_title.all %}
                         <li class="sol_input_img">
-                            <input type="file" id="sol_file_input_{{ sol_info.pk }}">
+                            <input type="file" class="sol_img_preview" id="sol_file_input_{{ sol_info.pk }}">
                             <button class="editable-btn --save --titleimg" id="sol_title_img_btn{{ sol_info.pk }}" data-id="{{ sol_info.pk }}">
                                 save
                             </button>
@@ -138,10 +138,10 @@
                                         <textarea class="solution-info__item-desc --sol_item_edit">{{ content.content }}</textarea>
                                     </div>
                                     <div class="solution-info__item-img-wrap">
-                                        <img id="solution-image-{{ content.id }}" src="{% if content.img %}{{ content.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
+                                        <img id="solution-image-new-{{ content.id }}" src="{% if content.img %}{{ content.img.url }}{% else %}{% static 'img/common/Vector.png' %}{% endif %}"
                                              alt="솔루션 인포 이미지"
                                              onerror="this.onerror=null; this.src='{% static 'img/common/Vector.png' %}';">
-                                        <input type="file" class="--sol_item_edit">
+                                        <input type="file" class="--sol_item_edit img-preview-input">
                                     </div>
                                     <div class="editable-btn-wrap --no-margin--solution">
 

@@ -757,7 +757,7 @@ input.history__cnt-item-desc{
 }
 .project-info__img-wrap {
   position: absolute;
-  left: 50%;
+  left: 55%;
   transform: translateX(-50%);
   z-index: 5;
   width: 30vw;

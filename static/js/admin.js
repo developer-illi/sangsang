@@ -2,6 +2,19 @@ function openFileDialog() {
     document.getElementById('main_img').click();
 }
 
+//이미지 미리보기
+document.getElementById("main_img").addEventListener("change", function(event) {
+    const file = event.target.files[0]; // 파일 가져오기
+    if (file) {
+        const reader = new FileReader(); // 파일 읽기 객체 생성
+        reader.onload = function(e) {
+            const previewImage = document.getElementById("about_img1");
+            previewImage.src = e.target.result; // 미리보기 이미지 적용
+            previewImage.style.display = "block"; // 미리보기 표시
+        };
+        reader.readAsDataURL(file); // 파일을 읽어 데이터 URL로 변환
+    }
+});
 
 document.addEventListener("focusin", function (event) {
     // 현재 포커스된 요소가 input 또는 textarea인지 확인
