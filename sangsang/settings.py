@@ -31,13 +31,25 @@ DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+# settings.py
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'ezsmtp.bizmeka.com'
+# EMAIL_PORT = 587  # TLS 포트
+# EMAIL_USE_TLS = True  # TLS 사용
+# EMAIL_USE_SSL = False  # SSL은 사용 안 함
+# EMAIL_HOST_USER = 'zmfla0331@bizmeka.com'  # KT 비즈 메일 계정
+# EMAIL_HOST_PASSWORD = 'guswls9503!'  # KT 비즈 메일 비밀번호
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 기본 발신자 이메일
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.naver.com'  # 네이버 SMTP 서버
-EMAIL_PORT = 587  # SMTP 포트 (TLS)
-EMAIL_USE_TLS = True  # 보안 프로토콜 (TLS)
-EMAIL_HOST_USER = "info@sangsangbuild.com"  # 발신할 이메일 주소
-EMAIL_HOST_PASSWORD = "앱 비밀번호 설정해야함" # 네이버 앱 비밀번호
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # TLS 포트
+EMAIL_USE_TLS = True  # TLS 사용
+EMAIL_HOST_USER = 'jin@illi.kr'  # KT 비즈 메일 계정
+EMAIL_HOST_PASSWORD = 'eeiivzvfojjaixyu'  # KT 비즈 메일 비밀번호
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 기본 발신자 이메일
+
 
 # Application definition
 
@@ -91,14 +103,14 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DATABASE_NAME'),
-        #'USER': 'postgres',
-        'USER': config('DATABASE_USER'),
-        #'PASSWORD': '1235gg',
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        #'HOST': 'localhost',
-        'HOST': config('DATABASE_HOST'),
-        #'PORT': '5432',
-        'PORT': config('DATABASE_PORT'),
+        'USER': 'postgres',
+        #'USER': config('DATABASE_USER'),
+        'PASSWORD': '1235gg',
+        #'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': 'localhost',
+        #'HOST': config('DATABASE_HOST'),
+        'PORT': '5432',
+        #'PORT': config('DATABASE_PORT'),
     }
 }
 

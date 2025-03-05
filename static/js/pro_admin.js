@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const newButtonWrap = document.createElement("div");
             newButtonWrap.classList.add("editable-btn-wrap", "--align-center");
             newButtonWrap.innerHTML = `
-                <button class="editable-btn --cancel --proj_sub_create">cancel</button>
+                <button class="editable-btn --cancel --proj_sub_create">delete</button>
                 <button class="editable-btn --save --proj_sub_create" data-id="${projectId}">
                     save
                 </button>

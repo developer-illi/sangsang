@@ -12,6 +12,7 @@ import datetime
 from django.contrib import messages
 from main.models import *
 import logging
+import smtplib
 
 
 # Create your views here.
@@ -39,25 +40,25 @@ def contact_pg(request):
 @csrf_exempt
 def contact_send(request):
     if request.method == "POST":
+
         name = request.POST.get("name")
         company = request.POST.get("company")
         contact = request.POST.get("contact")
         email = request.POST.get("email")
         message = request.POST.get("message")
+
         # 입력값 검증
         if not all([name, company, contact, email, message]):
             return JsonResponse({"success": False, "message": "필수 입력값이 누락되었습니다."})
-
         # 예제: 이메일 전송 (필요할 경우)
         try:
             send_mail(
-                subject=f"문의사항 접수: {name} ({company})",
+                subject=f"홈페이지 문의사항 접수: {name} ({company})",
                 message=f"이름: {name}\n기업명: {company}\n연락처: {contact}\n이메일: {email}\n\n문의 내용:\n{message}",
-                from_email="info@sangsangbuild.com",  # 발신자 이메일
+                from_email="jin@illi.com",  # 발신자 이메일
                 recipient_list=["info@sangsangbuild.com"],  # 관리자 이메일
                 fail_silently=False,
             )
-            print('ddd')
             return JsonResponse({"success": True, "message": "문의가 정상적으로 접수되었습니다."})
         except Exception as e:
             print(e)
@@ -206,8 +207,7 @@ def delete_history_item(request, item_id):
 
 @csrf_exempt
 def about_admin(request):
-    if "admin_id" not in request.session:
-        return redirect("admin")
+
     about = Main_pg.objects.get()
     history = History.objects.all()
     arg = {
@@ -216,8 +216,7 @@ def about_admin(request):
     return render(request, 'admin/about.html', arg)
 @csrf_exempt
 def sol_admin(request):
-    if "admin_id" not in request.session:
-        return redirect("admin")
+
     solution = Solution.objects.get(pk=1)
     arg = {
         'solution':solution
@@ -226,8 +225,7 @@ def sol_admin(request):
 
 @csrf_exempt
 def pro_admin(request):
-    if "admin_id" not in request.session:
-        return redirect("admin")
+
     project = Project.objects.get(pk=1)
     arg = {'project': project}
     return render(request, 'admin/project.html', arg)

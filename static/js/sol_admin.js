@@ -328,8 +328,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const itemId = target.getAttribute("data-id");
                 let formData = new FormData();
                 formData.append('itemId', itemId);
-
                 if (!itemId.startsWith("new-")) {
+                    alert(itemId);
                     fetch("/delete_solution", {
                         method: "POST",
                         body: formData,
