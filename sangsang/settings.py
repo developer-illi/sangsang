@@ -46,8 +46,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # TLS 포트
 EMAIL_USE_TLS = True  # TLS 사용
-EMAIL_HOST_USER = 'jin@illi.kr'  # KT 비즈 메일 계정
-EMAIL_HOST_PASSWORD = 'eeiivzvfojjaixyu'  # KT 비즈 메일 비밀번호
+EMAIL_HOST_USER = 'sangsangbuild22@gmail.com'  # KT 비즈 메일 계정
+EMAIL_HOST_PASSWORD = 'xfcskbjfqnwqhvnt'  # KT 비즈 메일 비밀번호
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 기본 발신자 이메일
 
 
