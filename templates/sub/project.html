@@ -27,6 +27,7 @@
     <script defer src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
     <link rel="icon" href="{% static 'img/common/favicon.png' %}">
     <script defer src="{% static 'js/index.js' %}"></script>
+    <script defer src="{% static 'js/project.js' %}"></script>
     <style>
         .project-list__slide-wrap .swiper-button-prev, .project-list__slide-wrap .swiper-button-next {
             width: 30px;
@@ -108,12 +109,12 @@
         </div>
     </section>
 
-    <section class="section --project-list">
+    <section class="section --project-list" id="targetDiv">
         <div class="section__content">
             <div class="project-list__tab-wrap">
                 <ul class="project-list__tab-list">
                     {% for proj_title in project.proj_title.all|order %}
-                        <li class="project-list__tab-item --{{ proj_title.pk }}">
+                        <li class="project-list__tab-item --{{ proj_title.pk }}" id="li{{ proj_title.pk }}">
                             {{ proj_title.title }}
                         </li>
                     {% endfor %}
