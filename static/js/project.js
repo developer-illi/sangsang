@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
                 //console.log("Clicking on:", targetLi);
                 targetLi.click();
-            }, 1500); // 클릭을 1.5초 뒤에 실행하여 스크롤이 완료된 후 작동
+            }, 1000); // 클릭을 1.5초 뒤에 실행하여 스크롤이 완료된 후 작동
         } else {
             console.error("No element found with ID:", targetId);
         }
