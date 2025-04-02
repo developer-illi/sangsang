@@ -99,17 +99,11 @@ WSGI_APPLICATION = 'sangsang.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DATABASE_NAME'),
-        #'USER': 'postgres',
         'USER': config('DATABASE_USER'),
-        #'PASSWORD': '1235gg',
         'PASSWORD': config('DATABASE_PASSWORD'),
-        #'HOST': 'localhost',
         'HOST': config('DATABASE_HOST'),
-        #'PORT': '5432',
         'PORT': config('DATABASE_PORT'),
     }
 }
